@@ -2,10 +2,10 @@
 
 ### Members
 
-| **Name**     | **UID**    |
-| :----------- | :--------- |
-| ***REMOVED*** | 3035974119 |
-| ***REMOVED*** | 3035973878 |
-| ***REMOVED*** | _          |
-| ***REMOVED*** | _          |
-| ***REMOVED*** | _          |
+| **Name**     | **UID**      | **GitHub Username**                                           |
+| :----------- | :----------- | :------------------------------------------------------------ |
+| ***REMOVED*** | ***REMOVED*** | [@Azuelle](https://github.com/Azuelle)                        | 
+| ***REMOVED*** | ***REMOVED*** | [@kxwhiowo](https://github.com/kxwhiowo)                      |
+| ***REMOVED*** | `          ` | [@qinchonghanzuibang](https://github.com/qinchonghanzuibang)  |
+| ***REMOVED*** | `          ` | [@Zhao-Shuman](https://github.com/Zhao-Shuman)                |
+| ***REMOVED*** | `          ` | [@Summerflyfly](https://github.com/Summerflyfly)              |
