@@ -3,15 +3,16 @@
 #ifndef CONTROL_H
 #define CONTROL_H
 
-enum class input : bool {
+enum class input {
     // Directions
-    up = true,
-    down = true,
-    left = true,
-    right = true,
+    up,
+    down,
+    left,
+    right,
 
-    place = true,  // Place bomb
-    none = false   // No input
+    place,  // Place bomb
+
+    none  // No input
 };
 input getInput();
 
