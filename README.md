@@ -1,6 +1,6 @@
-## ENGG1340 Group Project
+# ENGG1340 Group Project
 
-### Team Members
+## Team Members
 
 | **Name**     | **UID**      | **GitHub Username**                                           |
 | :----------- | :----------- | :------------------------------------------------------------ |
@@ -10,18 +10,18 @@
 | ***REMOVED*** | `          ` | [@Zhao-Shuman](https://github.com/Zhao-Shuman)                |
 | ***REMOVED*** | `          ` | [@Summerflyfly](https://github.com/Summerflyfly)              |
 
-### Game Introduction
+## Game Introduction
 [Brief Description]
-#### Rules
+### Rules
 
-### Features & Explanation
+## Features & Explanation
 
-### Dependencies
+## Dependencies
 The following non-standard C/C++ libraries have been used in this project:
 - `curses`, for acquiring user input without blocking the processing
 - `termcolor`, from [ikalnytskyi/termcolor](https://github.com/ikalnytskyi/termcolor) for convenient colorizing of terminal outputs
 
-### Quick Start Guide
+## Quick Start Guide
 
 <!-- README REQUIREMENT
 
