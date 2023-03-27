@@ -6,7 +6,7 @@
 | :----------- | :----------- | :------------------------------------------------------------ |
 | Tang Jiakai  | `3035974119` | [@Azuelle](https://github.com/Azuelle)                        | 
 | Liao Qilin   | `3035973878` | [@kxwhiowo](https://github.com/kxwhiowo)                      |
-| Qin Chonghan | `          ` | [@qinchonghanzuibang](https://github.com/qinchonghanzuibang)  |
+| Qin Chonghan | `3035988574` | [@qinchonghanzuibang](https://github.com/qinchonghanzuibang)  |
 | Zhao Shuman  | `          ` | [@Zhao-Shuman](https://github.com/Zhao-Shuman)                |
 | Xia Mingfei  | `          ` | [@Summerflyfly](https://github.com/Summerflyfly)              |
 
