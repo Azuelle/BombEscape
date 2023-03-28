@@ -3,6 +3,7 @@
 #include <curses.h>
 #include <unistd.h>
 
+#include <chrono>
 #include <cstdlib>
 #include <iostream>
 #include <string>
@@ -11,21 +12,25 @@
 #include "control.h"
 #include "display.h"
 #include "game_logic.h"
+#include "gamestate.h"
 
-const int FRAME_CAP = 30;
+const int FRAMES_PER_SECOND = 30;
 
 int main() {
-    int frame_time_us =
-        1000000 / FRAME_CAP;  // Length of a frame, in microseconds
-    input usr_input = input::none;
+    using namespace std::chrono;
+    microseconds frame_time =
+        seconds(1) / FRAMES_PER_SECOND;  // Length of a frame
+
+    Input usr_input = Input::none;
+    GameState gamestate;
 
     system("clear");  // Clear the screen before running
     while (checkRunning()) {
         display();
         usr_input = getInput();
-        logic(usr_input);
+        logic(gamestate, usr_input);
 
-        usleep(frame_time_us);  // Wait until next frame
+        usleep(frame_time.count());  // Wait until next frame
     }
     system("clear");  // Clear the screen after running
     return 0;

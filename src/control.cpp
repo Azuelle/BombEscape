@@ -7,8 +7,8 @@
 // Acquire input from user
 // Takes 0 arguments
 // Returns the input from user as enum class input
-input getInput() {
-    input usr_input = input::none;
+Input getInput() {
+    Input usr_input = Input::none;
 
     // Set up for non-blocking input
     noecho();

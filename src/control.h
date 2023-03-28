@@ -3,7 +3,7 @@
 #ifndef CONTROL_H
 #define CONTROL_H
 
-enum class input {
+enum class Input {
     // Directions
     up,
     down,
@@ -14,6 +14,6 @@ enum class input {
 
     none  // No input
 };
-input getInput();
+Input getInput();
 
 #endif
