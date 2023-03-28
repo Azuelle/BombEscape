@@ -4,8 +4,9 @@
 #define GAME_LOGIC_H
 
 #include "control.h"
+#include "gamestate.h"
 
-void logic(input usr_input);
+void logic(GameState cur_state, Input usr_input);
 bool checkRunning();
 
 #endif
