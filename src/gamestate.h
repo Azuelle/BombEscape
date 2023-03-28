@@ -53,7 +53,7 @@ class Message {
 
     std::chrono::duration<double> duration;
     std::chrono::time_point<std::chrono::system_clock> start;
-    MessageType type;
+    MessageType type = MessageType::none;
 };
 
 // Stores the game's state at a certain moment
