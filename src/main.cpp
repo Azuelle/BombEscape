@@ -3,6 +3,7 @@
 #include <curses.h>
 #include <unistd.h>
 
+#include <cstdlib>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -18,6 +19,7 @@ int main() {
         1000000 / FRAME_CAP;  // Length of a frame, in microseconds
     input usr_input = input::none;
 
+    system("clear");  // Clear the screen before running
     while (checkRunning()) {
         display();
         usr_input = getInput();
@@ -25,5 +27,6 @@ int main() {
 
         usleep(frame_time_us);  // Wait until next frame
     }
+    system("clear");  // Clear the screen after running
     return 0;
 }
