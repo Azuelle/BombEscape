@@ -45,8 +45,8 @@ class Message {
     // Returns true if the message has been displayed for long enough
     bool finished();
 
-    bool Message::operator<(Message operand) { return start < operand.start; }
-    bool Message::operator>(Message operand) { return start > operand.start; }
+    bool operator<(Message operand) { return start < operand.start; }
+    bool operator>(Message operand) { return start > operand.start; }
 
    private:
     std::string content;
