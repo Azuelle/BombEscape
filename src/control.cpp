@@ -18,8 +18,17 @@ Input getInput() {
     int i = getch();
     if (i != ERR) {
         switch (i) {
-            // Determine user input here
-            // TODO: Allow the user to customize the buttons for controls
+          case KEY_BACKSPACE: /* user pressed backspace */ 
+          case KEY_UP:  /* user pressed up arrow key */
+          case KEY_DOWN:  /* user pressed up arrow key */
+          case KEY_LEFT:
+          case KEY_RIGHT:
+          case KEY_HOME:        // Home key
+          case KEY_DC:        // Delete character
+          case KEY_IC:        // Insert char or enter insert mode
+          case KEY_ENTER :       // Enter or send
+          // case KEY_F(n):        // Function keys, for 0 <= n >= 63
+
         }
     }
     return usr_input;
