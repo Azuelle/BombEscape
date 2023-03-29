@@ -18,15 +18,22 @@ Input getInput() {
     int i = getch();
     if (i != ERR) {
         switch (i) {
-          case KEY_BACKSPACE: /* user pressed backspace */ 
+          case KEY_BACKSPACE: /* user pressed backspace */
+            break; 
           case KEY_UP:  /* user pressed up arrow key */
+            break;
           case KEY_DOWN:  /* user pressed up arrow key */
+            break;
           case KEY_LEFT:
+            break;
           case KEY_RIGHT:
-          case KEY_HOME:        // Home key
+            break;
           case KEY_DC:        // Delete character
+            break;
           case KEY_IC:        // Insert char or enter insert mode
+            break;
           case KEY_ENTER :       // Enter or send
+            break;
           // case KEY_F(n):        // Function keys, for 0 <= n >= 63
 
         }
