@@ -5,10 +5,10 @@
 
 enum class Input {
     // Directions
-    up,
-    down,
-    left,
-    right,
+    up,     // Up
+    down,   // Down
+    left,   // Left
+    right,  // Right
 
     place,  // Place bomb
 
