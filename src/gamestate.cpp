@@ -2,6 +2,10 @@
 
 #include "gamestate.h"
 
-bool Message::finished() {
-    return std::chrono::system_clock::now() - start > duration;
+bool GameState::setState(StateType target) {
+    if (this->state != target) {
+        this->state = target;
+        return true;
+    }
+    return false;
 }
