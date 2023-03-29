@@ -7,7 +7,7 @@
 | ***REMOVED*** | ***REMOVED*** | [@Azuelle](https://github.com/Azuelle)                        | 
 | ***REMOVED*** | ***REMOVED*** | [@kxwhiowo](https://github.com/kxwhiowo)                      |
 | ***REMOVED*** | ***REMOVED*** | [@qinchonghanzuibang](https://github.com/qinchonghanzuibang)  |
-| ***REMOVED*** | `          ` | [@Zhao-Shuman](https://github.com/Zhao-Shuman)                |
+| ***REMOVED*** | ***REMOVED*** | [@Zhao-Shuman](https://github.com/Zhao-Shuman)                |
 | ***REMOVED*** | ***REMOVED*** | [@Summerflyfly](https://github.com/Summerflyfly)              |
 
 ## Game Introduction
