@@ -34,6 +34,10 @@ Input getInput() {
             break;
           case KEY_ENTER :       // Enter or send
             break;
+          case KEY_SUSPEND:  // To suspend the game
+            break;
+          case KEY_EXIT: // exit the game
+            break;
           // case KEY_F(n):        // Function keys, for 0 <= n >= 63
 
         }
