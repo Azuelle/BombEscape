@@ -24,7 +24,10 @@ int main() {
     Input usr_input = Input::none;
     GameState gamestate;
 
-    system("clear");  // Clear the screen before running
+    // Initialize curses
+    initscr();
+    keypad(stdscr, true);
+
     while (checkRunning()) {
         display();
         usr_input = getInput();
@@ -32,6 +35,9 @@ int main() {
 
         usleep(frame_time.count());  // Wait until next frame
     }
-    system("clear");  // Clear the screen after running
+
+    // Cleanup for curses
+    endwin();
+
     return 0;
 }
