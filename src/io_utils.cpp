@@ -1,6 +1,6 @@
-// control.cpp
+// io_utils.cpp
 
-#include "control.h"
+#include "io_utils.h"
 
 #include <curses.h>
 
