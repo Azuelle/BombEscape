@@ -13,6 +13,11 @@
 ## Game Introduction
 [Brief Description]
 ### Rules
+- The player can control the character with the keyboard, moving the character with wsad, placing bombs with space, and pushing bombs away with shift.
+- The player must stay clear of the traps and bombs that are generated at random in the dungeon. 
+- The player can destroy the traps by explosion either by placing a bomb yourself or pushing those ones dropped into the dungeon close to the bomb. 
+- The player can gain new abilities by picking up items in the dungeon.
+- The longer the player survives, the higher the score. 
 
 ## Features & Explanation
 
