@@ -9,9 +9,9 @@
 #include <string>
 #include <vector>
 
-#include "display.h"
 #include "game_logic.h"
 #include "gamestate.h"
+#include "interface.h"
 #include "io_utils.h"
 #include "time_utils.h"
 
