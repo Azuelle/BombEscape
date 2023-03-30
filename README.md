@@ -36,7 +36,13 @@ The following non-standard C/C++ libraries have been used in this project:
 - `curses` , for acquiring user input without blocking the processing
 - `termcolor` , from [ikalnytskyi/termcolor](https://github.com/ikalnytskyi/termcolor) for convenient colorizing of terminal outputs
 
-## Quick Start Guide
+## Quick Start
+
+### Compilation
+Do some stuff
+
+### Execution
+Do other stuff
 
 <!-- README REQUIREMENT
 
