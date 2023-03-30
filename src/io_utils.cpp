@@ -4,9 +4,8 @@
 
 #include <curses.h>
 
-// Acquire input from user
-// Takes 0 arguments
-// Returns the input from user as enum class input
+#include <string>
+
 Input getInput() {
     Input usr_input = Input::none;
 
@@ -23,4 +22,20 @@ Input getInput() {
         }
     }
     return usr_input;
+}
+
+int print(std::string content, int max_len = -1) {
+    return addnstr(content.c_str(), max_len);
+}
+template <typename T>
+int print(T content, int max_len = -1) {
+    return addnstr(std::to_string(content).c_str(), max_len);
+}
+
+int mvprint(std::string content, int x, int y, int max_len = -1) {
+    return mvaddnstr(y, x, content.c_str(), max_len);
+}
+template <typename T>
+int mvprint(T content, int x, int y, int max_len = -1) {
+    return mvaddnstr(y, x, std::to_string(content).c_str(), max_len);
 }
