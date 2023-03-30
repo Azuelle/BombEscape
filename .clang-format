@@ -1,0 +1,9 @@
+---
+BasedOnStyle: Google
+IndentWidth: 4
+---
+Language: Cpp
+AlignTrailingComments: true
+EscapedNewlineAlignmentStyle: Right
+AlignConsecutiveMacros: true
+---
