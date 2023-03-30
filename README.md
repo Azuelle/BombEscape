@@ -1,4 +1,5 @@
-# ENGG1340 Group Project
+# BombEscape
+*— a game made for ENGG1340 group project*
 
 ## Team Members
 
