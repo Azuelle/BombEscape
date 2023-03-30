@@ -16,7 +16,7 @@
 
 Enter a chaotic world full of pitfalls and bombshells. Try your best to gather resources scattered in this world to arm yourself. Good luck to your survival journey. Play your way as you unravel the mysteries of this strange dungeon.
 
-### Rules
+### Gameplay
 - Marvolo must stay clear of the traps and bombs that are generated at random in the dungeon. If he gets in the range of explosion, he dies unless he has an item that protects him.
 - Marvolo can destroy the traps by explosion either by placing a bomb himself or pushing those ones dropped into the dungeon close to the bomb. 
 - Marvolo can gain new abilities by picking up items in the dungeon.
