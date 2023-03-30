@@ -11,17 +11,24 @@
 | ***REMOVED*** | ***REMOVED*** | [@Summerflyfly](https://github.com/Summerflyfly)              |
 
 ## Game Introduction
-BombEscape is an uncompromising roguelike game. You will play the role of Marvolo, a rapacious wizard who overstudied dark magic and is now imprisoned in an unknown dungeon. Tom has to be familiar with a random generated environment and the potential dangers including bombs and traps to survive. 
+**BombEscape** is an uncompromising roguelike game. You will play as Marvolo, a rapacious wizard who overstudied dark magic and is now imprisoned in an unknown dungeon. In order to survive, Marvolo has to familiarize himself quickly with a randomly-generated environment that contains dangers including bombs and traps. 
 
-Enter a chaotic world full of pitfalls and bombshells. Try your best to gather resources randomly dropped in this world to arm yourself. Good luck to your survival journey. Play your way as you unravel the mysteries of this strange dungeon.
+Enter a chaotic world full of pitfalls and bombshells. Try your best to gather resources scattered in this world to arm yourself. Good luck to your survival journey. Play your way as you unravel the mysteries of this strange dungeon.
+
 ### Rules
-- The player can control the character with the keyboard, moving the character with wsad, placing bombs with space, and pushing bombs away with shift.
-- The player must stay clear of the traps and bombs that are generated at random in the dungeon. 
-- The player can destroy the traps by explosion either by placing a bomb yourself or pushing those ones dropped into the dungeon close to the bomb. 
-- The player can gain new abilities by picking up items in the dungeon.
-- The longer the player survives, the higher the score. 
+- Marvolo must stay clear of the traps and bombs that are generated at random in the dungeon. If he gets in the range of explosion, he dies unless he has an item that protects him.
+- Marvolo can destroy the traps by explosion either by placing a bomb himself or pushing those ones dropped into the dungeon close to the bomb. 
+- Marvolo can gain new abilities by picking up items in the dungeon.
+- The longer Marvolo survives, the higher the score. 
 
 ## Features & Explanation
+
+### Controls
+The player can use the keyboard to control Marvolo.
+
+#### Default key bindings
+- `w` / `a` / `s` / `d` or `↑` / `←` / `↓` / `→` to move Marvolo
+- `space` to place a bomb in front of Marvolo
 
 ## Dependencies
 The following non-standard C/C++ libraries have been used in this project:
