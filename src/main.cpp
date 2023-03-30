@@ -9,10 +9,10 @@
 #include <string>
 #include <vector>
 
-#include "control.h"
 #include "display.h"
 #include "game_logic.h"
 #include "gamestate.h"
+#include "io_utils.h"
 #include "time_utils.h"
 
 int main() {
