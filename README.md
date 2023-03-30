@@ -32,7 +32,7 @@ The player can use the keyboard to control Marvolo.
 - `space` to place a bomb in front of Marvolo
 
 ## Dependencies
-The following non-standard C/C++ libraries have been used in this project:
+The following non-standard C/C++ library has been used in this project:
 - `curses` , for acquiring user input without blocking the processing and rendering the UI and graphics
 
 ## Quick Start
