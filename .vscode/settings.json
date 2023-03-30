@@ -1,5 +1,5 @@
 {
     "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, TabWidth: 4 }",
-    "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, IndentWidth: 4, TabWidth: 4 }",
+    "C_Cpp.clang_format_style": "file",
     "files.insertFinalNewline": true,
 }
