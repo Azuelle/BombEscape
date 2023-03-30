@@ -9,8 +9,10 @@
 #include "player.h"
 #include "playfield.h"
 
-// Describes the type of state a gamestate is in
-// Used a enum class here for simplicity (decrease chance of typo)
+/**
+ * For describing the type of state a gamestate is in.
+ * enum class is used here for simplicity (decrease chance of typo).
+ */
 enum class StateType {
     main_menu,
     // In-game

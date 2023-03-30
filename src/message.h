@@ -8,9 +8,10 @@
 
 using namespace std::chrono;
 
-// Pop-up on-screen messages
-// Sorted by start time
-// New message would overwrite existing ones
+/**
+ * Pop-up on-screen messages.
+ * Sorted by start time.
+ */
 class Message {
    public:
     Message(std::string content, duration<double> duration)
