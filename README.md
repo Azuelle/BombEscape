@@ -11,7 +11,9 @@
 | Xia Mingfei  | `3035973684` | [@Summerflyfly](https://github.com/Summerflyfly)              |
 
 ## Game Introduction
-[Brief Description]
+BombEscape is an uncompromising roguelike game. You will play the role of Marvolo, a rapacious wizard who overstudied dark magic and is now imprisoned in an unknown dungeon. Tom has to be familiar with a random generated environment and the potential dangers including bombs and traps to survive. 
+
+Enter a chaotic world full of pitfalls and bombshells. Try your best to gather resources randomly dropped in this world to arm yourself. Good luck to your survival journey. Play your way as you unravel the mysteries of this strange dungeon.
 ### Rules
 - The player can control the character with the keyboard, moving the character with wsad, placing bombs with space, and pushing bombs away with shift.
 - The player must stay clear of the traps and bombs that are generated at random in the dungeon. 
