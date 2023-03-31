@@ -17,8 +17,28 @@ Input getInput() {
     int i = getch();
     if (i != ERR) {
         switch (i) {
-            // Determine user input here
-            // TODO: Allow the user to customize the buttons for controls
+          case KEY_BACKSPACE: /* user pressed backspace */
+            break; 
+          case KEY_UP:  /* user pressed up arrow key */
+            break;
+          case KEY_DOWN:  /* user pressed up arrow key */
+            break;
+          case KEY_LEFT:
+            break;
+          case KEY_RIGHT:
+            break;
+          case KEY_DC:        // Delete character
+            break;
+          case KEY_IC:        // Insert char or enter insert mode
+            break;
+          case KEY_ENTER :       // Enter or send
+            break;
+          case KEY_SUSPEND:  // To suspend the game
+            break;
+          case KEY_EXIT: // exit the game
+            break;
+          // case KEY_F(n):        // Function keys, for 0 <= n >= 63
+
         }
     }
     return usr_input;
