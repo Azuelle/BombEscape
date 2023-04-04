@@ -7,6 +7,8 @@
 #include <cmath>
 #include <vector>
 
+#include "player.h"
+
 // For storing position (a pair of x, y coordinates) and easy calculations
 struct Position {
     int x;
@@ -37,12 +39,14 @@ class Entity {
 
     Position getPosition() { return this->position; };
 
-    // Checks whether this Item's timer has run out
+    // Checks whether this Entity's timer has run out
     bool checkDeath();
-    // Indicates whether this Item's onDeath has already been processed
+    // Indicates whether this Entity's onDeath has already been processed
     bool checkAlreadyDied();
 
-    virtual void onDeath();
+    // Declares a pure virtual onDeath fucntion in order to ensure that
+    // it is implemented only in derived entity classes.
+    virtual void onDeath(Player* player, Playfield* playfield) = 0;
 };
 
 // TODO: Implementation
