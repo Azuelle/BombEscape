@@ -3,15 +3,6 @@
 #ifndef PLAYER_H_
 #define PLAYER_H_
 
-// Describes player actions
-enum class PlayerState {
-    walk,
-    walk_hold,
-    death,
-    place,  // Placing a bomb
-    frozen  // Frozen
-};
-
 // Describes player health state
 enum class HealthState {
     alive,  // Normal state
@@ -24,7 +15,6 @@ enum class ShieldState { none, broken, normal };
 
 class Player {
    private:
-    PlayerState state;
     HealthState health;
     ShieldState shield;
     int health_val;
@@ -56,7 +46,6 @@ class Player {
 
     HealthState getHealthState() { return health; }
     ShieldState getShield() { return shield; }
-    PlayerState getState() { return state; }
 };
 
 #endif
