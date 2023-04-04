@@ -3,6 +3,8 @@
 #ifndef PLAYER_H_
 #define PLAYER_H_
 
+#include "entity.h"
+
 // Describes player health state
 enum class HealthState {
     alive,  // Normal state
@@ -21,8 +23,7 @@ class Player {
     int speed;
     int bomb_count;     // Number of bombs in hand
     int bomb_capacity;  // Maximum number of bombs a player can hold
-    int x;
-    int y;
+    Position position;
     double shield_time;
     double speed_time;
     double frozen_time;
@@ -38,8 +39,7 @@ class Player {
     int getBombCount() { return bomb_count; }
     int getBombCapacity() { return bomb_capacity; }
     int getHealth() { return health_val; };
-    int getPositionX() { return x; }
-    int getPositionY() { return y; }
+    Position getPosition() { return position; }
     double getShieldTime() { return shield_time; }
     double getSpeedTime() { return speed_time; }
     double getFrozenTime() { return frozen_time; }
