@@ -1,6 +1,7 @@
 ---
 BasedOnStyle: Google
 IndentWidth: 4
+TabWidth: 4
 ---
 Language: Cpp
 AlignTrailingComments: true
