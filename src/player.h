@@ -3,29 +3,6 @@
 #ifndef PLAYER_H_
 #define PLAYER_H_
 
-// Describes player actions
-enum PState {
-  PState_walk,
-  PState_walk_hold,
-  PState_death,
-  PState_place, //Placing a bomb
-  PState_frozen //Frozen
-};
-
-// Describes player health state
-enum PHealth {
-  PHealth_alive, //Normal state
-  PHealth_dying, //Low HP
-  PHealth_dead //HP <= 0
-};
-
-// Describes shield state
-enum PShield {
-  PShield_none,
-  PShield_normal,
-  PShield_vanishing
-};
-
 class Player {
   private:
     PState p_state;
