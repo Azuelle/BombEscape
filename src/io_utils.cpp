@@ -8,7 +8,6 @@
 
 Input getInput() {
     Input usr_input = Input::none;
-
     // Set up for non-blocking input
     noecho();
     cbreak();
@@ -18,26 +17,32 @@ Input getInput() {
     if (i != ERR) {
         switch (i) {
             case KEY_BACKSPACE: /* user pressed backspace */
+                return Input::backspace;
                 break;
             case KEY_UP: /* user pressed up arrow key */
+                return Input::up;
                 break;
             case KEY_DOWN: /* user pressed up arrow key */
+                return Input::down;
                 break;
             case KEY_LEFT:
+                return Input::left;
                 break;
             case KEY_RIGHT:
+                return Input::right;
                 break;
-            case KEY_DC:  // Delete character
-                break;
+            case 32: /* user pressed space key */
+                return Input::place;
+                break;    
             case KEY_IC:  // Insert char or enter insert mode
+                return Input::chars;
                 break;
             case KEY_ENTER:  // Enter or send
+                return Input::enter;
                 break;
-            case KEY_SUSPEND:  // To suspend the game
-                break;
-            case KEY_EXIT:  // exit the game
-                break;
-                // case KEY_F(n):        // Function keys, for 0 <= n >= 63
+            /*case KEY_EXIT:  // exit the game
+                break; */
+                // case KEY_F(n):        // Function keys, for 0 <= n >= 63 
         }
     }
     return usr_input;

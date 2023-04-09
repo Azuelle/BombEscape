@@ -9,9 +9,10 @@ enum class Input {
     down,   // Down
     left,   // Left
     right,  // Right
-
     place,  // Place bomb
-
+    chars, // characters
+    enter, // enter
+    backspace, // backspace
     none  // No input
 };
 
