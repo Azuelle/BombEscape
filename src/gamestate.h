@@ -9,6 +9,8 @@
 #include "player.h"
 #include "playfield.h"
 
+using namespace std::chrono;
+
 /**
  * For describing the type of state a gamestate is in.
  * enum class is used here for simplicity (decrease chance of typo).
@@ -26,19 +28,24 @@ enum class StateType {
 
 // Stores the game's state at a certain moment
 class GameState {
-   public:
-    GameState();
-    ~GameState();
-
-    StateType getState() { return this->state; }
-    // Returns false if unsuccessful (already at this state)
-    bool setState(StateType target);
-
    private:
-    std::chrono::time_point<std::chrono::system_clock> start_time;
-    StateType state = StateType::main_menu;
+    time_point<system_clock> start;
+
+   public:
+    GameState() { this->start = system_clock::now(); }
+    GameState(Player player, Playfield playfield)
+        : player(&player), playfield(&playfield) {
+        this->start = system_clock::now();
+    }
+    ~GameState() { delete this->player, delete this->playfield; }
+
     Player *player = nullptr;
     Playfield *playfield = nullptr;
+    StateType state = StateType::main_menu;
+
+    duration<double> getCurrentDuration() {
+        return system_clock::now() - this->start;
+    }
 };
 
 #endif

@@ -3,6 +3,8 @@
 #ifndef CONTROL_H
 #define CONTROL_H
 
+#include <string>
+
 enum class Input {
     // Directions
     up,     // Up

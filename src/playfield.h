@@ -3,18 +3,11 @@
 #ifndef PLAYFIELD_H
 #define PLAYFIELD_H
 
+#include <chrono>
+#include <cmath>
 #include <vector>
 
-// TODO: Implementation
-class Item {
-    // Position, Lifetime (time left before disappearing / exploding) etc.
-};
-
-// TODO: Implementation
-class Bomb : Item {};
-
-// TODO: Implementation
-class PowerUp : Item {};
+#include "entity.h"
 
 // TODO: Implementation
 class Playfield {
