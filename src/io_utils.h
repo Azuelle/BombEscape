@@ -7,15 +7,15 @@
 
 enum class Input {
     // Directions
-    up,     // Up
-    down,   // Down
-    left,   // Left
-    right,  // Right
-    place,  // Place bomb
-    chars, // characters
-    enter, // enter
-    backspace, // backspace
-    none  // No input
+    up,         // Up
+    down,       // Down
+    left,       // Left
+    right,      // Right
+    place,      // Place bomb
+    chars,      // characters
+    enter,      // enter
+    backspace,  // backspace
+    none        // No input
 };
 
 /**
@@ -23,6 +23,8 @@ enum class Input {
  * Returns the input from user as type Input.
  */
 Input getInput();
+std::string getString(const int max_len);
+std::string getString(int x, int y, const int max_len);
 
 /**
  * Expansion on curses.h's addstr() / addnstr().

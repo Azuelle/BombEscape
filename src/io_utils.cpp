@@ -4,6 +4,8 @@
 
 #include <curses.h>
 
+#include <iostream>
+#include <sstream>
 #include <string>
 
 Input getInput() {
@@ -33,19 +35,53 @@ Input getInput() {
                 break;
             case 32: /* user pressed space key */
                 return Input::place;
-                break;    
+                break;
             case KEY_IC:  // Insert char or enter insert mode
                 return Input::chars;
                 break;
             case KEY_ENTER:  // Enter or send
                 return Input::enter;
                 break;
-            /*case KEY_EXIT:  // exit the game
-                break; */
-                // case KEY_F(n):        // Function keys, for 0 <= n >= 63 
+                /*case KEY_EXIT:  // exit the game
+                    break; */
+                // case KEY_F(n):        // Function keys, for 0 <= n >= 63
         }
     }
     return usr_input;
+}
+
+std::string getString(const int max_len) {
+    std::string str = "";
+    echo();
+    nocbreak();
+    while (str.size() <= max_len) {
+        str += getch();
+        if (str.size() > max_len) {
+            addstr("Your input exceeds the limit. Please input again.");
+        }
+    }
+    noecho();
+    cbreak();
+    nodelay(stdscr, true);
+    return str;
+}
+
+std::string getString(int x, int y,
+                      const int max_len) {  // get the string input from users
+    std::string str="";
+    move(x, y);
+    echo();
+    nocbreak();
+    while (str.size() <= max_len) {
+        str+=getch();
+        if (str.size() > max_len) {
+            addstr("Your input exceeds the limit. Please input again.");
+        }
+    }
+    noecho();
+    cbreak();
+    nodelay(stdscr, true);
+    return str;
 }
 
 template <typename T>
