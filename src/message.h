@@ -24,10 +24,11 @@ class Message {
     }
 
     // Returns true if the message has been displayed for long enough
-    bool finished() { return system_clock::now() - start > duration; }
-
-    bool operator<(Message operand) { return start < operand.start; }
-    bool operator>(Message operand) { return start > operand.start; }
+    bool finished() { return system_clock::now() - start > duration; };
+    
+    friend bool operator<(const Message &a, const Message &b) {
+        return a.start < b.start;
+    }
 
    private:
     // Content of the message
@@ -39,5 +40,6 @@ class Message {
     duration<double> duration;
     time_point<system_clock> start;
 };
+
 
 #endif
