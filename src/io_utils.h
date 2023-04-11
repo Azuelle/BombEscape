@@ -12,7 +12,6 @@ enum class Input {
     left,       // Left
     right,      // Right
     place,      // Place bomb
-    chars,      // characters
     enter,      // enter
     backspace,  // backspace
     none        // No input

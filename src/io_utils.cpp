@@ -36,9 +36,6 @@ Input getInput() {
             case 32: /* user pressed space key */
                 return Input::place;
                 break;
-            case KEY_IC:  // Insert char or enter insert mode
-                return Input::chars;
-                break;
             case KEY_ENTER:  // Enter or send
                 return Input::enter;
                 break;
