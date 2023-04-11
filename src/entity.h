@@ -32,17 +32,21 @@ class Entity {
     duration<double> lifetime;
     // Indicates whether this Entity's onDeath has already been processed
     bool alreadyDied = false;
+    // Indicates whether this Entity dies after a certain amount of time
+    bool timed = true;
 
    public:
-    Entity(duration<double> lifetime, Position position)
-        : lifetime(lifetime), position(position) {
+    Entity(duration<double> lifetime, Position position, bool timed = true)
+        : lifetime(lifetime), position(position), timed(timed) {
         start_time = system_clock::now();
     };
 
     Position getPosition() { return this->position; };
 
     // Checks whether this Entity's timer has run out
-    bool checkDeath() { return system_clock::now() - start_time >= lifetime; }
+    bool checkDeath() {
+        return timed ? system_clock::now() - start_time >= lifetime : false;
+    }
     // Indicates whether this Entity's onDeath has already been processed
     bool checkAlreadyDied() { return alreadyDied; }
 
@@ -52,7 +56,7 @@ class Entity {
 };
 
 // TODO: Implementation
-class Bomb : Entity {};
+class Bomb : Entity {};  // length
 
 // TODO: Implementation
 class PowerUp : Entity {};
