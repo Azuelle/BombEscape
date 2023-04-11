@@ -5,7 +5,7 @@
 
 #include <chrono>
 #include <cmath>
-#include <vector>
+#include <list>
 
 #include "player.h"
 
@@ -42,13 +42,13 @@ class Entity {
     Position getPosition() { return this->position; };
 
     // Checks whether this Entity's timer has run out
-    bool checkDeath();
+    bool checkDeath() { return system_clock::now() - start_time >= lifetime; }
     // Indicates whether this Entity's onDeath has already been processed
-    bool checkAlreadyDied();
+    bool checkAlreadyDied() { return alreadyDied; }
 
     // Declares a pure virtual onDeath fucntion in order to ensure that
     // it is implemented only in derived entity classes.
-    virtual void onDeath(Player* player, std::vector<Entity>& entity_list) = 0;
+    virtual void onDeath(Player* player, std::list<Entity>& entity_list) = 0;
 };
 
 // TODO: Implementation
