@@ -16,6 +16,9 @@ using namespace std::chrono;
  * enum class is used here for simplicity (decrease chance of typo).
  */
 enum class StateType {
+    // Quitting the game
+    exit,
+    // In main menu
     main_menu,
     // In-game
     alive,
@@ -41,7 +44,7 @@ class GameState {
 
     Player *player = nullptr;
     Playfield *playfield = nullptr;
-    StateType state = StateType::main_menu;
+    StateType type = StateType::main_menu;
 
     duration<double> getCurrentDuration() {
         return system_clock::now() - this->start;

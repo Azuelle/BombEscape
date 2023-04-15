@@ -5,7 +5,7 @@
 
 #include <string>
 
-enum class Input {
+enum class Input : int {
     // Directions
     up,         // Up
     down,       // Down

@@ -14,6 +14,20 @@ class Playfield {
     // A list of items, bombs, etc. on map
     // These should also have their own classes probably
     // Maybe a seperate header?
+   private:
+   public:
+    std::vector<Entity*> entity_list;
+
+    // Checks if a tile is accessible
+    bool isObstacle(Pos pos);
+
+    /**
+     * Locates the entity at a certain position.
+     * Takes the coordinate of the target tile.
+     * Returns a pointer to such entity if found.
+     * Returns nullptr if not found.
+     */
+    Entity* locateEntityAt(Pos pos);
 };
 
 #endif

@@ -12,22 +12,33 @@
 using namespace std::chrono;
 
 // For storing position (a pair of x, y coordinates) and easy calculations
-struct Position {
+struct Pos {
     int x;
     int y;
 
     // Return the Manhattan distance between two points
-    int distance(Position to) {
-        return abs(to.x - this->x) + abs(to.y - this->y);
-    }
+    int distance(Pos to) { return abs(to.x - this->x) + abs(to.y - this->y); }
 
-    Position(int x, int y) : x(x), y(y) {}
+    constexpr Pos operator+(const Pos opr) {
+        return Pos{this->x + opr.x, this->y + opr.y};
+    }
+    constexpr Pos operator-(const Pos opr) {
+        return Pos{this->x - opr.x, this->y - opr.y};
+    }
+    Pos& operator+=(const Pos opr) {
+        this->x += opr.x, this->y += opr.y;
+        return *this;
+    }
+    Pos& operator-=(const Pos opr) {
+        this->x -= opr.x, this->y -= opr.y;
+        return *this;
+    }
 };
 
 // A base class for all kinds of non-player entities on the playfield
 class Entity {
    private:
-    Position position;
+    Pos position;
     time_point<system_clock> start_time;
     duration<double> lifetime;
     // Indicates whether this Entity's onDeath has already been processed
@@ -36,12 +47,16 @@ class Entity {
     bool timed = true;
 
    public:
-    Entity(duration<double> lifetime, Position position, bool timed = true)
+    Entity(duration<double> lifetime, Pos position, bool timed = true)
         : lifetime(lifetime), position(position), timed(timed) {
         start_time = system_clock::now();
     };
 
-    Position getPosition() { return this->position; };
+    Pos getPosition() { return this->position; }
+    // Absolute movement
+    void setPosition(Pos position) { this->position = position; }
+    // Relative movement
+    void move(Pos offset) { this->position += offset; }
 
     // Checks whether this Entity's timer has run out
     bool checkDeath() {
@@ -59,7 +74,12 @@ class Entity {
 class Bomb : Entity {};  // length
 
 // TODO: Implementation
-class PowerUp : Entity {};
+class PowerUp : Entity {
+   public:
+    void onDeath(Player* player, std::list<Entity>& entity_list) {
+        // TODO: Implementation
+    }
+};
 
 // TODO: Implementation
 class Barricade : Entity {};

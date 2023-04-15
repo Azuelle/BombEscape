@@ -6,7 +6,13 @@
 #include "gamestate.h"
 #include "io_utils.h"
 
-void logic(GameState cur_state, Input usr_input);
+// Process all game logic
+void logic(GameState &cur_state, const Input usr_input);
+
+void movePlayer(GameState &cur_state, const Input usr_input);
+
 bool checkRunning();
+
+bool quitting = false;
 
 #endif

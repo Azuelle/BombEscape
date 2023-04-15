@@ -23,7 +23,7 @@ class Player {
     int speed;
     int bomb_count;     // Number of bombs in hand
     int bomb_capacity;  // Maximum number of bombs a player can hold
-    Position position;
+    Pos position;
     double shield_time;
     double speed_time;
     double frozen_time;
@@ -38,8 +38,14 @@ class Player {
     bool hasShield() { return shield != ShieldState::none; }
     int getBombCount() { return bomb_count; }
     int getBombCapacity() { return bomb_capacity; }
-    int getHealth() { return health_val; };
-    Position getPosition() { return position; }
+    int getHealth() { return health_val; }
+
+    Pos getPosition() { return this->position; }
+    // Absolute movement
+    void setPosition(Pos position) { this->position = position; }
+    // Relative movement
+    void move(Pos offset) { this->position += offset; }
+
     double getShieldTime() { return shield_time; }
     double getSpeedTime() { return speed_time; }
     double getFrozenTime() { return frozen_time; }
