@@ -25,9 +25,12 @@ class Message {
 
     // Returns true if the message has been displayed for long enough
     bool finished() { return system_clock::now() - start > duration; };
-    
+
     friend bool operator<(const Message &a, const Message &b) {
         return a.start < b.start;
+    }
+    friend bool operator>(const Message &a, const Message &b) {
+        return a.start > b.start;
     }
 
    private:
@@ -40,6 +43,5 @@ class Message {
     duration<double> duration;
     time_point<system_clock> start;
 };
-
 
 #endif
