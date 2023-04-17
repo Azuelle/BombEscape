@@ -47,7 +47,7 @@ Input getInput() {
     return usr_input;
 }
 
-std::string getString(const int max_len) {
+std::string getString(const unsigned int max_len) {
     std::string str = "";
     echo();
     nocbreak();
@@ -63,14 +63,15 @@ std::string getString(const int max_len) {
     return str;
 }
 
-std::string getString(int x, int y,
-                      const int max_len) {  // get the string input from users
-    std::string str="";
+std::string getString(
+    int x, int y,
+    const unsigned int max_len) {  // get the string input from users
+    std::string str = "";
     move(x, y);
     echo();
     nocbreak();
     while (str.size() <= max_len) {
-        str+=getch();
+        str += getch();
         if (str.size() > max_len) {
             addstr("Your input exceeds the limit. Please input again.");
         }
@@ -82,37 +83,37 @@ std::string getString(int x, int y,
 }
 
 template <typename T>
-int print(T content, int max_len = -1) {
+int print(T content, const unsigned int max_len) {
     return addnstr(std::to_string(content).c_str(), max_len);
 }
 template <>
-int print(std::string content, int max_len) {
+int print(std::string content, const unsigned int max_len) {
     return addnstr(content.c_str(), max_len);
 }
 template <>
-int print(char content, int max_len) {
+int print(char content, const unsigned int max_len) {
     char str[2] = {content};
     return addnstr(str, max_len);
 }
 template <>
-int print(bool content, int max_len) {
+int print(bool content, const unsigned int max_len) {
     return addnstr(content ? "true" : "false", max_len);
 }
 
 template <typename T>
-int mvprint(T content, int x, int y, int max_len = -1) {
+int mvprint(T content, int x, int y, const unsigned int max_len) {
     return mvaddnstr(y, x, std::to_string(content).c_str(), max_len);
 }
 template <>
-int mvprint(std::string content, int x, int y, int max_len) {
+int mvprint(std::string content, int x, int y, const unsigned int max_len) {
     return mvaddnstr(y, x, content.c_str(), max_len);
 }
 template <>
-int mvprint(char content, int x, int y, int max_len) {
+int mvprint(char content, int x, int y, const unsigned int max_len) {
     char str[2] = {content};
     return mvaddnstr(y, x, str, max_len);
 }
 template <>
-int mvprint(bool content, int x, int y, int max_len) {
+int mvprint(bool content, int x, int y, const unsigned int max_len) {
     return mvaddnstr(y, x, content ? "true" : "false", max_len);
 }

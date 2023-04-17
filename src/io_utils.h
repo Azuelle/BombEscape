@@ -22,8 +22,8 @@ enum class Input : int {
  * Returns the input from user as type Input.
  */
 Input getInput();
-std::string getString(const int max_len);
-std::string getString(int x, int y, const int max_len);
+std::string getString(const unsigned int max_len);
+std::string getString(int x, int y, const unsigned int max_len);
 
 /**
  * Expansion on curses.h's addstr() / addnstr().
@@ -32,13 +32,13 @@ std::string getString(int x, int y, const int max_len);
  * Returns the return value from addnstr().
  */
 template <typename T>
-int print(T content, int max_len = -1);
+int print(T content, const unsigned int max_len = -1);
 template <>
-int print(std::string content, int max_len);
+int print(std::string content, const unsigned int max_len);
 template <>
-int print(char content, int max_len);
+int print(char content, const unsigned int max_len);
 template <>
-int print(bool content, int max_len);
+int print(bool content, const unsigned int max_len);
 
 /**
  * Expansion on curses.h's mvaddstr() / mvaddnstr().
@@ -48,12 +48,12 @@ int print(bool content, int max_len);
  * Returns the return value from addnstr().
  */
 template <typename T>
-int mvprint(T content, int x, int y, int max_len = -1);
+int mvprint(T content, int x, int y, const unsigned int max_len = -1);
 template <>
-int mvprint(std::string content, int x, int y, int max_len);
+int mvprint(std::string content, int x, int y, const unsigned int max_len);
 template <>
-int mvprint(char content, int x, int y, int max_len);
+int mvprint(char content, int x, int y, const unsigned int max_len);
 template <>
-int mvprint(bool content, int x, int y, int max_len);
+int mvprint(bool content, int x, int y, const unsigned int max_len);
 
 #endif

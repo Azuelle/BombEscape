@@ -7,8 +7,6 @@
 #include <cmath>
 #include <list>
 
-#include "player.h"
-
 using namespace std::chrono;
 
 // For storing position (a pair of x, y coordinates) and easy calculations
@@ -34,6 +32,8 @@ struct Pos {
         return *this;
     }
 };
+
+#include "player.h"
 
 // A base class for all kinds of non-player entities on the playfield
 class Entity {

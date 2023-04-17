@@ -15,16 +15,16 @@ using namespace std::chrono;
 class Message {
    public:
     Message(std::string content, duration<double> duration)
-        : content(content), duration(duration) {
+        : content(content), display_length(duration) {
         start = system_clock::now();
     }
     Message(std::string type, std::string content, duration<double> duration)
-        : type(type), content(content), duration(duration) {
+        : type(type), content(content), display_length(duration) {
         start = system_clock::now();
     }
 
     // Returns true if the message has been displayed for long enough
-    bool finished() { return system_clock::now() - start > duration; };
+    bool finished() { return system_clock::now() - start > display_length; };
 
     friend bool operator<(const Message &a, const Message &b) {
         return a.start < b.start;
@@ -40,7 +40,7 @@ class Message {
     // Should always be Capitalized.
     std::string type = "None";
 
-    duration<double> duration;
+    duration<double> display_length;
     time_point<system_clock> start;
 };
 
