@@ -39,17 +39,16 @@ void print() {
 }
 
 void move(int x, int y) {
-    if (!wall[pl_y + y][pl_x + x]) {
-        if (!b_placed || pl_x + x != b_x || pl_y + y != b_y ||
-            !wall[b_y + y][b_x + x]) {
-            pl_x += x;
-            pl_y += y;
-        }
-        if (b_placed && pl_x + x == b_x && pl_y + y == b_y &&
-            !wall[b_y + y][b_x + x]) {
-            b_x += x;
-            b_y += y;
-        }
+    if (!wall[pl_y + y][pl_x + x] && (pl_x + x != b_x || pl_y + y != b_y)) {
+        pl_x += x;
+        pl_y += y;
+    }
+    if (!wall[pl_y + y][pl_x + x] && pl_x + x == b_x && pl_y + y == b_y &&
+        !wall[b_y + y][b_x + x]) {
+        pl_x += x;
+        pl_y += y;
+        b_x += x;
+        b_y += y;
     }
 }
 
