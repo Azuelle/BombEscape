@@ -2,14 +2,16 @@
 SHELL = /bin/bash
 
 # Output directory
-OUT_DIR = build
+OUT_DIR = ./build
 # Source code directory
-SRC_DIR = src
+SRC_DIR = ./src
 
 # Compiler
 CXX = g++
 # Compiler flags
-CXXFLAGS += -Wall -MMD -MP -lncurses
+CXXFLAGS += -Wall -MMD -MP
+# Additional flags
+LDFLAGS = -lcurses
 
 # Final executable name
 EXEC = bombescape
@@ -26,7 +28,7 @@ all: $(OUT_DIR)/$(EXEC)
 # Make the final executable
 $(OUT_DIR)/$(EXEC): $(OBJ)
 	mkdir -p $(dir $@)
-	$(CXX) $(CXXFLAGS) $^ -o $@
+	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
 
 # Make all object codes
 $(OUT_DIR)/%.o: %.cpp
