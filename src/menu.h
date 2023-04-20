@@ -1,11 +1,12 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include <stdio.h>
-#include <ncurses.h>
 #include <curses.h>
-#include <string>
+#include <ncurses.h>
+#include <stdio.h>
 #include <stdlib.h>
+
+#include <string>
 
 int main(int argc, char **argv);
 
