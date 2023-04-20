@@ -1,7 +1,7 @@
-// display.h
+// interface.h
 
-#ifndef DISPLAY_H
-#define DISPLAY_H
+#ifndef INTERFACE_H
+#define INTERFACE_H
 
 void display();
 
