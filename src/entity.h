@@ -67,7 +67,7 @@ class Entity {
 
     // Declares a pure virtual onDeath fucntion in order to ensure that
     // it is implemented only in derived entity classes.
-    virtual void onDeath(Player* player, std::list<Entity>& entity_list) = 0;
+    virtual void onDeath(Player* player, std::vector<Entity*>& entity_list) = 0;
 };
 
 // TODO: Implementation
@@ -76,7 +76,7 @@ class Bomb : Entity {};  // length
 // TODO: Implementation
 class PowerUp : Entity {
    public:
-    void onDeath(Player* player, std::list<Entity>& entity_list) {
+    void onDeath(Player* player, std::vector<Entity*>& entity_list) {
         // TODO: Implementation
     }
 };
