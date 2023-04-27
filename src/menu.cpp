@@ -72,10 +72,10 @@ int main(int argc, char **argv) {
     mvwprintw(win, centerY, centerX2, option2.c_str());
     mvwprintw(win, centerY + 2, centerX3, option3.c_str());
     mvwprintw(win, centerY + 4, centerX4, option4.c_str());
-    -
-        // Output message for the game title
 
-        mvwprintw(win, 5, centerTitle, title_1.c_str());
+    // Output message for the game title
+
+    mvwprintw(win, 5, centerTitle, title_1.c_str());
     mvwprintw(win, 6, centerTitle, title_2.c_str());
     mvwprintw(win, 7, centerTitle, title_3.c_str());
     mvwprintw(win, 8, centerTitle, title_4.c_str());
