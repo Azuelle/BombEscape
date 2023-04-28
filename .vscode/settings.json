@@ -4,5 +4,6 @@
     "files.insertFinalNewline": true,
     "files.associations": {
         ".clang-format": "yaml",
+        "string": "cpp"
     },
 }

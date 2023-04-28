@@ -7,6 +7,112 @@
 
 using namespace std;
 
+bool isStart(int pos) {
+    if (pos == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+void chooseGame(WINDOW *win, int cX[4], int cY[4], string op[4], int choice,
+                int pos) {}
+
+void RUN(WINDOW *win, int cX[4], int cY[4], string op[4], int choice, int pos) {
+    bool isRun = true;
+    while (isRun) {
+        choice = wgetch(win);
+        switch (choice) {
+            case KEY_UP:
+                switch (pos) {
+                    case 0:
+                        wattron(win, A_BOLD);
+                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
+                        wattroff(win, A_BOLD);
+                        pos = 3;
+                        wattron(win, A_STANDOUT);
+                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
+                        wattroff(win, A_STANDOUT);
+                        break;
+                    case 1:
+                        wattron(win, A_BOLD);
+                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
+                        wattroff(win, A_BOLD);
+                        pos = 0;
+                        wattron(win, A_STANDOUT);
+                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
+                        wattroff(win, A_STANDOUT);
+                        break;
+                    case 2:
+                        wattron(win, A_BOLD);
+                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
+                        wattroff(win, A_BOLD);
+                        pos = 1;
+                        wattron(win, A_STANDOUT);
+                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
+                        wattroff(win, A_STANDOUT);
+                        break;
+                    case 3:
+                        wattron(win, A_BOLD);
+                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
+                        wattroff(win, A_BOLD);
+                        pos = 2;
+                        wattron(win, A_STANDOUT);
+                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
+                        wattroff(win, A_STANDOUT);
+                        break;
+                }
+                break;
+            case KEY_DOWN:
+                switch (pos) {
+                    case 0:
+                        wattron(win, A_BOLD);
+                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
+                        wattroff(win, A_BOLD);
+                        pos = 1;
+                        wattron(win, A_STANDOUT);
+                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
+                        wattroff(win, A_STANDOUT);
+                        break;
+                    case 1:
+                        wattron(win, A_BOLD);
+                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
+                        wattroff(win, A_BOLD);
+                        pos = 2;
+                        wattron(win, A_STANDOUT);
+                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
+                        wattroff(win, A_STANDOUT);
+                        break;
+                    case 2:
+                        wattron(win, A_BOLD);
+                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
+                        wattroff(win, A_BOLD);
+                        pos = 3;
+                        wattron(win, A_STANDOUT);
+                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
+                        wattroff(win, A_STANDOUT);
+                        break;
+                    case 3:
+                        wattron(win, A_BOLD);
+                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
+                        wattroff(win, A_BOLD);
+                        pos = 0;
+                        wattron(win, A_STANDOUT);
+                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
+                        wattroff(win, A_STANDOUT);
+                        break;
+                }
+                break;
+            default:
+                if (choice == 10) {
+                    erase();
+                    refresh();
+                    isRun = false;
+                }
+        }
+    }
+}
+
 int main(int argc, char **argv) {
     // Initialize the game menu
     initscr();
@@ -54,7 +160,6 @@ int main(int argc, char **argv) {
         "                                                          |_|";
 
     // Setting the options to be bold
-    wattron(win, A_BOLD);
 
     // Calculate center coordinates for each option and print them
     int centerY = (yMax - yMax / 5) / 2;
@@ -69,6 +174,14 @@ int main(int argc, char **argv) {
 
     // Output message for the game option
     // mvwprintw(win, centerY-2, centerX1, option1.c_str());
+    wrefresh(win);
+    wattron(win, A_STANDOUT);
+    mvwprintw(win, centerY - 2, centerX1, option1.c_str());
+    wattroff(win, A_STANDOUT);
+
+    wrefresh(win);
+
+    wattron(win, A_BOLD);
     mvwprintw(win, centerY, centerX2, option2.c_str());
     mvwprintw(win, centerY + 2, centerX3, option3.c_str());
     mvwprintw(win, centerY + 4, centerX4, option4.c_str());
@@ -87,127 +200,20 @@ int main(int argc, char **argv) {
     wattroff(win, A_BOLD);
 
     // To set the initial stage to Start Game
-    wrefresh(win);
-    wattron(win, A_STANDOUT);
-    mvwprintw(win, centerY - 2, centerX1, option1.c_str());
-    wattroff(win, A_STANDOUT);
-
-    wrefresh(win);
 
     // To enable the User Input to be arrow key
     keypad(win, true);
-    int choice;
+    int choice = 0;
     // Create array for x,y coordinate and the option.
     string opArray[4] = {"Start Game", "Ranking", "Settings", "Quit"};
     int centerXArray[4] = {centerX1, centerX2, centerX3, centerX4};
     int centerYArray[4] = {centerY - 2, centerY, centerY + 2, centerY + 4};
 
     int pos = 0;
-
     // Highlight
-    while (1) {
-        choice = wgetch(win);
-        switch (choice) {
-            case KEY_UP:
-                switch (pos) {
-                    case 0:
-                        wattron(win, A_BOLD);
-                        mvwprintw(win, centerYArray[pos], centerXArray[pos],
-                                  opArray[pos].c_str());
-                        wattroff(win, A_BOLD);
-                        pos = 3;
-                        wattron(win, A_STANDOUT);
-                        mvwprintw(win, centerYArray[pos], centerXArray[pos],
-                                  opArray[pos].c_str());
-                        wattroff(win, A_STANDOUT);
-                        break;
-                    case 1:
-                        wattron(win, A_BOLD);
-                        mvwprintw(win, centerYArray[pos], centerXArray[pos],
-                                  opArray[pos].c_str());
-                        wattroff(win, A_BOLD);
-                        pos = 0;
-                        wattron(win, A_STANDOUT);
-                        mvwprintw(win, centerYArray[pos], centerXArray[pos],
-                                  opArray[pos].c_str());
-                        wattroff(win, A_STANDOUT);
-                        break;
-                    case 2:
-                        wattron(win, A_BOLD);
-                        mvwprintw(win, centerYArray[pos], centerXArray[pos],
-                                  opArray[pos].c_str());
-                        wattroff(win, A_BOLD);
-                        pos = 1;
-                        wattron(win, A_STANDOUT);
-                        mvwprintw(win, centerYArray[pos], centerXArray[pos],
-                                  opArray[pos].c_str());
-                        wattroff(win, A_STANDOUT);
-                        break;
-                    case 3:
-                        wattron(win, A_BOLD);
-                        mvwprintw(win, centerYArray[pos], centerXArray[pos],
-                                  opArray[pos].c_str());
-                        wattroff(win, A_BOLD);
-                        pos = 2;
-                        wattron(win, A_STANDOUT);
-                        mvwprintw(win, centerYArray[pos], centerXArray[pos],
-                                  opArray[pos].c_str());
-                        wattroff(win, A_STANDOUT);
-                        break;
-                }
-                break;
-            case KEY_DOWN:
-                switch (pos) {
-                    case 0:
-                        wattron(win, A_BOLD);
-                        mvwprintw(win, centerYArray[pos], centerXArray[pos],
-                                  opArray[pos].c_str());
-                        wattroff(win, A_BOLD);
-                        pos = 1;
-                        wattron(win, A_STANDOUT);
-                        mvwprintw(win, centerYArray[pos], centerXArray[pos],
-                                  opArray[pos].c_str());
-                        wattroff(win, A_STANDOUT);
-                        break;
-                    case 1:
-                        wattron(win, A_BOLD);
-                        mvwprintw(win, centerYArray[pos], centerXArray[pos],
-                                  opArray[pos].c_str());
-                        wattroff(win, A_BOLD);
-                        pos = 2;
-                        wattron(win, A_STANDOUT);
-                        mvwprintw(win, centerYArray[pos], centerXArray[pos],
-                                  opArray[pos].c_str());
-                        wattroff(win, A_STANDOUT);
-                        break;
-                    case 2:
-                        wattron(win, A_BOLD);
-                        mvwprintw(win, centerYArray[pos], centerXArray[pos],
-                                  opArray[pos].c_str());
-                        wattroff(win, A_BOLD);
-                        pos = 3;
-                        wattron(win, A_STANDOUT);
-                        mvwprintw(win, centerYArray[pos], centerXArray[pos],
-                                  opArray[pos].c_str());
-                        wattroff(win, A_STANDOUT);
-                        break;
-                    case 3:
-                        wattron(win, A_BOLD);
-                        mvwprintw(win, centerYArray[pos], centerXArray[pos],
-                                  opArray[pos].c_str());
-                        wattroff(win, A_BOLD);
-                        pos = 0;
-                        wattron(win, A_STANDOUT);
-                        mvwprintw(win, centerYArray[pos], centerXArray[pos],
-                                  opArray[pos].c_str());
-                        wattroff(win, A_STANDOUT);
-                        break;
-                }
-                break;
-                // case "\n":
-                // mvwprintw(win, 0,0, opArray[pos].c_str());
-        }
-    }
+    RUN(win, centerXArray, centerYArray, opArray, choice, pos);
+
+    refresh();
 
     endwin();
     return 0;
