@@ -40,7 +40,7 @@ struct Pos {
 
 // A base class for all kinds of non-player entities on the playfield
 class Entity {
-   private:
+   protected:
     Pos position;
     time_point<system_clock> start_time;
     duration<double> lifetime;
@@ -74,8 +74,8 @@ class Entity {
 };
 
 // TODO: Implementation
-class Bomb : Entity {};  // length
-
+class Bomb : public Entity {};  // length
+//
 // TODO: Implementation
 class PowerUp : Entity {
    public:

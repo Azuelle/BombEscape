@@ -62,6 +62,7 @@ if (movement.x == -1 && movement.y==0){ // right
     }
 }
 
+
 // Process the movement of player character
 void movePlayer(GameState &state, const Input usr_input) {
     Pos destination = state.player->getPosition() + movement[int(usr_input)];

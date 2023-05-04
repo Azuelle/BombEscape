@@ -8,4 +8,3 @@ bool Playfield::isObstacle(Pos pos) {
         return false;
     }
 }
-
