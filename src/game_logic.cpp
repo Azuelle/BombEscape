@@ -50,33 +50,11 @@ void entityInteraction(PowerUp *power_up, GameState &state,
 }
 template <>
 void entityInteraction(Bomb *bomb, GameState &state, const Pos movement) {
-    if (movement.x == 0 && movement.y == 1) {  // up
-        if (state.playfield->isObstacle(bomb->getPosition())) {
-            return;
-
-            bomb->setPosition(bomb->getPosition() + movement);
-        }
-        if (movement.x == 0 && movement.y == -1) {  // down
-            if (state.playfield->isObstacle(bomb->getPosition())) {
-                return;
-            }
-
-            bomb->setPosition(bomb->getPosition() + movement);
-        }
-        if (movement.x == 1 && movement.y == 0) {  // left
-            if (state.playfield->isObstacle(bomb->getPosition())) {
-                return;
-            }
-
-            bomb->setPosition(bomb->getPosition() + movement);
-        }
-        if (movement.x == -1 && movement.y == 0) {  // right
-            if (state.playfield->isObstacle(bomb->getPosition())) {
-                return;
-            }
-
-            bomb->setPosition(bomb->getPosition() + movement);
-        }
+    if (!state.playfield->isObstacle(bomb->getPosition() + movement) &&
+        state.playfield->locateEntityAt(bomb->getPosition() + movement) ==
+            nullptr) {
+        bomb->move(movement);
+        state.player->move(movement);
     }
 }
 
