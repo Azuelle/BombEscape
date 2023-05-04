@@ -10,7 +10,7 @@ std::string getstring(/*a coordinate*/){ // get the string input from users
         cbreak();
         nodelay(stdscr, TRUE); */
         int i = getch();
-        if (i == KEY_ENTER){
+        if (i == '\n'){
             break;
         }
         else if (i == KEY_BACKSPACE){

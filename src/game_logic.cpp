@@ -2,17 +2,25 @@
 
 #include "game_logic.h"
 
-void logic(GameState &state, const Input usr_input) {
+#include <vector>
+
+#include "playfield.h"
+void logic(GameState &state) {
     switch (state.type) {
         case StateType::exit:
             quitting = true;
             break;
         case StateType::alive:
+            Input usr_input = getInput();
             if (int(Input::up) <= int(usr_input) <= int(Input::right))
                 movePlayer(state, usr_input);
             break;
+        case StateType::death_screen:
 
-            // TODO: Process other types of states
+            break;
+        case StateType::main_menu:
+
+            break;
     }
 }
 
@@ -30,15 +38,44 @@ const Pos movement[4] = {
  * Handles what happens when player run into an entity.
  * Default response is to do nothing and block movement.
  */
+
 template <typename T>
-void entityInteraction(T *entity, Player *player, const Pos movement) {}
+void entityInteraction(T *entity, GameState &state, const Pos movement) {}
 template <>
-void entityInteraction(PowerUp *power_up, Player *player, const Pos movement) {
+void entityInteraction(PowerUp *power_up, GameState &state,
+                       const Pos movement) {
     // TODO: Handle power-ups
 }
 template <>
-void entityInteraction(Bomb *bomb, Player *player, const Pos movement) {
-    // TODO: Handle bombs
+void entityInteraction(Bomb *bomb, GameState &state, const Pos movement) {
+    if (movement.x == 0 && movement.y == 1) {  // up
+        if (state.playfield->isObstacle(bomb->getPosition())) {
+            return;
+
+            bomb->setPosition(bomb->getPosition() + movement);
+        }
+        if (movement.x == 0 && movement.y == -1) {  // down
+            if (state.playfield->isObstacle(bomb->getPosition())) {
+                return;
+            }
+
+            bomb->setPosition(bomb->getPosition() + movement);
+        }
+        if (movement.x == 1 && movement.y == 0) {  // left
+            if (state.playfield->isObstacle(bomb->getPosition())) {
+                return;
+            }
+
+            bomb->setPosition(bomb->getPosition() + movement);
+        }
+        if (movement.x == -1 && movement.y == 0) {  // right
+            if (state.playfield->isObstacle(bomb->getPosition())) {
+                return;
+            }
+
+            bomb->setPosition(bomb->getPosition() + movement);
+        }
+    }
 }
 
 // Process the movement of player character
@@ -53,9 +90,25 @@ void movePlayer(GameState &state, const Input usr_input) {
         state.player->setPosition(destination);
         return;
     } else {
-        entityInteraction(entity_encounter, state.player,
-                          movement[int(usr_input)]);
+        entityInteraction(entity_encounter, state, movement[int(usr_input)]);
     }
 }
 
+void updateEntityList(GameState &state) {
+    auto *entities = &state.playfield->entity_list;
+    for (auto entity : *entities)
+        if (entity->checkDeath() && !entity->checkAlreadyDied())
+            entity->onDeath(state.player, *entities);
+
+    // delete all the death entities
+    std::vector<Entity *> newentitylist;
+    for (auto itr = entities->begin(); itr != entities->end(); itr++)
+        if (!(*itr)->checkAlreadyDied()) newentitylist.push_back(*itr);
+    *entities = newentitylist;
+}
+
 bool checkRunning() { return !quitting; }
+
+void placeBomb(GameState &state) {  // placebomb
+    state.playfield->entity_list.push_back(Bomb(state.player->getPosition()));
+}

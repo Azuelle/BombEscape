@@ -49,6 +49,7 @@ class GameState {
     duration<double> getCurrentDuration() {
         return system_clock::now() - this->start;
     }
+    long long gettimescore(GameState &state);
 };
 
 #endif

@@ -5,7 +5,7 @@
 
 #include <chrono>
 #include <cmath>
-#include <list>
+#include <vector>
 
 using namespace std::chrono;
 
@@ -31,12 +31,16 @@ struct Pos {
         this->x -= opr.x, this->y -= opr.y;
         return *this;
     }
+    bool operator==(const Pos opr) {
+        return this->x == opr.x && this->y == opr.y;
+    }
 };
 
 #include "player.h"
 
 // A base class for all kinds of non-player entities on the playfield
 class Entity {
+   protected:
    protected:
     Pos position;
     time_point<system_clock> start_time;
@@ -74,7 +78,8 @@ class Entity {
 };
 
 // TODO: Implementation
-class Bomb : public Entity {
+class Bomb : Entity {
+    class Bomb : public Entity {
     public:
       void onDeath(Player* player, std::vector<Entity*>& entity_list);
       void setBombLevel(Player* player);
@@ -82,7 +87,7 @@ class Bomb : public Entity {
       bool takeDamage();
     private:
       int bombLevel=1;
-      bool state=1;
+  };
 };
 
 // TODO: Implementation

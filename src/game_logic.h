@@ -7,7 +7,7 @@
 #include "io_utils.h"
 
 // Process all game logic
-void logic(GameState &cur_state, const Input usr_input);
+void logic(GameState &cur_state);
 
 void movePlayer(GameState &cur_state, const Input usr_input);
 
