@@ -15,7 +15,7 @@ struct Pos {
     int y;
 
     // Return the Manhattan distance between two points
-    int distance(Pos to) { return abs(to.x - this->x) + abs(to.y - this->y); }
+    int distance(Pos to) { return abs(to.x - this->x) + abs(to.y - this->y); } //What is the use of this function?
 
     constexpr Pos operator+(const Pos opr) {
         return Pos{this->x + opr.x, this->y + opr.y};
@@ -37,7 +37,7 @@ struct Pos {
 
 // A base class for all kinds of non-player entities on the playfield
 class Entity {
-   private:
+   protected:
     Pos position;
     time_point<system_clock> start_time;
     duration<double> lifetime;
@@ -65,13 +65,28 @@ class Entity {
     // Indicates whether this Entity's onDeath has already been processed
     bool checkAlreadyDied() { return alreadyDied; }
 
+    //
+    virtual bool takeDamage();
+
     // Declares a pure virtual onDeath fucntion in order to ensure that
     // it is implemented only in derived entity classes.
     virtual void onDeath(Player* player, std::vector<Entity*>& entity_list) = 0;
 };
 
 // TODO: Implementation
-class Bomb : Entity {};  // length
+class Bomb : Entity {
+    public:
+      void onDeath(Player* player, std::vector<Entity*>& entity_list) {};
+      void setBombLevel(Player* player);
+      bool checkRange(Pos p);
+      void damageHealth(Player *player);
+      void breakEntity(std::vector<Entity*>& entity_list);
+      bool takeDamage();
+    private:
+      int bombLevel=1;
+      bool state=1;
+      
+};  // length
 
 // TODO: Implementation
 class PowerUp : Entity {
@@ -82,6 +97,12 @@ class PowerUp : Entity {
 };
 
 // TODO: Implementation
-class Barricade : Entity {};
+class Barricade : Entity {
+    public:
+      void onDeath(Player* player, std::vector<Entity*>& entity_list) { };
+      void breakB();
+    private:
+      bool state=1;
+};
 
 #endif
