@@ -5,7 +5,7 @@
 
 void Bomb::onDeath(Player* player, std::vector<Entity*>& entity_list) {
   if (this->checkRange(player->getPosition()) == 1){
-    player->takeDamage();
+    player->getDamage();
   }
   for(auto itr=entity_list.begin(); itr != entity_list.end(); itr++){
     if ((*itr)->checkDeath() == false && !(*itr)->checkAlreadyDied()){

@@ -41,7 +41,6 @@ struct Pos {
 // A base class for all kinds of non-player entities on the playfield
 class Entity {
    protected:
-   protected:
     Pos position;
     time_point<system_clock> start_time;
     duration<double> lifetime;
@@ -78,8 +77,7 @@ class Entity {
 };
 
 // TODO: Implementation
-class Bomb : Entity {
-    class Bomb : public Entity {
+class Bomb : public Entity {
     public:
       void onDeath(Player* player, std::vector<Entity*>& entity_list);
       void setBombLevel(Player* player);
@@ -87,7 +85,6 @@ class Bomb : Entity {
       bool takeDamage();
     private:
       int bombLevel=1;
-  };
 };
 
 // TODO: Implementation

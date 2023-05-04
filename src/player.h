@@ -13,6 +13,7 @@ class Player;
 class Player {
    private:
     int hp = 3;
+    int bomb_level=1;
     Pos position;
 
     time_point<system_clock> last_moved = system_clock::now();
@@ -32,6 +33,8 @@ class Player {
     bool moveable() { return system_clock::now() - last_moved > movement_cd; }
     bool canPlaceBomb() { return !bomb_placed; }
     bool setBombPlaced(bool stat) { bomb_placed = stat; }
+    
+    int getBombLevel() { return bomb_level; }
 
     Pos getPosition() { return this->position; }
     // Absolute movement
