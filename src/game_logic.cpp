@@ -63,7 +63,6 @@ if (movement.x == 1 && movement.y==0){ // left
 if (movement.x == -1 && movement.y==0){ // right
         if (state.playfield->isObstacle(bomb->getPosition())){
             return;}
-        
         bomb->setPosition(bomb->getPosition()+movement);}
     }
 }
@@ -89,12 +88,10 @@ void movePlayer(GameState &state, const Input usr_input) {
 void checkBomb(GameState &state, Bomb *bomb, Player *player){
     if (bomb->checkDeath()){
         if (player->getPosition().x == bomb->getPosition().x || player->getPosition().y == player->getPosition().y){
-            // 改变血量
         }
         //remove bomb
         
     }
-
 
 }
 
