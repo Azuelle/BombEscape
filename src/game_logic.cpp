@@ -3,6 +3,7 @@
 #include "game_logic.h"
 
 #include "playfield.h"
+#include<vector>
 void logic(GameState &state) {
     switch (state.type) {
         case StateType::exit:
@@ -85,15 +86,23 @@ void movePlayer(GameState &state, const Input usr_input) {
     }
 }
 
-void checkBomb(GameState &state, Bomb *bomb, Player *player){
+void checkhurt(GameState &state, Bomb *bomb, Player *player){
+
     if (bomb->checkDeath()){
-        if (player->getPosition().x == bomb->getPosition().x || player->getPosition().y == player->getPosition().y){
-            // 改变血量
+        if ((player->getPosition().x == bomb->getPosition().x || player->getPosition().y == player->getPosition().y) && player->isAlive()){
+            player->getDamage();
         }
-        // remove bomb
     }
 
-
+    std::vector<Entity*>::iterator itr;
+    // delete all the death entities
+    std::vector<Entity*> newentitylist;
+    for (itr = state.playfield->entity_list.begin(); itr!= state.playfield->entity_list.end(); itr++){
+        if(!(*itr)->checkAlreadyDied()){
+            newentitylist.push_back(*itr);
+        }
+    }
+    state.playfield->entity_list=newentitylist;
 }
 
 bool checkRunning() { return !quitting; }
