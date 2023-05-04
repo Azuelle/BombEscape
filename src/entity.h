@@ -75,8 +75,8 @@ class Entity {
 
 // TODO: Implementation
 class Bomb : public Entity {};  // length
-//
-// TODO: Implementation
+
+
 class PowerUp : public Entity {
    public:
     void onDeath(Player* player, std::vector<Entity*>& entity_list) {
