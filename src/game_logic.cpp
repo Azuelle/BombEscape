@@ -6,13 +6,14 @@
 
 #include "playfield.h"
 void logic(GameState &state) {
+    Input usr_input = getInput();
     switch (state.type) {
         case StateType::exit:
             quitting = true;
             break;
         case StateType::alive:
-            Input usr_input = getInput();
-            if (int(Input::up) <= int(usr_input) <= int(Input::right))
+            if (int(Input::up) <= int(usr_input) &&
+                int(usr_input) <= int(Input::right))
                 movePlayer(state, usr_input);
             break;
         case StateType::death_screen:
@@ -44,7 +45,8 @@ void entityInteraction(T *entity, GameState &state, const Pos movement) {}
 template <>
 void entityInteraction(PowerUp *power_up, GameState &state,
                        const Pos movement) {
-    // TODO: Handle power-ups
+    state.player->usePowerUp(*power_up);
+    state.player->move(movement);
 }
 template <>
 void entityInteraction(Bomb *bomb, GameState &state, const Pos movement) {
@@ -111,5 +113,5 @@ bool checkRunning() { return !quitting; }
 
 void placeBomb(GameState &state) {  // placebomb
     state.playfield->entity_list.push_back(
-        new Bomb(state.player->getPosition(), state.player->getBombLevel()));
+        new Bomb(state.player->getPosition(), state.player->getBombPower()));
 }

@@ -70,7 +70,6 @@ class Entity {
     virtual void onDeath(Player* player, std::vector<Entity*>& entity_list) = 0;
 };
 
-// TODO: Implementation
 class Bomb : public Entity {
    public:
     void onDeath(Player* player, std::vector<Entity*>& entity_list);
@@ -79,26 +78,54 @@ class Bomb : public Entity {
     // Returns whether the player or entity is in range of the explosion
     bool inRange(Pos p);
 
-    Bomb(Pos p, int level) : bomb_level(level) {
+    Bomb(Pos p, int bomb_power) : bomb_power(bomb_power) {
         this->position = p;
         this->start_time = system_clock::now();
     }
 
    private:
-    int bomb_level = 1;
+    static constexpr duration<double> lifetime = seconds(3);
+    int bomb_power = 1;
 };
 
-// TODO: Implementation
 class PowerUp : public Entity {
    public:
     void onDeath(Player* player, std::vector<Entity*>& entity_list) {
         this->alreadyDied = true;
     }
+    int getPower() { return this->power; }
+
+   protected:
+    static int power;
+    static constexpr duration<double> lifetime = seconds(15);
+};
+class Healing : public PowerUp {
+   public:
+    Healing(Pos p) {
+        this->position = p;
+        this->start_time = system_clock::now();
+    }
+
+   protected:
+    static constexpr int power = 1;
+};
+class BombPower : public PowerUp {
+   public:
+    BombPower(Pos p) {
+        this->position = p;
+        this->start_time = system_clock::now();
+    }
+
+   protected:
+    static constexpr int power = 2;
 };
 
-// TODO: Implementation
 class Barricade : public Entity {
    public:
+    Barricade(Pos p) {
+        this->position = p;
+        this->timed = false;
+    }
     void onDeath(Player* player, std::vector<Entity*>& entity_list) {
         this->alreadyDied = true;
     }

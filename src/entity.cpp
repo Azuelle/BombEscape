@@ -2,7 +2,7 @@
 
 #include "entity.h"
 
-#include <vector>;
+#include <vector>
 
 void Bomb::onDeath(Player* player, std::vector<Entity*>& entity_list) {
     this->alreadyDied = true;
@@ -13,6 +13,4 @@ void Bomb::onDeath(Player* player, std::vector<Entity*>& entity_list) {
             (*itr)->onDeath(player, entity_list);
 };
 
-bool Bomb::inRange(Pos p) {
-    return this->position.distance(p) <= bomb_level * 2;
-}
+bool Bomb::inRange(Pos p) { return this->position.distance(p) <= bomb_power; }
