@@ -3,57 +3,47 @@
 #ifndef PLAYER_H_
 #define PLAYER_H_
 
+#include <chrono>
+using namespace std::chrono;
+
 class Player;
 
 #include "entity.h"
 
-// Describes player health state
-enum class HealthState {
-    alive,  // Normal state
-    dying,  // Low HP
-    dead    // HP <= 0
-};
-
-// Describes shield state
-enum class ShieldState { none, broken, normal };
-
 class Player {
    private:
-    HealthState health;
-    ShieldState shield;
-    int health_val;
-    int speed;
-    int bomb_count;     // Number of bombs in hand
-    int bomb_capacity;  // Maximum number of bombs a player can hold
+    int hp = 3;
     Pos position;
-    double shield_time;
-    double speed_time;
-    double frozen_time;
+
+    time_point<system_clock> last_moved = system_clock::now();
+    duration<double> movement_cd =
+        milliseconds(100);  // Interval between movements
+    bool bomb_placed = false;
 
    public:
     Player();
     ~Player();
 
-    bool isAlive() { return health == HealthState::alive; }
-    bool isDying() { return health == HealthState::dying; }
-    bool isDead() { return health == HealthState::dead; }
-    bool hasShield() { return shield != ShieldState::none; }
-    int getBombCount() { return bomb_count; }
-    int getBombCapacity() { return bomb_capacity; }
-    int getHealth() { return health_val; }
+    bool isAlive() { return hp >= 0; }
+    void getDamage() {
+        if (isAlive()) hp--;
+    }
+    // Check if player is still in movement cd
+    bool moveable() { return system_clock::now() - last_moved > movement_cd; }
+    bool canPlaceBomb() { return !bomb_placed; }
+    bool setBombPlaced(bool stat) { bomb_placed = stat; }
 
     Pos getPosition() { return this->position; }
     // Absolute movement
-    void setPosition(Pos position) { this->position = position; }
+    void setPosition(Pos position, bool update_last_moved = true) {
+        this->position = position;
+        if (update_last_moved) last_moved = system_clock::now();
+    }
     // Relative movement
-    void move(Pos offset) { this->position += offset; }
-
-    double getShieldTime() { return shield_time; }
-    double getSpeedTime() { return speed_time; }
-    double getFrozenTime() { return frozen_time; }
-
-    HealthState getHealthState() { return health; }
-    ShieldState getShield() { return shield; }
+    void move(Pos offset, bool update_last_moved = true) {
+        this->position += offset;
+        if (update_last_moved) last_moved = system_clock::now();
+    }
 };
 
 #endif
