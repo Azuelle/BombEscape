@@ -38,7 +38,11 @@ class Playfield {
      * Returns a pointer to such entity if found.
      * Returns nullptr if not found.
      */
-    Entity* locateEntityAt(Pos pos);
+    Entity* locateEntityAt(Pos pos) {
+        for (auto en : entity_list)
+            if (en->getPosition() == pos) return en;
+        return nullptr;
+    }
 };
 
 #endif
