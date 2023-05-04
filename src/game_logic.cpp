@@ -86,13 +86,7 @@ void movePlayer(GameState &state, const Input usr_input) {
     }
 }
 
-void checkhurt(GameState &state, Bomb *bomb, Player *player){
-
-    if (bomb->checkDeath()){
-        if ((player->getPosition().x == bomb->getPosition().x || player->getPosition().y == player->getPosition().y) && player->isAlive()){
-            player->getDamage();
-        }
-    }
+void checkHurt(GameState &state, Bomb *bomb, Player *player){
 
     std::vector<Entity*>::iterator itr;
     // delete all the death entities
@@ -106,3 +100,11 @@ void checkhurt(GameState &state, Bomb *bomb, Player *player){
 }
 
 bool checkRunning() { return !quitting; }
+
+void placeBomb(GameState &state){ // placebomb
+    state.playfield->entity_list.push_back(Bomb());
+    Bomb->setPosition(state.player->getPosition());
+}
+
+
+
