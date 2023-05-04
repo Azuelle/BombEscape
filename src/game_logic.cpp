@@ -1,7 +1,7 @@
 // game_logic.cpp
 
 #include "game_logic.h"
-
+#include "playfield.h"
 void logic(GameState &state, const Input usr_input) {
     switch (state.type) {
         case StateType::exit:
@@ -31,14 +31,35 @@ const Pos movement[4] = {
  * Default response is to do nothing and block movement.
  */
 template <typename T>
-void entityInteraction(T *entity, Player *player, const Pos movement) {}
+void entityInteraction(T *entity, GameState &state, const Pos movement) {}
 template <>
-void entityInteraction(PowerUp *power_up, Player *player, const Pos movement) {
+void entityInteraction(PowerUp *power_up, GameState &state, const Pos movement) {
     // TODO: Handle power-ups
+
 }
 template <>
-void entityInteraction(Bomb *bomb, Player *player, const Pos movement) {
-    // TODO: Handle bombs
+void entityInteraction(Bomb *bomb, GameState &state, const Pos movement) {
+    if (movement.x == 0 && movement.y==1){ // up
+        if (state.playfield->isObstacle(bomb->getPosition())){
+            return;
+        
+        bomb->setPosition(bomb->getPosition()+movement);}
+   if (movement.x == 0 && movement.y==-1){ // down
+        if (state.playfield->isObstacle(bomb->getPosition())){
+            return;}
+        
+        bomb->setPosition(bomb->getPosition()+movement);} 
+if (movement.x == 1 && movement.y==0){ // left
+        if (state.playfield->isObstacle(bomb->getPosition())){
+            return;}
+        
+        bomb->setPosition(bomb->getPosition()+movement);}
+if (movement.x == -1 && movement.y==0){ // right
+        if (state.playfield->isObstacle(bomb->getPosition())){
+            return;}
+        
+        bomb->setPosition(bomb->getPosition()+movement);}
+    }
 }
 
 // Process the movement of player character
@@ -53,7 +74,7 @@ void movePlayer(GameState &state, const Input usr_input) {
         state.player->setPosition(destination);
         return;
     } else {
-        entityInteraction(entity_encounter, state.player,
+        entityInteraction(entity_encounter, state,
                           movement[int(usr_input)]);
     }
 }
