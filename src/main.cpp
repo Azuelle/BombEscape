@@ -16,7 +16,6 @@
 #include "time_utils.h"
 
 int main() {
-    Input usr_input = Input::none;
     GameState gamestate;
 
     // Initialize curses
@@ -25,10 +24,7 @@ int main() {
 
     while (checkRunning()) {
         display();
-        usr_input = getInput();
-        logic(gamestate, usr_input);
-
-        usleep(FRAME_TIME.count());  // Wait until next frame
+        logic(gamestate);
     }
 
     // Cleanup for curses
