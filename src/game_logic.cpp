@@ -11,8 +11,13 @@ void logic(GameState &state, const Input usr_input) {
             if (int(Input::up) <= int(usr_input) <= int(Input::right))
                 movePlayer(state, usr_input);
             break;
+        case StateType::death_screen:
 
-            // TODO: Process other types of states
+            break;
+        case StateType::main_menu:
+
+            break;
+
     }
 }
 
@@ -30,6 +35,7 @@ const Pos movement[4] = {
  * Handles what happens when player run into an entity.
  * Default response is to do nothing and block movement.
  */
+
 template <typename T>
 void entityInteraction(T *entity, GameState &state, const Pos movement) {}
 template <>
@@ -78,6 +84,18 @@ void movePlayer(GameState &state, const Input usr_input) {
         entityInteraction(entity_encounter, state,
                           movement[int(usr_input)]);
     }
+}
+
+void checkBomb(GameState &state, Bomb *bomb, Player *player){
+    if (bomb->checkDeath()){
+        if (player->getPosition().x == bomb->getPosition().x || player->getPosition().y == player->getPosition().y){
+            // 改变血量
+        }
+        //remove bomb
+        
+    }
+
+
 }
 
 bool checkRunning() { return !quitting; }
