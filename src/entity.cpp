@@ -7,9 +7,9 @@ void Bomb::onDeath(Player* player, std::vector<Entity*>& entity_list) {
   if (this->checkRange(player->getPosition()) == 1){
     player->takeDamage();
   }
-  for(std::vector<Entity*>::iterator itr=entity_list.begin(); itr != entity_list.end(); itr++){
-    if ((*itr)->checkDeath() == false){
-      (*itr)->alreadyDied = true;
+  for(auto itr=entity_list.begin(); itr != entity_list.end(); itr++){
+    if ((*itr)->checkDeath() == false && !(*itr)->checkAlreadyDied()){
+      (*itr)->changeState();
     }
   }
 };
@@ -27,4 +27,8 @@ bool Bomb::checkRange(Pos p){ // Pass in player position or entity position
   } else {
     return false;
   }
+}
+
+void Barricade::onDeath(Player* player, std::vector<Entity*>& entity_list){
+  //What to implement?
 }
