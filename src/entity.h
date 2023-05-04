@@ -15,7 +15,9 @@ struct Pos {
     int y;
 
     // Return the Manhattan distance between two points
-    int distance(Pos to) { return abs(to.x - this->x) + abs(to.y - this->y); } //What is the use of this function?
+    int distance(Pos to) {
+        return abs(to.x - this->x) + abs(to.y - this->y);
+    }  // What is the use of this function?
 
     constexpr Pos operator+(const Pos opr) {
         return Pos{this->x + opr.x, this->y + opr.y};
@@ -50,11 +52,6 @@ class Entity {
     bool timed = true;
 
    public:
-    Entity(duration<double> lifetime, Pos position, bool timed = true)
-        : lifetime(lifetime), position(position), timed(timed) {
-        start_time = system_clock::now();
-    };
-
     Pos getPosition() { return this->position; }
     // Absolute movement
     void setPosition(Pos position) { this->position = position; }
@@ -68,9 +65,6 @@ class Entity {
     // Indicates whether this Entity's onDeath has already been processed
     bool checkAlreadyDied() { return alreadyDied; }
 
-    //Change state of entity
-    void changeState() { alreadyDied = true; }
-
     // Declares a pure virtual onDeath fucntion in order to ensure that
     // it is implemented only in derived entity classes.
     virtual void onDeath(Player* player, std::vector<Entity*>& entity_list) = 0;
@@ -78,28 +72,36 @@ class Entity {
 
 // TODO: Implementation
 class Bomb : public Entity {
-    public:
-      void onDeath(Player* player, std::vector<Entity*>& entity_list);
-      void setBombLevel(Player* player);
-      bool checkRange(Pos p);
-      bool takeDamage();
-    private:
-      int bombLevel=1;
+   public:
+    void onDeath(Player* player, std::vector<Entity*>& entity_list);
+
+    // Takes position of player or entity in consideration
+    // Returns whether the player or entity is in range of the explosion
+    bool inRange(Pos p);
+
+    Bomb(Pos p, int level) : bomb_level(level) {
+        this->position = p;
+        this->start_time = system_clock::now();
+    }
+
+   private:
+    int bomb_level = 1;
 };
 
 // TODO: Implementation
 class PowerUp : public Entity {
    public:
     void onDeath(Player* player, std::vector<Entity*>& entity_list) {
-        // TODO: Implementation
+        this->alreadyDied = true;
     }
 };
 
 // TODO: Implementation
 class Barricade : public Entity {
-    public:
-      void onDeath(Player* player, std::vector<Entity*>& entity_list);
-      
+   public:
+    void onDeath(Player* player, std::vector<Entity*>& entity_list) {
+        this->alreadyDied = true;
+    }
 };
 
 #endif

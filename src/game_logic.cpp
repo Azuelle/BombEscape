@@ -110,5 +110,6 @@ void updateEntityList(GameState &state) {
 bool checkRunning() { return !quitting; }
 
 void placeBomb(GameState &state) {  // placebomb
-    state.playfield->entity_list.push_back(Bomb(state.player->getPosition()));
+    state.playfield->entity_list.push_back(
+        new Bomb(state.player->getPosition(), state.player->getBombLevel()));
 }
