@@ -2,8 +2,9 @@
 
 #include "game_logic.h"
 
+#include <vector>
+
 #include "playfield.h"
-#include<vector>
 void logic(GameState &state) {
     switch (state.type) {
         case StateType::exit:
@@ -50,23 +51,30 @@ void entityInteraction(Bomb *bomb, GameState &state, const Pos movement) {
     if (movement.x == 0 && movement.y == 1) {  // up
         if (state.playfield->isObstacle(bomb->getPosition())) {
             return;
-        
-        bomb->setPosition(bomb->getPosition()+movement);}
-   if (movement.x == 0 && movement.y==-1){ // down
-        if (state.playfield->isObstacle(bomb->getPosition())){
-            return;}
-        
-        bomb->setPosition(bomb->getPosition()+movement);} 
-if (movement.x == 1 && movement.y==0){ // left
-        if (state.playfield->isObstacle(bomb->getPosition())){
-            return;}
-        
-        bomb->setPosition(bomb->getPosition()+movement);}
-if (movement.x == -1 && movement.y==0){ // right
-        if (state.playfield->isObstacle(bomb->getPosition())){
-            return;}
-        
-        bomb->setPosition(bomb->getPosition()+movement);}
+
+            bomb->setPosition(bomb->getPosition() + movement);
+        }
+        if (movement.x == 0 && movement.y == -1) {  // down
+            if (state.playfield->isObstacle(bomb->getPosition())) {
+                return;
+            }
+
+            bomb->setPosition(bomb->getPosition() + movement);
+        }
+        if (movement.x == 1 && movement.y == 0) {  // left
+            if (state.playfield->isObstacle(bomb->getPosition())) {
+                return;
+            }
+
+            bomb->setPosition(bomb->getPosition() + movement);
+        }
+        if (movement.x == -1 && movement.y == 0) {  // right
+            if (state.playfield->isObstacle(bomb->getPosition())) {
+                return;
+            }
+
+            bomb->setPosition(bomb->getPosition() + movement);
+        }
     }
 }
 
@@ -86,25 +94,22 @@ void movePlayer(GameState &state, const Input usr_input) {
     }
 }
 
-void checkHurt(GameState &state, Bomb *bomb, Player *player){
+void updateEntityList(GameState &state) {
+    auto *entities = &state.playfield->entity_list;
+    for (auto entity : *entities)
+        if (entity->checkDeath() && !entity->checkAlreadyDied())
+            entity.onDeath(state.player, *entities);
 
-    std::vector<Entity*>::iterator itr;
     // delete all the death entities
-    std::vector<Entity*> newentitylist;
-    for (itr = state.playfield->entity_list.begin(); itr!= state.playfield->entity_list.end(); itr++){
-        if(!(*itr)->checkAlreadyDied()){
-            newentitylist.push_back(*itr);
-        }
-    }
-    state.playfield->entity_list=newentitylist;
+    std::vector<Entity *> newentitylist;
+    for (auto itr = entities->begin(); itr != entities->end(); itr++)
+        if (!(*itr)->checkAlreadyDied()) newentitylist.push_back(*itr);
+    *entities = newentitylist;
 }
 
 bool checkRunning() { return !quitting; }
 
-void placeBomb(GameState &state){ // placebomb
+void placeBomb(GameState &state) {  // placebomb
     state.playfield->entity_list.push_back(Bomb());
     Bomb->setPosition(state.player->getPosition());
 }
-
-
-
