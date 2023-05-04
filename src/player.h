@@ -38,7 +38,6 @@ class Player {
     // bool isAlive() { return health == HealthState::alive; }
     // bool isDying() { return health == HealthState::dying; }
     // bool isDead() { return health == HealthState::dead; }
-    // bool hasShield() { return shield != ShieldState::none; }
     int getBombCount() { return bomb_count; }
     int getBombCapacity() { return bomb_capacity; }
     int getBombLevel() { return bomb_level; }
@@ -60,12 +59,10 @@ class Player {
     // Relative movement
     void move(Pos offset) { this->position += offset; }
 
-    double getShieldTime() { return shield_time; }
     double getSpeedTime() { return speed_time; }
     double getFrozenTime() { return frozen_time; }
 
     // HealthState getHealthState() { return health; }
-    // ShieldState getShield() { return shield; }
     // For better visual effects. Redundant.
 };
 
