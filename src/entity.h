@@ -5,7 +5,7 @@
 
 #include <chrono>
 #include <cmath>
-#include <list>
+#include <vector>
 
 using namespace std::chrono;
 
@@ -30,6 +30,9 @@ struct Pos {
     Pos& operator-=(const Pos opr) {
         this->x -= opr.x, this->y -= opr.y;
         return *this;
+    }
+    bool operator==(const Pos opr) {
+        return this->x == opr.x && this->y == opr.y;
     }
 };
 
