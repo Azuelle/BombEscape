@@ -98,7 +98,7 @@ void updateEntityList(GameState &state) {
     auto *entities = &state.playfield->entity_list;
     for (auto entity : *entities)
         if (entity->checkDeath() && !entity->checkAlreadyDied())
-            entity.onDeath(state.player, *entities);
+            entity->onDeath(state.player, *entities);
 
     // delete all the death entities
     std::vector<Entity *> newentitylist;
@@ -110,6 +110,5 @@ void updateEntityList(GameState &state) {
 bool checkRunning() { return !quitting; }
 
 void placeBomb(GameState &state) {  // placebomb
-    state.playfield->entity_list.push_back(Bomb());
-    Bomb->setPosition(state.player->getPosition());
+    state.playfield->entity_list.push_back(Bomb(state.player->getPosition()));
 }
