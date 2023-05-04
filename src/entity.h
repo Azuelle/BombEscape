@@ -66,7 +66,7 @@ class Entity {
     bool checkAlreadyDied() { return alreadyDied; }
 
     //
-    virtual bool takeDamage();
+    virtual void takeDamage();
 
     // Declares a pure virtual onDeath fucntion in order to ensure that
     // it is implemented only in derived entity classes.
@@ -74,13 +74,13 @@ class Entity {
 };
 
 // TODO: Implementation
-class Bomb : Entity {
+class Bomb : public Entity {
     public:
-      void onDeath(Player* player, std::vector<Entity*>& entity_list) {};
+      void onDeath(Player* player, std::vector<Entity*>& entity_list);
       void setBombLevel(Player* player);
       bool checkRange(Pos p);
-      void damageHealth(Player *player);
-      void breakEntity(std::vector<Entity*>& entity_list);
+    //   void damageHealth(Player *player);
+    //   void breakEntity(std::vector<Entity*>& entity_list);
       bool takeDamage();
     private:
       int bombLevel=1;
@@ -89,7 +89,7 @@ class Bomb : Entity {
 };  // length
 
 // TODO: Implementation
-class PowerUp : Entity {
+class PowerUp : public Entity {
    public:
     void onDeath(Player* player, std::vector<Entity*>& entity_list) {
         // TODO: Implementation
@@ -97,7 +97,7 @@ class PowerUp : Entity {
 };
 
 // TODO: Implementation
-class Barricade : Entity {
+class Barricade : public Entity {
     public:
       void onDeath(Player* player, std::vector<Entity*>& entity_list) { };
       void breakB();
