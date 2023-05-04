@@ -1,13 +1,15 @@
 // game_logic.cpp
 
 #include "game_logic.h"
+
 #include "playfield.h"
-void logic(GameState &state, const Input usr_input) {
+void logic(GameState &state) {
     switch (state.type) {
         case StateType::exit:
             quitting = true;
             break;
         case StateType::alive:
+            Input usr_input = getInput();
             if (int(Input::up) <= int(usr_input) <= int(Input::right))
                 movePlayer(state, usr_input);
             break;
@@ -17,7 +19,6 @@ void logic(GameState &state, const Input usr_input) {
         case StateType::main_menu:
 
             break;
-
     }
 }
 
@@ -39,14 +40,14 @@ const Pos movement[4] = {
 template <typename T>
 void entityInteraction(T *entity, GameState &state, const Pos movement) {}
 template <>
-void entityInteraction(PowerUp *power_up, GameState &state, const Pos movement) {
+void entityInteraction(PowerUp *power_up, GameState &state,
+                       const Pos movement) {
     // TODO: Handle power-ups
-
 }
 template <>
 void entityInteraction(Bomb *bomb, GameState &state, const Pos movement) {
-    if (movement.x == 0 && movement.y==1){ // up
-        if (state.playfield->isObstacle(bomb->getPosition())){
+    if (movement.x == 0 && movement.y == 1) {  // up
+        if (state.playfield->isObstacle(bomb->getPosition())) {
             return;
         
         bomb->setPosition(bomb->getPosition()+movement);}
@@ -63,10 +64,10 @@ if (movement.x == 1 && movement.y==0){ // left
 if (movement.x == -1 && movement.y==0){ // right
         if (state.playfield->isObstacle(bomb->getPosition())){
             return;}
+        
         bomb->setPosition(bomb->getPosition()+movement);}
     }
 }
-
 
 // Process the movement of player character
 void movePlayer(GameState &state, const Input usr_input) {
@@ -80,18 +81,18 @@ void movePlayer(GameState &state, const Input usr_input) {
         state.player->setPosition(destination);
         return;
     } else {
-        entityInteraction(entity_encounter, state,
-                          movement[int(usr_input)]);
+        entityInteraction(entity_encounter, state, movement[int(usr_input)]);
     }
 }
 
 void checkBomb(GameState &state, Bomb *bomb, Player *player){
     if (bomb->checkDeath()){
         if (player->getPosition().x == bomb->getPosition().x || player->getPosition().y == player->getPosition().y){
+            // 改变血量
         }
-        //remove bomb
-        
+        // remove bomb
     }
+
 
 }
 

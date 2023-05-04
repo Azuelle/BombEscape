@@ -19,12 +19,12 @@ class Playfield {
     int height;
 
    public:
-    Playfield(int width, int height, bool** wall)
+    Playfield(int width, int height, std::vector<std::vector<bool>> wall)
         : width(width), height(height), wall(wall) {}
 
     std::vector<Entity*> entity_list;
     // True: wall False: no wall
-    bool** wall = nullptr;
+    std::vector<std::vector<bool>> wall;
 
     /**
      * Checks if a tile is accessible
