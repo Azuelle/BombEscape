@@ -101,9 +101,8 @@ class PowerUp : public Entity {
     int getPower() { return this->power; }
 
    protected:
-    static int power;
+    static constexpr int power = 0;
     static constexpr duration<double> lifetime = seconds(15);
-
 };
 class Healing : public PowerUp {
    public:
