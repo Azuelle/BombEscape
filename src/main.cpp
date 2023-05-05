@@ -22,10 +22,13 @@ int main() {
     // Initialize curses window
     Win w = initWindow();
 
-    while (checkRunning()) logic(gamestate, w);
+    if (w.validSize())
+        while (checkRunning()) logic(gamestate, w);
 
     // Cleanup for curses
     endwin();
+
+    if (!w.validSize()) w.printWindowHint();
 
     return 0;
 }
