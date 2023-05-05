@@ -16,6 +16,7 @@ class Player {
     int max_hp = 3;
     int bomb_power = 2;
     Pos position;
+    static constexpr char pIcon = '@';
 
     time_point<system_clock> last_moved = system_clock::now();
     duration<double> movement_cd =
@@ -25,6 +26,8 @@ class Player {
    public:
     Player();
     ~Player();
+
+    char getpIcon() { return pIcon; }
 
     bool isAlive() { return hp >= 0; }
     void getDamage() {

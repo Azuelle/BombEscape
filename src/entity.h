@@ -51,6 +51,8 @@ class Entity {
     // Indicates whether this Entity dies after a certain amount of time
     bool timed = true;
 
+    static constexpr char icon = ' ';
+
    public:
     Pos getPosition() { return this->position; }
     // Absolute movement
@@ -68,6 +70,8 @@ class Entity {
     // Declares a pure virtual onDeath fucntion in order to ensure that
     // it is implemented only in derived entity classes.
     virtual void onDeath(Player* player, std::vector<Entity*>& entity_list) = 0;
+
+    char getIcon() { return icon; }
 };
 
 class Bomb : public Entity {
@@ -85,6 +89,7 @@ class Bomb : public Entity {
 
    private:
     static constexpr duration<double> lifetime = seconds(3);
+    static constexpr char icon = 'O';
     int bomb_power = 1;
 };
 
@@ -98,6 +103,7 @@ class PowerUp : public Entity {
    protected:
     static int power;
     static constexpr duration<double> lifetime = seconds(15);
+
 };
 class Healing : public PowerUp {
    public:
@@ -108,6 +114,7 @@ class Healing : public PowerUp {
 
    protected:
     static constexpr int power = 1;
+    static constexpr char icon = 'H';
 };
 class BombPower : public PowerUp {
    public:
@@ -118,6 +125,7 @@ class BombPower : public PowerUp {
 
    protected:
     static constexpr int power = 2;
+    static constexpr char icon = '!';
 };
 
 class Barricade : public Entity {
@@ -129,6 +137,9 @@ class Barricade : public Entity {
     void onDeath(Player* player, std::vector<Entity*>& entity_list) {
         this->alreadyDied = true;
     }
+
+   protected:
+    static constexpr char icon = 'X';
 };
 
 #endif

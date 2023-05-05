@@ -23,8 +23,12 @@ class Playfield {
         : width(width), height(height), wall(wall) {}
 
     std::vector<Entity*> entity_list;
-    // True: wall False: no wall
+
+    // True: wall  False: no wall
     std::vector<std::vector<bool>> wall;
+
+    int getWidth() { return width; }
+    int getHeight() { return height; }
 
     /**
      * Checks if a tile is accessible
@@ -38,6 +42,7 @@ class Playfield {
      * Returns a pointer to such entity if found.
      * Returns nullptr if not found.
      */
+
     Entity* locateEntityAt(Pos pos) {
         for (auto en : entity_list)
             if (en->getPosition() == pos) return en;
