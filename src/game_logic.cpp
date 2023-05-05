@@ -4,23 +4,25 @@
 
 #include <vector>
 
-#include "playfield.h"
 void logic(GameState &state) {
     Input usr_input = getInput();
     switch (state.type) {
         case StateType::exit:
             quitting = true;
             break;
+
         case StateType::alive:
             if (int(Input::up) <= int(usr_input) &&
                 int(usr_input) <= int(Input::right))
                 movePlayer(state, usr_input);
             break;
+
         case StateType::death_screen:
 
             break;
-        case StateType::main_menu:
 
+        case StateType::main_menu:
+            runMenu();
             break;
     }
 }
