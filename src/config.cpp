@@ -19,5 +19,7 @@ map<string,int> config(){
     fin >> key_name >> key_int;
     configMap[key_name] = key_int;
   }
+
+  fin.close();
   return configMap;
 }
