@@ -1,0 +1,8 @@
+up
+down
+left
+right
+place
+enter
+backspace
+none
