@@ -1,141 +1,34 @@
 // menu.cpp
 
-#include <curses.h>
-#include <ncurses.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "menu.h"
 
-#include <string>
-
-using namespace std;
-
-bool isStart(int pos) {
-    if (pos == 0) {
-        return true;
-    } else {
-        return false;
-    }
+inline void switchOptionDisplayState(WINDOW *win, int from, int to, int cX[4],
+                                     int cY[4], std::string op[4]) {
+    wrefresh(win);
+    wattron(win, A_BOLD);
+    mvwprintw(win, cY[from], cX[from], op[from].c_str());
+    wattroff(win, A_BOLD);
+    wrefresh(win);
+    wrefresh(win);
+    wattron(win, A_STANDOUT);
+    mvwprintw(win, cY[to], cX[to], op[to].c_str());
+    wattroff(win, A_STANDOUT);
+    wrefresh(win);
 }
 
-void chooseGame(WINDOW *win, int cX[4], int cY[4], string op[4], int choice,
-                int pos) {}
-
-void RUN(WINDOW *win, int cX[4], int cY[4], string op[4], int choice, int pos) {
+int getOptions(WINDOW *win, int cX[4], int cY[4], std::string op[4]) {
     bool isRun = true;
+    int choice, pos = 0;
     while (isRun) {
         choice = wgetch(win);
         switch (choice) {
             case KEY_UP:
-                switch (pos) {
-                    case 0:
-                        wrefresh(win);
-                        wattron(win, A_BOLD);
-                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
-                        wattroff(win, A_BOLD);
-                        wrefresh(win);
-                        pos = 3;
-                        wrefresh(win);
-                        wattron(win, A_STANDOUT);
-                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
-                        wattroff(win, A_STANDOUT);
-                        wrefresh(win);
-                        break;
-                    case 1:
-                        wrefresh(win);
-                        wattron(win, A_BOLD);
-                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
-                        wattroff(win, A_BOLD);
-                        wrefresh(win);
-                        pos = 0;
-                        wrefresh(win);
-                        wattron(win, A_STANDOUT);
-                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
-                        wattroff(win, A_STANDOUT);
-                        wrefresh(win);
-                        break;
-                    case 2:
-                        wrefresh(win);
-                        wattron(win, A_BOLD);
-                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
-                        wattroff(win, A_BOLD);
-                        wrefresh(win);
-                        pos = 1;
-                        wrefresh(win);
-                        wattron(win, A_STANDOUT);
-                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
-                        wattroff(win, A_STANDOUT);
-                        wrefresh(win);
-                        break;
-                    case 3:
-                        wrefresh(win);
-                        wattron(win, A_BOLD);
-                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
-                        wattroff(win, A_BOLD);
-                        wrefresh(win);
-                        pos = 2;
-                        wrefresh(win);
-                        wattron(win, A_STANDOUT);
-                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
-                        wattroff(win, A_STANDOUT);
-                        wrefresh(win);
-                        break;
-                }
+                switchOptionDisplayState(win, pos, (pos + 3) % 4, cX, cY, op);
+                pos = (pos + 3) % 4;
                 break;
             case KEY_DOWN:
-                switch (pos) {
-                    case 0:
-                        wrefresh(win);
-                        wattron(win, A_BOLD);
-                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
-                        wattroff(win, A_BOLD);
-                        wrefresh(win);
-                        pos = 1;
-                        wrefresh(win);
-                        wattron(win, A_STANDOUT);
-                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
-                        wattroff(win, A_STANDOUT);
-                        wrefresh(win);
-                        break;
-                    case 1:
-                        wrefresh(win);
-                        wattron(win, A_BOLD);
-                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
-                        wattroff(win, A_BOLD);
-                        wrefresh(win);
-                        pos = 2;
-                        wrefresh(win);
-                        wattron(win, A_STANDOUT);
-                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
-                        wattroff(win, A_STANDOUT);
-                        wrefresh(win);
-                        break;
-                    case 2:
-                        wrefresh(win);
-                        wattron(win, A_BOLD);
-                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
-                        wattroff(win, A_BOLD);
-                        wrefresh(win);
-                        pos = 3;
-                        wrefresh(win);
-                        wattron(win, A_STANDOUT);
-                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
-                        wattroff(win, A_STANDOUT);
-                        wrefresh(win);
-                        break;
-                    case 3:
-                        wrefresh(win);
-                        wattron(win, A_BOLD);
-                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
-                        wattroff(win, A_BOLD);
-                        wrefresh(win);
-                        pos = 0;
-                        wrefresh(win);
-                        wattron(win, A_STANDOUT);
-                        mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
-                        wattroff(win, A_STANDOUT);
-                        wrefresh(win);
-                        break;
-                }
+                switchOptionDisplayState(win, pos, (pos + 1) % 4, cX, cY, op);
+                pos = (pos + 1) % 4;
                 break;
             default:
                 if (choice == 10) {
@@ -145,91 +38,74 @@ void RUN(WINDOW *win, int cX[4], int cY[4], string op[4], int choice, int pos) {
                 }
         }
     }
+    return pos;
 }
 
-int runMenu() {
+int runMenu(Win w) {
     // Initialize the game menu
-    initscr();
-    noecho();
     curs_set(0);
     start_color();
+    WINDOW *win = w.win;
+    int yMax = w.yMax;
+    int xMax = w.xMax;
 
-    int yMax, xMax;
-    getmaxyx(stdscr, yMax, xMax);
+    // x, y coords for options
+    int optionX[4];
+    int optionY[4];
 
-    // Initialize the size of the menu
-    WINDOW *win = newwin(yMax - yMax / 5, xMax / 2, yMax / 10, xMax / 4);
-    box(win, 0, 0);
+    // Draw outline
+    box(w.win, 0, 0);
 
     // Creating variables for the game option
-    string option1 = "Start Game";
-    string option2 = "Ranking";
-    string option3 = "Settings";
-    string option4 = "Quit";
+    std::string option[4] = {"Start Game", "Ranking", "Settings", "Quit"};
 
     // Creating variables for the game title
-
-    string title_1 =
+    std::string title[8] = {
         " ____                     _       ______                              "
-        " ";
-    string title_2 =
+        " ",
         "|  _ \\                   | |     |  ____|                            "
-        "  ";
-    string title_3 =
+        "  ",
         "| |_) |  ___   _ __ ___  | |__   | |__    ___   ___  __ _  _ __    "
-        "___ ";
-    string title_4 =
+        "___ ",
         "|  _ <  / _ \\ | '_ ` _ \\ | '_ \\  |  __|  / __| / __|/ _` || '_ \\  "
-        "/ _ \\";
-    string title_5 =
+        "/ _ \\",
         "| |_) || (_) || | | | | || |_) | | |____ \\__ \\| (__| (_| || |_) ||  "
-        "__/";
-    string title_6 =
+        "__/",
         "|____/  \\___/ |_| |_| |_||_.__/  |______||___/ \\___|\\__,_|| .__/  "
-        "\\___|";
-    string title_7 =
+        "\\___|",
         "                                                          | |         "
-        " ";
-    string title_8 =
-        "                                                          |_|";
+        " ",
+        "                                                          |_|"};
 
-    // Setting the options to be bold
-
-    // Calculate center coordinates for each option and print them
-    int centerY = (yMax - yMax / 5) / 2;
-    int centerX1 = (xMax / 4) - (option1.length() / 2);
-    int centerX2 = (xMax / 4) - (option2.length() / 2);
-    int centerX3 = (xMax / 4) - (option3.length() / 2);
-    int centerX4 = (xMax / 4) - (option4.length() / 2);
-
-    // Calculate coordinates for the game title
-
-    int centerTitle = (xMax / 4) - (title_5.length() / 2);
+    // Calculate adaptive distance between title and options
+    int gap = std::max(1, (w.yMax - w.yMax / w.border_ratio_y) / 12);
 
     // Output message for the game option
     // mvwprintw(win, centerY-2, centerX1, option1.c_str());
     wrefresh(win);
     wattron(win, A_STANDOUT);
-    mvwprintw(win, centerY - 2, centerX1, option1.c_str());
+    mvwprintw(win, optionY[0] = w.getYCenterOffset() - (15 + gap) / 2 + 8 + gap,
+              optionX[0] = w.getXCenterOffset() - option[0].length() / 2,
+              option[0].c_str());
+
     wattroff(win, A_STANDOUT);
 
     wrefresh(win);
 
     wattron(win, A_BOLD);
-    mvwprintw(win, centerY, centerX2, option2.c_str());
-    mvwprintw(win, centerY + 2, centerX3, option3.c_str());
-    mvwprintw(win, centerY + 4, centerX4, option4.c_str());
+    for (int i = 1; i < 4; i++)
+        mvwprintw(win,
+                  optionY[i] =
+                      w.getYCenterOffset() - (15 + gap) / 2 + 8 + gap + 2 * i,
+                  optionX[i] = w.getXCenterOffset() - option[i].length() / 2,
+                  option[i].c_str());
 
     // Output message for the game title
 
-    mvwprintw(win, 5, centerTitle, title_1.c_str());
-    mvwprintw(win, 6, centerTitle, title_2.c_str());
-    mvwprintw(win, 7, centerTitle, title_3.c_str());
-    mvwprintw(win, 8, centerTitle, title_4.c_str());
-    mvwprintw(win, 9, centerTitle, title_5.c_str());
-    mvwprintw(win, 10, centerTitle, title_6.c_str());
-    mvwprintw(win, 11, centerTitle, title_7.c_str());
-    mvwprintw(win, 12, centerTitle, title_8.c_str());
+    for (int i = 0; i < 8; i++)
+        mvwprintw(win, w.getYCenterOffset() - (15 + gap) / 2 + i,
+                  w.getXCenterOffset() - title[5].length() / 2,
+                  title[i].c_str());
 
     wattroff(win, A_BOLD);
 
@@ -237,18 +113,11 @@ int runMenu() {
 
     // To enable the User Input to be arrow key
     keypad(win, true);
-    int choice = 0;
-    // Create array for x,y coordinate and the option.
-    string opArray[4] = {"Start Game", "Ranking", "Settings", "Quit"};
-    int centerXArray[4] = {centerX1, centerX2, centerX3, centerX4};
-    int centerYArray[4] = {centerY - 2, centerY, centerY + 2, centerY + 4};
 
-    int pos = 0;
-    // Highlight
-    RUN(win, centerXArray, centerYArray, opArray, choice, pos);
+    // Highlight chosen options
+    int pos = getOptions(win, optionX, optionY, option);
 
     refresh();
 
-    endwin();
-    return 0;
+    return pos;
 }

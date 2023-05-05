@@ -44,6 +44,10 @@ bool verifyMap(const vector<deque<bool>>& map) {
 }
 
 vector<deque<bool>> generateMap(int width, int height, int seed) {
+    // Predesignate space for outer ring of walls
+    width -= 2;
+    height -= 2;
+
     default_random_engine rng(seed);
     uniform_int_distribution<int> dist(0, 1);
 
@@ -56,9 +60,9 @@ vector<deque<bool>> generateMap(int width, int height, int seed) {
         int length = dist(rng) + 2;
 
         uniform_int_distribution<int> getStartX(
-            0, width - is_vertical ? 1 : length);
+            0, width - (is_vertical ? 1 : length));
         uniform_int_distribution<int> getStartY(
-            0, height - is_vertical ? length : 1);
+            0, height - (is_vertical ? length : 1));
         int start_x = getStartX(rng);
         int start_y = getStartY(rng);
 

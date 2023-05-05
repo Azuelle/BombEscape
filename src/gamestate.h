@@ -39,14 +39,13 @@ class GameState {
         this->start = system_clock::now();
         player = new Player;
     }
-    GameState(Player player, Playfield playfield)
-        : player(&player), playfield(&playfield) {
+    GameState(Player* player, Playfield* playfield)
+        : player(player), playfield(playfield) {
         this->start = system_clock::now();
     }
-    ~GameState() { delete this->player, delete this->playfield; }
 
-    Player *player = nullptr;
-    Playfield *playfield = nullptr;
+    Player* player = nullptr;
+    Playfield* playfield = nullptr;
     StateType type = StateType::main_menu;
 
     duration<double> getCurrentDuration() {

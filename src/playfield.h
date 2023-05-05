@@ -9,6 +9,7 @@
 #include <vector>
 
 #include "entity.h"
+#include "map_gen.h"
 
 // For storing walls, entities and providing related functionalities
 class Playfield {
@@ -19,6 +20,9 @@ class Playfield {
    public:
     Playfield(int width, int height, std::vector<std::deque<bool>> wall)
         : width(width), height(height), wall(wall) {}
+    Playfield(int width, int height) : width(width), height(height) {
+        this->wall = generateMap(width, height);
+    }
 
     std::vector<Entity*> entity_list;
 
@@ -33,7 +37,7 @@ class Playfield {
      * Has wall: return true
      */
     bool isObstacle(Pos pos) { return wall[pos.y][pos.x]; }
-    bool isObstacle(int x, int y) { return wall[x][y]; }
+    bool isObstacle(int x, int y) { return wall[y][x]; }
 
     /**
      * Locates the entity at a certain position.

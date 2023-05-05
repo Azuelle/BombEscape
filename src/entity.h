@@ -51,7 +51,7 @@ class Entity {
     // Indicates whether this Entity dies after a certain amount of time
     bool timed = true;
 
-    static constexpr char icon = ' ';
+    char icon = ' ';
 
    public:
     Pos getPosition() { return this->position; }
@@ -71,7 +71,7 @@ class Entity {
     // it is implemented only in derived entity classes.
     virtual void onDeath(Player* player, std::vector<Entity*>& entity_list) = 0;
 
-    char getIcon() { return icon; }
+    virtual char getIcon() { return this->icon; }
 };
 
 class Bomb : public Entity {
@@ -86,10 +86,11 @@ class Bomb : public Entity {
         this->position = p;
         this->start_time = system_clock::now();
     }
+    char getIcon() { return this->icon; }
 
    private:
     static constexpr duration<double> lifetime = seconds(3);
-    static constexpr char icon = 'O';
+    char icon = 'O';
     int bomb_power = 1;
 };
 
@@ -110,10 +111,11 @@ class Healing : public PowerUp {
         this->position = p;
         this->start_time = system_clock::now();
     }
+    char getIcon() { return this->icon; }
 
    protected:
     static constexpr int power = 1;
-    static constexpr char icon = 'H';
+    char icon = 'H';
 };
 class BombPower : public PowerUp {
    public:
@@ -121,10 +123,11 @@ class BombPower : public PowerUp {
         this->position = p;
         this->start_time = system_clock::now();
     }
+    char getIcon() { return this->icon; }
 
    protected:
     static constexpr int power = 2;
-    static constexpr char icon = '!';
+    char icon = '!';
 };
 
 class Barricade : public Entity {
@@ -136,9 +139,10 @@ class Barricade : public Entity {
     void onDeath(Player* player, std::vector<Entity*>& entity_list) {
         this->alreadyDied = true;
     }
+    char getIcon() { return this->icon; }
 
    protected:
-    static constexpr char icon = 'X';
+    char icon = 'X';
 };
 
 #endif
