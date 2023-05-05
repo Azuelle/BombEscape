@@ -4,6 +4,10 @@
 
 #include <vector>
 
+bool quitting = false;
+
+bool checkRunning() { return !quitting; }
+
 void logic(GameState &state, Win w) {
     Input usr_input = getInput();
     switch (state.type) {
@@ -15,10 +19,14 @@ void logic(GameState &state, Win w) {
             if (int(Input::up) <= int(usr_input) &&
                 int(usr_input) <= int(Input::right))
                 movePlayer(state, usr_input);
+            display(state, w);
+            if (!state.player->isAlive()) state.type = StateType::death_screen;
             break;
 
         case StateType::death_screen:
-
+            // TODO: Death screen
+            state.type = StateType::main_menu;  // We'll just return to menu for
+                                                // now, to be changed
             break;
 
         case StateType::main_menu:
@@ -31,7 +39,7 @@ void logic(GameState &state, Win w) {
 
                     break;
                 case 2:  // settings
-                    state.type = StateType::alive;
+
                     break;
                 case 3:  // exit
                     state.type = StateType::exit;
@@ -61,7 +69,7 @@ void entityInteraction(T *entity, GameState &state, const Pos movement) {}
 template <>
 void entityInteraction(PowerUp *power_up, GameState &state,
                        const Pos movement) {
-    state.player->usePowerUp(*power_up);
+    state.player->usePowerUp(power_up);
     state.player->move(movement);
 }
 template <>
@@ -102,10 +110,6 @@ void updateEntityList(GameState &state) {
         if (!(*itr)->checkAlreadyDied()) newentitylist.push_back(*itr);
     *entities = newentitylist;
 }
-
-bool quitting = false;
-
-bool checkRunning() { return !quitting; }
 
 void placeBomb(GameState &state) {  // placebomb
     state.playfield->entity_list.push_back(

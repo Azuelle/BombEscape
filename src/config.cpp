@@ -46,7 +46,7 @@ map<string, int> config() {
     }
     for (auto const& imap : configMap) keylist.push_back(imap.first);
     for (auto const& imap : configMap) {
-        if (find(listshould.begin(), listshould.end(), imap) !=
+        if (find(listshould.begin(), listshould.end(), imap.first) !=
             listshould.end()) {
             fin.close();
             ofstream fout;

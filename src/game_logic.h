@@ -5,8 +5,10 @@
 
 #include "gamestate.h"
 #include "init_window.h"
+#include "interface.h"
 #include "io_utils.h"
 #include "menu.h"
+#include "player.h"
 #include "playfield.h"
 
 // Process all game logic
