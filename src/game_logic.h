@@ -18,4 +18,11 @@ void movePlayer(GameState &cur_state, const Input usr_input);
 
 bool checkRunning();
 
+/**
+ * Handles what happens when player run into an entity.
+ * Default response is to do nothing and block movement.
+ */
+template <typename T>
+void entityInteraction(T *entity, GameState &state, const Pos movement);
+
 #endif

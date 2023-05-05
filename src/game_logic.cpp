@@ -63,13 +63,18 @@ const Pos movement[4] = {
  * Handles what happens when player run into an entity.
  * Default response is to do nothing and block movement.
  */
-
 template <typename T>
 void entityInteraction(T *entity, GameState &state, const Pos movement) {}
 template <>
-void entityInteraction(PowerUp *power_up, GameState &state,
+void entityInteraction(BombPower *power_up, GameState &state,
                        const Pos movement) {
-    state.player->usePowerUp(power_up);
+    state.player->usePowerUp(*power_up);
+    state.player->move(movement);
+}
+template <>
+void entityInteraction(Healing *power_up, GameState &state,
+                       const Pos movement) {
+    state.player->usePowerUp(*power_up);
     state.player->move(movement);
 }
 template <>

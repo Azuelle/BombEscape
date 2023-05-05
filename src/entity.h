@@ -38,7 +38,7 @@ struct Pos {
     }
 };
 
-#include "player.h"
+class Player;
 
 // A base class for all kinds of non-player entities on the playfield
 class Entity {
@@ -144,5 +144,7 @@ class Barricade : public Entity {
    protected:
     char icon = 'X';
 };
+
+#include "player.h"
 
 #endif

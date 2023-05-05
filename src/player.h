@@ -39,8 +39,8 @@ class Player {
     int getHP() { return hp; }
     int getMaxHP() { return max_hp; }
 
-    template <class T>
-    void usePowerUp(T* powerup);
+    void usePowerUp(Healing h);
+    void usePowerUp(BombPower p);
 
     Pos getPosition() { return this->position; }
     // Absolute movement
