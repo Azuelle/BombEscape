@@ -42,7 +42,7 @@ bool verifyMap(const vector<vector<bool>>& map) {
     return false;
 }
 
-vector<vector<bool>> generateMap(int width, int height, auto seed) {
+vector<vector<bool>> generateMap(int width, int height, int seed) {
     default_random_engine rng(seed);
     uniform_int_distribution<int> dist(0, 1);
 
@@ -89,5 +89,5 @@ vector<vector<bool>> generateMap(int width, int height, auto seed) {
 }
 vector<vector<bool>> generateMap(int width, int height) {
     random_device rd;
-    generateMap(width, height, rd());
+    return generateMap(width, height, rd());
 }

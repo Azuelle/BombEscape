@@ -3,6 +3,8 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
-void display();
+#include "gamestate.h"
+
+void display(const GameState &state);
 
 #endif

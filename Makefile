@@ -45,6 +45,9 @@ proto: test/game_prototype.cpp src/time_utils.h
 	mkdir -p $(OUT_DIR)
 	$(CXX) -lcurses $^ -o $(OUT_DIR)/$@.out
 
+maptest: test/map_test.cpp src/gamestate.cpp src/map_gen.cpp src/entity.cpp src/player.cpp src/playfield.cpp
+	mkdir -p $(OUT_DIR)
+	$(CXX) -lcurses $^ -o $(OUT_DIR)/$@.out
 
 # Include all G++-generated makefiles
 -include ${DEP}

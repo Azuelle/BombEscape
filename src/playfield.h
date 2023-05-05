@@ -9,11 +9,8 @@
 
 #include "entity.h"
 
-// TODO: Implementation
+// For storing walls, entities and providing related functionalities
 class Playfield {
-    // A list of items, bombs, etc. on map
-    // These should also have their own classes probably
-    // Maybe a seperate header?
    private:
     int width;
     int height;
@@ -23,14 +20,18 @@ class Playfield {
         : width(width), height(height), wall(wall) {}
 
     std::vector<Entity*> entity_list;
-    // True: wall False: no wall
+
+    // True: wall  False: no wall
     std::vector<std::vector<bool>> wall;
+
+    int getWidth() { return width; }
+    int getHeight() { return height; }
 
     /**
      * Checks if a tile is accessible
      * Has wall: return true
      */
-    bool isObstacle(Pos pos);
+    bool isObstacle(Pos pos) { return wall[pos.y][pos.x]; }
 
     /**
      * Locates the entity at a certain position.
@@ -38,6 +39,7 @@ class Playfield {
      * Returns a pointer to such entity if found.
      * Returns nullptr if not found.
      */
+
     Entity* locateEntityAt(Pos pos) {
         for (auto en : entity_list)
             if (en->getPosition() == pos) return en;

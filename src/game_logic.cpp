@@ -4,22 +4,25 @@
 
 #include <vector>
 
-#include "playfield.h"
 void logic(GameState &state) {
+    Input usr_input = getInput();
     switch (state.type) {
         case StateType::exit:
             quitting = true;
             break;
+
         case StateType::alive:
-            Input usr_input = getInput();
-            if (int(Input::up) <= int(usr_input) <= int(Input::right))
+            if (int(Input::up) <= int(usr_input) &&
+                int(usr_input) <= int(Input::right))
                 movePlayer(state, usr_input);
             break;
+
         case StateType::death_screen:
 
             break;
-        case StateType::main_menu:
 
+        case StateType::main_menu:
+            runMenu();
             break;
     }
 }
@@ -44,37 +47,16 @@ void entityInteraction(T *entity, GameState &state, const Pos movement) {}
 template <>
 void entityInteraction(PowerUp *power_up, GameState &state,
                        const Pos movement) {
-    // TODO: Handle power-ups
+    state.player->usePowerUp(*power_up);
+    state.player->move(movement);
 }
 template <>
 void entityInteraction(Bomb *bomb, GameState &state, const Pos movement) {
-    if (movement.x == 0 && movement.y == 1) {  // up
-        if (state.playfield->isObstacle(bomb->getPosition())) {
-            return;
-
-            bomb->setPosition(bomb->getPosition() + movement);
-        }
-        if (movement.x == 0 && movement.y == -1) {  // down
-            if (state.playfield->isObstacle(bomb->getPosition())) {
-                return;
-            }
-
-            bomb->setPosition(bomb->getPosition() + movement);
-        }
-        if (movement.x == 1 && movement.y == 0) {  // left
-            if (state.playfield->isObstacle(bomb->getPosition())) {
-                return;
-            }
-
-            bomb->setPosition(bomb->getPosition() + movement);
-        }
-        if (movement.x == -1 && movement.y == 0) {  // right
-            if (state.playfield->isObstacle(bomb->getPosition())) {
-                return;
-            }
-
-            bomb->setPosition(bomb->getPosition() + movement);
-        }
+    if (!state.playfield->isObstacle(bomb->getPosition() + movement) &&
+        state.playfield->locateEntityAt(bomb->getPosition() + movement) ==
+            nullptr) {
+        bomb->move(movement);
+        state.player->move(movement);
     }
 }
 
@@ -110,5 +92,6 @@ void updateEntityList(GameState &state) {
 bool checkRunning() { return !quitting; }
 
 void placeBomb(GameState &state) {  // placebomb
-    state.playfield->entity_list.push_back(Bomb(state.player->getPosition()));
+    state.playfield->entity_list.push_back(
+        new Bomb(state.player->getPosition(), state.player->getBombPower()));
 }

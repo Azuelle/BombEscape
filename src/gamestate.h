@@ -35,7 +35,10 @@ class GameState {
     time_point<system_clock> start;
 
    public:
-    GameState() { this->start = system_clock::now(); }
+    GameState() {
+        this->start = system_clock::now();
+        player = new Player;
+    }
     GameState(Player player, Playfield playfield)
         : player(&player), playfield(&playfield) {
         this->start = system_clock::now();
@@ -49,7 +52,18 @@ class GameState {
     duration<double> getCurrentDuration() {
         return system_clock::now() - this->start;
     }
-    long long gettimescore(GameState &state);
+
+    // Calculate score given for surviving
+    long long getSurvivalScore() {
+        return 100 *
+               duration_cast<milliseconds>(this->getCurrentDuration()).count();
+    }
+    // Calculate score given for breaking obstacles, etc.
+    long long getAdditionalScore() { return 0; }
+    // Calculate full score
+    long long getScore() {
+        return this->getSurvivalScore() + this->getAdditionalScore();
+    }
 };
 
 #endif

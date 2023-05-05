@@ -1,7 +1,7 @@
 // io_utils.h
 
-#ifndef CONTROL_H
-#define CONTROL_H
+#ifndef IO_UTILS_H
+#define IO_UTILS_H
 
 #include <string>
 

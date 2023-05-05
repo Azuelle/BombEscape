@@ -1,3 +1,5 @@
+// menu.h
+
 #ifndef MENU_H
 #define MENU_H
 
@@ -13,6 +15,6 @@ void chooseGame(WINDOW *win, int cX[4], int cY[4], std::string op[4],
                 int choice, int pos);
 void RUN(WINDOW *win, int cX[4], int cY[4], std::string op[4], int choice,
          int pos);
-int main(int argc, char **argv);
+int runMenu();
 
 #endif

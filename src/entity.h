@@ -15,7 +15,9 @@ struct Pos {
     int y;
 
     // Return the Manhattan distance between two points
-    int distance(Pos to) { return abs(to.x - this->x) + abs(to.y - this->y); } //What is the use of this function?
+    int distance(Pos to) {
+        return abs(to.x - this->x) + abs(to.y - this->y);
+    }  // What is the use of this function?
 
     constexpr Pos operator+(const Pos opr) {
         return Pos{this->x + opr.x, this->y + opr.y};
@@ -49,12 +51,9 @@ class Entity {
     // Indicates whether this Entity dies after a certain amount of time
     bool timed = true;
 
-   public:
-    Entity(duration<double> lifetime, Pos position, bool timed = true)
-        : lifetime(lifetime), position(position), timed(timed) {
-        start_time = system_clock::now();
-    };
+    static constexpr char icon = ' ';
 
+   public:
     Pos getPosition() { return this->position; }
     // Absolute movement
     void setPosition(Pos position) { this->position = position; }
@@ -68,38 +67,79 @@ class Entity {
     // Indicates whether this Entity's onDeath has already been processed
     bool checkAlreadyDied() { return alreadyDied; }
 
-    //Change state of entity
-    void changeState() { alreadyDied = true; }
-
     // Declares a pure virtual onDeath fucntion in order to ensure that
     // it is implemented only in derived entity classes.
     virtual void onDeath(Player* player, std::vector<Entity*>& entity_list) = 0;
+
+    char getIcon() { return icon; }
 };
 
-// TODO: Implementation
 class Bomb : public Entity {
-    public:
-      void onDeath(Player* player, std::vector<Entity*>& entity_list);
-      void setBombLevel(Player* player);
-      bool checkRange(Pos p);
-      bool takeDamage();
-    private:
-      int bombLevel=1;
+   public:
+    void onDeath(Player* player, std::vector<Entity*>& entity_list);
+
+    // Takes position of player or entity in consideration
+    // Returns whether the player or entity is in range of the explosion
+    bool inRange(Pos p);
+
+    Bomb(Pos p, int bomb_power) : bomb_power(bomb_power) {
+        this->position = p;
+        this->start_time = system_clock::now();
+    }
+
+   private:
+    static constexpr duration<double> lifetime = seconds(3);
+    static constexpr char icon = 'O';
+    int bomb_power = 1;
 };
 
-// TODO: Implementation
 class PowerUp : public Entity {
    public:
     void onDeath(Player* player, std::vector<Entity*>& entity_list) {
-        // TODO: Implementation
+        this->alreadyDied = true;
     }
+    int getPower() { return this->power; }
+
+   protected:
+    static int power;
+    static constexpr duration<double> lifetime = seconds(15);
+
+};
+class Healing : public PowerUp {
+   public:
+    Healing(Pos p) {
+        this->position = p;
+        this->start_time = system_clock::now();
+    }
+
+   protected:
+    static constexpr int power = 1;
+    static constexpr char icon = 'H';
+};
+class BombPower : public PowerUp {
+   public:
+    BombPower(Pos p) {
+        this->position = p;
+        this->start_time = system_clock::now();
+    }
+
+   protected:
+    static constexpr int power = 2;
+    static constexpr char icon = '!';
 };
 
-// TODO: Implementation
 class Barricade : public Entity {
-    public:
-      void onDeath(Player* player, std::vector<Entity*>& entity_list);
-      
+   public:
+    Barricade(Pos p) {
+        this->position = p;
+        this->timed = false;
+    }
+    void onDeath(Player* player, std::vector<Entity*>& entity_list) {
+        this->alreadyDied = true;
+    }
+
+   protected:
+    static constexpr char icon = 'X';
 };
 
 #endif
