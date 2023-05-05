@@ -16,6 +16,5 @@ void chooseGame(WINDOW *win, int cX[4], int cY[4], std::string op[4],
 void RUN(WINDOW *win, int cX[4], int cY[4], std::string op[4], int choice,
          int pos);
 int runMenu();
-int main();
 
 #endif
