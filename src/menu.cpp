@@ -1,5 +1,3 @@
-// menu.cpp
-
 #include <curses.h>
 #include <ncurses.h>
 #include <stdio.h>
@@ -28,80 +26,112 @@ void RUN(WINDOW *win, int cX[4], int cY[4], string op[4], int choice, int pos) {
             case KEY_UP:
                 switch (pos) {
                     case 0:
+                        wrefresh(win);
                         wattron(win, A_BOLD);
                         mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
                         wattroff(win, A_BOLD);
+                        wrefresh(win);
                         pos = 3;
+                        wrefresh(win);
                         wattron(win, A_STANDOUT);
                         mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
                         wattroff(win, A_STANDOUT);
+                        wrefresh(win);
                         break;
                     case 1:
+                        wrefresh(win);
                         wattron(win, A_BOLD);
                         mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
                         wattroff(win, A_BOLD);
+                        wrefresh(win);
                         pos = 0;
+                        wrefresh(win);
                         wattron(win, A_STANDOUT);
                         mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
                         wattroff(win, A_STANDOUT);
+                        wrefresh(win);
                         break;
                     case 2:
+                        wrefresh(win);
                         wattron(win, A_BOLD);
                         mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
                         wattroff(win, A_BOLD);
+                        wrefresh(win);
                         pos = 1;
+                        wrefresh(win);
                         wattron(win, A_STANDOUT);
                         mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
                         wattroff(win, A_STANDOUT);
+                        wrefresh(win);
                         break;
                     case 3:
+                        wrefresh(win);
                         wattron(win, A_BOLD);
                         mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
                         wattroff(win, A_BOLD);
+                        wrefresh(win);
                         pos = 2;
+                        wrefresh(win);
                         wattron(win, A_STANDOUT);
                         mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
                         wattroff(win, A_STANDOUT);
+                        wrefresh(win);
                         break;
                 }
                 break;
             case KEY_DOWN:
                 switch (pos) {
                     case 0:
+                        wrefresh(win);
                         wattron(win, A_BOLD);
                         mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
                         wattroff(win, A_BOLD);
+                        wrefresh(win);
                         pos = 1;
+                        wrefresh(win);
                         wattron(win, A_STANDOUT);
                         mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
                         wattroff(win, A_STANDOUT);
+                        wrefresh(win);
                         break;
                     case 1:
+                        wrefresh(win);
                         wattron(win, A_BOLD);
                         mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
                         wattroff(win, A_BOLD);
+                        wrefresh(win);
                         pos = 2;
+                        wrefresh(win);
                         wattron(win, A_STANDOUT);
                         mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
                         wattroff(win, A_STANDOUT);
+                        wrefresh(win);
                         break;
                     case 2:
+                        wrefresh(win);
                         wattron(win, A_BOLD);
                         mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
                         wattroff(win, A_BOLD);
+                        wrefresh(win);
                         pos = 3;
+                        wrefresh(win);
                         wattron(win, A_STANDOUT);
                         mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
                         wattroff(win, A_STANDOUT);
+                        wrefresh(win);
                         break;
                     case 3:
+                        wrefresh(win);
                         wattron(win, A_BOLD);
                         mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
                         wattroff(win, A_BOLD);
+                        wrefresh(win);
                         pos = 0;
+                        wrefresh(win);
                         wattron(win, A_STANDOUT);
                         mvwprintw(win, cY[pos], cX[pos], op[pos].c_str());
                         wattroff(win, A_STANDOUT);
+                        wrefresh(win);
                         break;
                 }
                 break;
@@ -115,7 +145,7 @@ void RUN(WINDOW *win, int cX[4], int cY[4], string op[4], int choice, int pos) {
     }
 }
 
-int main(int argc, char **argv) {
+int runMenu() {
     // Initialize the game menu
     initscr();
     noecho();
@@ -219,4 +249,9 @@ int main(int argc, char **argv) {
 
     endwin();
     return 0;
+}
+
+
+int main(){
+    runMenu();
 }

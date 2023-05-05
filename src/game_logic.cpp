@@ -3,7 +3,7 @@
 #include "game_logic.h"
 
 #include <vector>
-
+#include "menu.h"
 #include "playfield.h"
 
 void logic(GameState &state) {
@@ -21,7 +21,7 @@ void logic(GameState &state) {
 
             break;
         case StateType::main_menu:
-
+            runMenu();
             break;
     }
 }
