@@ -21,13 +21,8 @@ int main() {
     // Initialize curses
     initscr();
     keypad(stdscr, true);
-    // loop 本体 画面：地图/玩家/血量/分数
-    
 
-    while (checkRunning()) {
-        display();
-        logic(gamestate);
-    }
+    while (checkRunning()) logic(gamestate);
 
     // Cleanup for curses
     endwin();

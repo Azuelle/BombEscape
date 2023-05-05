@@ -5,6 +5,8 @@
 
 #include "gamestate.h"
 #include "io_utils.h"
+#include "menu.h"
+#include "playfield.h"
 
 // Process all game logic
 void logic(GameState &cur_state);

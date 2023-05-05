@@ -3,8 +3,6 @@
 #include "game_logic.h"
 
 #include <vector>
-#include "menu.h"
-#include "playfield.h"
 
 void logic(GameState &state) {
     Input usr_input = getInput();
@@ -12,14 +10,17 @@ void logic(GameState &state) {
         case StateType::exit:
             quitting = true;
             break;
+
         case StateType::alive:
             if (int(Input::up) <= int(usr_input) &&
                 int(usr_input) <= int(Input::right))
                 movePlayer(state, usr_input);
             break;
+
         case StateType::death_screen:
 
             break;
+
         case StateType::main_menu:
             runMenu();
             break;
