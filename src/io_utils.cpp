@@ -36,12 +36,9 @@ Input getInput() {
             case 32: /* user pressed space key */
                 return Input::place;
                 break;
-            case KEY_ENTER:  // Enter or send
+            case 10:  // Enter or send
                 return Input::enter;
                 break;
-                /*case KEY_EXIT:  // exit the game
-                    break; */
-                // case KEY_F(n):        // Function keys, for 0 <= n >= 63
         }
     }
     return usr_input;
