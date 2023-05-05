@@ -11,7 +11,7 @@ std::vector<std::string> renderMap(GameState &state) {
                                  std::string(state.playfield->getWidth(), '.'));
     for (int i = 0; i < state.playfield->getHeight(); i++)
         for (int j = 0; j < state.playfield->getWidth(); j++)
-            if (state.playfield->isObstacle(j, i)) vec[i][j] = '#';
+            if (state.playfield->isObstacle(j, i)) vec[i].at(j) = '#';
 
     for (auto itr = state.playfield->entity_list.begin();
          itr != state.playfield->entity_list.end(); itr++)
