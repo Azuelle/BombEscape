@@ -6,6 +6,6 @@
 #include "gamestate.h"
 #include "init_window.h"
 
-void display(const GameState& state, Win w);
+void display(GameState& state, Win w);
 
 #endif

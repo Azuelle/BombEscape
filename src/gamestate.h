@@ -54,8 +54,7 @@ class GameState {
 
     // Calculate score given for surviving
     long long getSurvivalScore() {
-        return 100 *
-               duration_cast<milliseconds>(this->getCurrentDuration()).count();
+        return 100 * duration_cast<seconds>(this->getCurrentDuration()).count();
     }
     // Calculate score given for breaking obstacles, etc.
     long long getAdditionalScore() { return 0; }

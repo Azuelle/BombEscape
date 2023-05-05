@@ -37,6 +37,7 @@ class Player {
 
     int getBombPower() { return bomb_power; }
     int getHP() { return hp; }
+    int getMaxHP() { return max_hp; }
 
     template <class T>
     void usePowerUp(T powerup);

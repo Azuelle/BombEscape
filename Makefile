@@ -53,5 +53,9 @@ mainmenu: src/init_window.cpp src/menu.cpp test/main_menu.cpp
 	mkdir -p $(OUT_DIR)
 	$(CXX) -g $^ -o $(OUT_DIR)/$@.out -lncurses
 
+hudtest: test/hud_test.cpp src/interface.cpp src/init_window.cpp src/entity.cpp src/map_gen.cpp src/playfield.cpp src/player.cpp src/gamestate.cpp src/render.cpp
+	mkdir -p $(OUT_DIR)
+	$(CXX) -g $^ -o $(OUT_DIR)/$@.out -lncurses
+
 # Include all G++-generated makefiles
 -include ${DEP}

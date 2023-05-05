@@ -5,6 +5,7 @@
 Win initWindow(int border_ratio_y, int border_ratio_x) {
     initscr();
     noecho();
+    start_color();
     int yMax, xMax;
     getmaxyx(stdscr, yMax, xMax);
 

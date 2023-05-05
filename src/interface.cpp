@@ -7,41 +7,31 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#include <algorithm>
 #include <string>
 
 #include "gamestate.h"
 #include "player.h"
+#include "render.h"
 
 // Display in-game HUD, map, player & entities
-void display(GameState &state, WINDOW *win) {
+void display(GameState &state, Win w) {
     // initscr();
     // noecho();
     // curs_set(0);
     // start_color();
 
-    int yMax, xMax;
-    getmaxyx(stdscr, yMax, xMax);
-
+    WINDOW *win = w.win;
+    int yMax = w.yMax;
+    int xMax = w.xMax;
     box(win, 0, 0);
 
-    std::string status_bar[4] = {"[STATUS]",
-                                 "HP: ", "Score: ", "Survival Time: "};
-    wrefresh(win);
-    int corY = (yMax - yMax / 5) / 2 + (yMax - yMax / 5) / 2.12;
+    std::string status_bar[3] = {"HP", "Score", "Time Survived (s)"};
+    int corY = w.getSizeY() - 2;
 
-    wattron(win, A_BOLD);
-
-    for (int i = 1; i < xMax / 2 - 1; i++) {
-        mvwprintw(win, corY - 1, i, "-");
-    }
-    // status bar: 11
-    mvwprintw(win, corY, 1, status_bar[0].c_str());
-    // HP: 3
-    mvwprintw(win, corY, 12, status_bar[1].c_str());
-    // Score: 6
-    mvwprintw(win, corY, 19, status_bar[2].c_str());
-    // Survival Time: 15
-    mvwprintw(win, corY, 29, status_bar[3].c_str());
+    wattron(win, A_UNDERLINE);
+    mvwprintw(win, corY - 1, 1, std::string(w.getSizeX() - 1, ' ').c_str());
+    wattroff(win, A_UNDERLINE);
 
     // get status from gamestate and player
     int duration = duration_cast<seconds>(state.getCurrentDuration()).count();
@@ -52,10 +42,61 @@ void display(GameState &state, WINDOW *win) {
     // long long score = 45;
     // int duration = 98;
 
-    mvwprintw(win, corY, 15, "%d", hp);
-    mvwprintw(win, corY, 25, "%lld", score);
-    mvwprintw(win, corY, 43, "%d", duration);
+    int pos = 1, score_len = std::max(7, int(std::to_string(score).size()));
 
+    // Tags
+    wattron(win, A_BOLD);
+    init_pair(0, COLOR_CYAN, COLOR_BLACK);
+
+    // STATUS
+    wattron(win, COLOR_PAIR(0));
+    mvwprintw(win, corY, pos, "STATUS");
+    wattroff(win, COLOR_PAIR(0));
+
+    // HP
+    pos += 6 + 3;
+    wattron(win, A_STANDOUT);
+    mvwprintw(win, corY, pos, status_bar[0].c_str());
+
+    // Score
+    pos += status_bar[0].size() + 1 + std::to_string(hp).size() + 1 +
+           std::to_string(state.player->getMaxHP()).size() + 3;
+    mvwprintw(win, corY, pos, status_bar[1].c_str());
+
+    // Time Survived (s)
+    pos += status_bar[1].size() + 1 + score_len + 3;
+    mvwprintw(win, corY, pos, status_bar[2].c_str());
+
+    wattroff(win, A_STANDOUT);
     wattroff(win, A_BOLD);
+
+    // Stats
+    // HP 3/3
+    pos = 1 + 6 + 3 + status_bar[0].size() + 1;
+    mvwprintw(
+        win, corY, pos,
+        (std::to_string(hp) + "/" + std::to_string(state.player->getMaxHP()))
+            .c_str());
+
+    // Score 1000000
+    pos += std::to_string(hp).size() + 1 +
+           std::to_string(state.player->getMaxHP()).size() + 3 +
+           status_bar[1].size() + 1;
+    mvwprintw(win, corY, pos, std::to_string(score).c_str());
+
+    // Time Survived (s) 10000
+    pos += score_len + 3 + status_bar[2].size() + 1;
+    mvwprintw(win, corY, pos, std::to_string(duration).c_str());
+
+    // Print map on screen
+    // Get rendered map
+    std::vector<std::string> map_string = renderMap(state);
+    // Get offset to center the map
+    int yOffset = w.getYCenterOffset() - 1 - map_string.size() / 2;
+    int xOffset = w.getXCenterOffset() - map_string[0].size() / 2;
+    // Print
+    for (int i = 0; i < map_string.size(); i++)
+        mvwprintw(win, yOffset + i, xOffset, map_string[i].c_str());
+
     wrefresh(win);
 }

@@ -25,6 +25,9 @@ struct Win {
     static constexpr int ySuggestion = 30;
     static constexpr int xSuggestion = 108;
 
+    int getSizeY() { return yMax - yMax / (this->border_ratio_y); }
+    int getSizeX() { return xMax - xMax / (this->border_ratio_x); }
+
     int getYCenterOffset() {
         return yMax / 2 - yMax / (this->border_ratio_y * 2);
     }
