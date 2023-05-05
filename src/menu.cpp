@@ -251,7 +251,4 @@ int runMenu() {
     return 0;
 }
 
-
-int main(){
-    runMenu();
-}
+int main() { runMenu(); }
