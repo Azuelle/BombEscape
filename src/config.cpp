@@ -16,8 +16,7 @@ map<string,int> config(){
   string key_name;
   int key_int;
   while (!fin.eof()){
-    fin >> key_name;
-    istringstream(key_name) >> key_int;
+    fin >> key_name >> key_int;
     configMap[key_name] = key_int;
   }
   return configMap;
