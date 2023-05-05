@@ -37,7 +37,7 @@ struct Win {
                   << "Minimal size requirement: Width " << this->xRequirement
                   << ", Height " << this->yRequirement << std::endl
                   << "Suggested size: Width " << this->xSuggestion
-                  << ", Height " << this->ySuggestion << std::endl
+                  << ", Height " << this->ySuggestion << std::endl;
     }
 };
 
