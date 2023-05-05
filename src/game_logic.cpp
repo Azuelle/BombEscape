@@ -136,7 +136,7 @@ void updateEntityList(GameState &state) {
 void placeBomb(GameState &state) {
     if (state.player->canPlaceBomb()) {
         state.playfield->entity_list.push_back(new Bomb(
-            state.player->getPosition(), state.player->getBombPower()));
+            state.player->getPosition(), state.player->getBombPower(), true));
         state.player->setBombPlaced(true);
     }
 }

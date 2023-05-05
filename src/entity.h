@@ -61,8 +61,10 @@ class Entity {
     void move(Pos offset) { this->position += offset; }
 
     // Checks whether this Entity's timer has run out
-    bool checkDeath() {
-        return timed ? system_clock::now() - start_time >= lifetime : false;
+    virtual bool checkDeath() {
+        return this->timed
+                   ? system_clock::now() - this->start_time >= this->lifetime
+                   : false;
     }
     // Indicates whether this Entity's onDeath has already been processed
     bool checkAlreadyDied() { return alreadyDied; }
@@ -82,7 +84,12 @@ class Bomb : public Entity {
     // Returns whether the player or entity is in range of the explosion
     bool inRange(Pos p);
     bool isPlacedByPlayer() { return this->placed_by_player; }
-
+    // Checks whether this Bomb has exploded
+    bool checkDeath() {
+        return this->timed
+                   ? system_clock::now() - this->start_time >= this->lifetime
+                   : false;
+    }
     Bomb(Pos p, int bomb_power, bool placed_by_player = false)
         : bomb_power(bomb_power), placed_by_player(placed_by_player) {
         this->position = p;

@@ -79,13 +79,13 @@ std::string getString(
     return str;
 }
 
-template <typename T>
-int print(T content, const unsigned int max_len) {
-    return addnstr(std::to_string(content).c_str(), max_len);
-}
 template <>
 int print(std::string content, const unsigned int max_len) {
     return addnstr(content.c_str(), max_len);
+}
+template <>
+int print(char content[], const unsigned int max_len) {
+    return addnstr(content, max_len);
 }
 template <>
 int print(char content, const unsigned int max_len) {
@@ -97,13 +97,13 @@ int print(bool content, const unsigned int max_len) {
     return addnstr(content ? "true" : "false", max_len);
 }
 
-template <typename T>
-int mvprint(T content, int x, int y, const unsigned int max_len) {
-    return mvaddnstr(y, x, std::to_string(content).c_str(), max_len);
-}
 template <>
 int mvprint(std::string content, int x, int y, const unsigned int max_len) {
     return mvaddnstr(y, x, content.c_str(), max_len);
+}
+template <>
+int mvprint(char content[], int x, int y, const unsigned int max_len) {
+    return mvaddnstr(y, x, content, max_len);
 }
 template <>
 int mvprint(char content, int x, int y, const unsigned int max_len) {

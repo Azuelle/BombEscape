@@ -44,10 +44,10 @@ int getOptions(WINDOW *win, int cX[4], int cY[4], std::string op[4]) {
 int runMenu(Win w) {
     // Initialize the game menu
     curs_set(0);
-    start_color();
+
     WINDOW *win = w.win;
-    int yMax = w.yMax;
-    int xMax = w.xMax;
+
+    werase(win);
 
     // x, y coords for options
     int optionX[4];

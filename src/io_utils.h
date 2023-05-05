@@ -34,9 +34,13 @@ std::string getString(int x, int y, const unsigned int max_len);
  * Returns the return value from addnstr().
  */
 template <typename T>
-int print(T content, const unsigned int max_len = -1);
+int print(T content, const unsigned int max_len = -1) {
+    return addnstr(std::to_string(content).c_str(), max_len);
+}
 template <>
 int print(std::string content, const unsigned int max_len);
+template <>
+int print(char content[], const unsigned int max_len);
 template <>
 int print(char content, const unsigned int max_len);
 template <>
@@ -50,9 +54,13 @@ int print(bool content, const unsigned int max_len);
  * Returns the return value from addnstr().
  */
 template <typename T>
-int mvprint(T content, int x, int y, const unsigned int max_len = -1);
+int mvprint(T content, int x, int y, const unsigned int max_len = -1) {
+    return mvaddnstr(y, x, std::to_string(content).c_str(), max_len);
+}
 template <>
 int mvprint(std::string content, int x, int y, const unsigned int max_len);
+template <>
+int mvprint(char content[], int x, int y, const unsigned int max_len);
 template <>
 int mvprint(char content, int x, int y, const unsigned int max_len);
 template <>
