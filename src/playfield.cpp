@@ -1,10 +1,3 @@
-#include "playfield.h"
+// playfield.cpp
 
-bool Playfield::isObstacle(Pos pos) { 
-    if (wall[pos.y][pos.x] == true){
-        return wall[pos.y][pos.x];
-    }
-    else{
-        return false;
-    }
-}
+#include "playfield.h"

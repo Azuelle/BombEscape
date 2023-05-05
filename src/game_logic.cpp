@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "playfield.h"
+
 void logic(GameState &state) {
     Input usr_input = getInput();
     switch (state.type) {

@@ -9,11 +9,8 @@
 
 #include "entity.h"
 
-// TODO: Implementation
+// For storing walls, entities and providing related functionalities
 class Playfield {
-    // A list of items, bombs, etc. on map
-    // These should also have their own classes probably
-    // Maybe a seperate header?
    private:
     int width;
     int height;
@@ -30,7 +27,7 @@ class Playfield {
      * Checks if a tile is accessible
      * Has wall: return true
      */
-    bool isObstacle(Pos pos);
+    bool isObstacle(Pos pos) { return wall[pos.y][pos.x]; }
 
     /**
      * Locates the entity at a certain position.
