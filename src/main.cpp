@@ -11,6 +11,7 @@
 
 #include "game_logic.h"
 #include "gamestate.h"
+#include "init_window.h"
 #include "interface.h"
 #include "io_utils.h"
 #include "time_utils.h"
@@ -18,11 +19,10 @@
 int main() {
     GameState gamestate;
 
-    // Initialize curses
-    initscr();
-    keypad(stdscr, true);
+    // Initialize curses window
+    Win w = initWindow();
 
-    while (checkRunning()) logic(gamestate);
+    while (checkRunning()) logic(gamestate, w);
 
     // Cleanup for curses
     endwin();

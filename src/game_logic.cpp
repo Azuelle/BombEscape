@@ -4,7 +4,7 @@
 
 #include <vector>
 
-void logic(GameState &state) {
+void logic(GameState &state, Win w) {
     Input usr_input = getInput();
     switch (state.type) {
         case StateType::exit:
@@ -22,7 +22,21 @@ void logic(GameState &state) {
             break;
 
         case StateType::main_menu:
-            runMenu();
+            int choice = runMenu(w);
+            switch (choice) {
+                case 0:  // start game
+                    state.type = StateType::alive;
+                    break;
+                case 1:  // ranking
+
+                    break;
+                case 2:  // settings
+                    state.type = StateType::alive;
+                    break;
+                case 3:  // exit
+                    state.type = StateType::exit;
+                    break;
+            }
             break;
     }
 }
@@ -88,6 +102,8 @@ void updateEntityList(GameState &state) {
         if (!(*itr)->checkAlreadyDied()) newentitylist.push_back(*itr);
     *entities = newentitylist;
 }
+
+bool quitting = false;
 
 bool checkRunning() { return !quitting; }
 

@@ -43,11 +43,15 @@ clean:
 
 proto: test/game_prototype.cpp src/time_utils.h
 	mkdir -p $(OUT_DIR)
-	$(CXX) -lcurses $^ -o $(OUT_DIR)/$@.out
+	$(CXX) $^ -o $(OUT_DIR)/$@.out -lcurses
 
 maptest: test/map_test.cpp src/entity.cpp src/map_gen.cpp src/playfield.cpp src/player.cpp src/gamestate.cpp src/render.cpp
 	mkdir -p $(OUT_DIR)
-	$(CXX) -lcurses -g $^ -o $(OUT_DIR)/$@.out
+	$(CXX) -g $^ -o $(OUT_DIR)/$@.out -lcurses
+
+mainmenu: src/init_window.cpp src/menu.cpp test/main_menu.cpp
+	mkdir -p $(OUT_DIR)
+	$(CXX) -g $^ -o $(OUT_DIR)/$@.out -lncurses
 
 # Include all G++-generated makefiles
 -include ${DEP}
