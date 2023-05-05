@@ -43,7 +43,6 @@ class GameState {
         : player(player), playfield(playfield) {
         this->start = system_clock::now();
     }
-    ~GameState() { delete this->player, delete this->playfield; }
 
     Player* player = nullptr;
     Playfield* playfield = nullptr;
