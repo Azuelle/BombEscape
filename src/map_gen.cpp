@@ -3,51 +3,52 @@
 #include "map_gen.h"
 
 #include <cstring>
+#include <deque>
 #include <random>
 #include <vector>
 
 using namespace std;
 
 // Add a wall border to the map
-vector<vector<bool>> addBorder(vector<vector<bool>> map) {
+vector<deque<bool>> addBorder(vector<deque<bool>> map) {
     int width = map[0].size(), height = map.size();
-    for (auto line : map) {
-        line.insert(line.begin(), true);
+    for (auto& line : map) {
+        line.push_front(true);
         line.push_back(true);
     }
-    map.insert(map.begin(), vector<bool>(width + 2, true));
-    map.push_back(vector<bool>(width + 2, true));
+    map.insert(map.begin(), deque<bool>(width + 2, true));
+    map.push_back(deque<bool>(width + 2, true));
     return map;
 }
 
 // Recursive fill algorithm for checking connectivity
-void fill(int x, int y, vector<vector<bool>>& filled) {
+void fill(int x, int y, vector<deque<bool>>& filled) {
     if (filled[y][x]) return;
     filled[y][x] = true;
 
-    fill(x - 1, y, filled);
-    fill(x + 1, y, filled);
-    fill(x, y - 1, filled);
-    fill(x, y + 1, filled);
+    if (x > 0) fill(x - 1, y, filled);
+    if (x < filled[0].size() - 1) fill(x + 1, y, filled);
+    if (y > 0) fill(x, y - 1, filled);
+    if (y < filled.size() - 1) fill(x, y + 1, filled);
 }
 
 // Verify the validity of a map with fill
-bool verifyMap(const vector<vector<bool>>& map) {
+bool verifyMap(const vector<deque<bool>>& map) {
     int width = map[0].size(), height = map.size();
     if (map[0][0] || map[height - 1][width - 1]) return false;
 
-    vector<vector<bool>> filled = addBorder(map);
+    vector<deque<bool>> filled = addBorder(map);
     fill(1, 1, filled);
     if (filled[height][width]) return true;
     return false;
 }
 
-vector<vector<bool>> generateMap(int width, int height, int seed) {
+vector<deque<bool>> generateMap(int width, int height, int seed) {
     default_random_engine rng(seed);
     uniform_int_distribution<int> dist(0, 1);
 
-    vector<vector<bool>> current(height, vector<bool>(width, false));
-    vector<vector<bool>> last_viable(current);
+    vector<deque<bool>> current(height, deque<bool>(width, false));
+    vector<deque<bool>> last_viable(current);
 
     // Add longer walls
     for (int i = 0; i < width * height / 10; i++) {
@@ -87,7 +88,7 @@ vector<vector<bool>> generateMap(int width, int height, int seed) {
 
     return addBorder(last_viable);
 }
-vector<vector<bool>> generateMap(int width, int height) {
+vector<deque<bool>> generateMap(int width, int height) {
     random_device rd;
     return generateMap(width, height, rd());
 }

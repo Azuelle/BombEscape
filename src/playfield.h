@@ -5,6 +5,7 @@
 
 #include <chrono>
 #include <cmath>
+#include <deque>
 #include <vector>
 
 #include "entity.h"
@@ -16,13 +17,13 @@ class Playfield {
     int height;
 
    public:
-    Playfield(int width, int height, std::vector<std::vector<bool>> wall)
+    Playfield(int width, int height, std::vector<std::deque<bool>> wall)
         : width(width), height(height), wall(wall) {}
 
     std::vector<Entity*> entity_list;
 
     // True: wall  False: no wall
-    std::vector<std::vector<bool>> wall;
+    std::vector<std::deque<bool>> wall;
 
     int getWidth() { return width; }
     int getHeight() { return height; }
@@ -32,6 +33,7 @@ class Playfield {
      * Has wall: return true
      */
     bool isObstacle(Pos pos) { return wall[pos.y][pos.x]; }
+    bool isObstacle(int x, int y) { return wall[x][y]; }
 
     /**
      * Locates the entity at a certain position.

@@ -24,9 +24,6 @@ class Player {
     bool bomb_placed = false;
 
    public:
-    Player();
-    ~Player();
-
     char getpIcon() { return pIcon; }
 
     bool isAlive() { return hp >= 0; }
