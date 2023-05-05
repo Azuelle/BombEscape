@@ -25,4 +25,9 @@ bool checkRunning();
 template <typename T>
 void entityInteraction(T *entity, GameState &state, const Pos movement);
 
+void updateEntityList(GameState &state);
+
+// Validates, then place the bomb
+void placeBomb(GameState &state);
+
 #endif

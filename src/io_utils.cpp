@@ -8,14 +8,14 @@
 #include <sstream>
 #include <string>
 
-Input getInput() {
+Input getInput(Win w) {
     Input usr_input = Input::none;
     // Set up for non-blocking input
     noecho();
     cbreak();
-    nodelay(stdscr, TRUE);
+    nodelay(w.win, TRUE);
 
-    int i = getch();
+    int i = wgetch(w.win);
     if (i != ERR) {
         switch (i) {
             case KEY_BACKSPACE: /* user pressed backspace */

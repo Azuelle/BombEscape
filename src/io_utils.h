@@ -5,6 +5,8 @@
 
 #include <string>
 
+#include "init_window.h"
+
 enum class Input : int {
     // Directions
     up,         // Up
@@ -21,7 +23,7 @@ enum class Input : int {
  * Acquires input from user.
  * Returns the input from user as type Input.
  */
-Input getInput();
+Input getInput(Win w);
 std::string getString(const unsigned int max_len);
 std::string getString(int x, int y, const unsigned int max_len);
 

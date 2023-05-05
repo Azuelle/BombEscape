@@ -35,10 +35,7 @@ class GameState {
     time_point<system_clock> start;
 
    public:
-    GameState() {
-        this->start = system_clock::now();
-        player = new Player;
-    }
+    GameState() { this->start = system_clock::now(); }
     GameState(Player* player, Playfield* playfield)
         : player(player), playfield(playfield) {
         this->start = system_clock::now();

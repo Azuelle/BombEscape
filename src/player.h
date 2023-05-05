@@ -24,6 +24,9 @@ class Player {
     bool bomb_placed = false;
 
    public:
+    Player(int x, int y) : position(Pos{x, y}) {}
+    Player(Pos pos) : position(pos) {}
+
     char getpIcon() { return pIcon; }
 
     bool isAlive() { return hp >= 0; }

@@ -109,11 +109,6 @@ int runMenu(Win w) {
 
     wattroff(win, A_BOLD);
 
-    // To set the initial stage to Start Game
-
-    // To enable the User Input to be arrow key
-    keypad(win, true);
-
     // Highlight chosen options
     int pos = getOptions(win, optionX, optionY, option);
 

@@ -81,8 +81,10 @@ class Bomb : public Entity {
     // Takes position of player or entity in consideration
     // Returns whether the player or entity is in range of the explosion
     bool inRange(Pos p);
+    bool isPlacedByPlayer() { return this->placed_by_player; }
 
-    Bomb(Pos p, int bomb_power) : bomb_power(bomb_power) {
+    Bomb(Pos p, int bomb_power, bool placed_by_player = false)
+        : bomb_power(bomb_power), placed_by_player(placed_by_player) {
         this->position = p;
         this->start_time = system_clock::now();
     }
@@ -92,6 +94,7 @@ class Bomb : public Entity {
     static constexpr duration<double> lifetime = seconds(3);
     char icon = 'O';
     int bomb_power = 1;
+    bool placed_by_player = false;
 };
 
 class PowerUp : public Entity {

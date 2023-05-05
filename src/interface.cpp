@@ -24,11 +24,13 @@ void display(GameState &state, Win w) {
     WINDOW *win = w.win;
     int yMax = w.yMax;
     int xMax = w.xMax;
-    box(win, 0, 0);
 
     std::string status_bar[3] = {"HP", "Score", "Time Survived (s)"};
     int corY = w.getSizeY() - 2;
 
+    werase(win);
+
+    // box(win, 0, 0);
     wattron(win, A_UNDERLINE);
     mvwprintw(win, corY - 1, 1, std::string(w.getSizeX() - 1, ' ').c_str());
     wattroff(win, A_UNDERLINE);

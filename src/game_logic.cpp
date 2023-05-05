@@ -9,17 +9,33 @@ bool quitting = false;
 bool checkRunning() { return !quitting; }
 
 void logic(GameState &state, Win w) {
-    Input usr_input = getInput();
+    Input usr_input = getInput(w);
     switch (state.type) {
         case StateType::exit:
             quitting = true;
             break;
 
         case StateType::alive:
+            // Sanity check: Init if player or playfield hasn't been initialized
+            if (state.player == nullptr) state.player = new Player(1, 1);
+            if (state.playfield == nullptr)
+                state.playfield = new Playfield(30, 14);
+
+            // Check for movement
             if (int(Input::up) <= int(usr_input) &&
                 int(usr_input) <= int(Input::right))
                 movePlayer(state, usr_input);
+
+            // Update Entities
+            updateEntityList(state);
+
+            // Check for placing bomb
+            if (usr_input == Input::place) placeBomb(state);
+
+            // Display
             display(state, w);
+
+            // Check player health
             if (!state.player->isAlive()) state.type = StateType::death_screen;
             break;
 
@@ -53,10 +69,10 @@ void logic(GameState &state, Win w) {
 
 // 4 movement directions represented in coordinate offsets
 const Pos movement[4] = {
-    {0, 1},   // Up
-    {0, -1},  // Down
-    {1, 0},   // Left
-    {-1, 0}   // Right
+    {0, -1},  // Up
+    {0, 1},   // Down
+    {-1, 0},  // Left
+    {1, 0}    // Right
 };
 
 /**
@@ -116,7 +132,11 @@ void updateEntityList(GameState &state) {
     *entities = newentitylist;
 }
 
-void placeBomb(GameState &state) {  // placebomb
-    state.playfield->entity_list.push_back(
-        new Bomb(state.player->getPosition(), state.player->getBombPower()));
+// Validates, then place the bomb
+void placeBomb(GameState &state) {
+    if (state.player->canPlaceBomb()) {
+        state.playfield->entity_list.push_back(new Bomb(
+            state.player->getPosition(), state.player->getBombPower()));
+        state.player->setBombPlaced(true);
+    }
 }
