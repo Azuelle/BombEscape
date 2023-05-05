@@ -39,6 +39,7 @@ class Player {
     void setBombPlaced(bool stat) { bomb_placed = stat; }
 
     int getBombPower() { return bomb_power; }
+    int getHP() { return hp; }
 
     template <class T>
     void usePowerUp(T powerup);
