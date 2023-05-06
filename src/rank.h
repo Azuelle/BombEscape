@@ -2,12 +2,13 @@
 
 #ifndef RANK_H
 #define RANK_H
-#include <map>
 #include <string>
 #include <fstream>
+#include <vector>
 
+using namespace std;
 
-std::map<std::string, int> getRank();
+vector<pair<string, int > > getRank();
 
 
 #endif
