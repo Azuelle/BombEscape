@@ -1,13 +1,6 @@
 #include "rank.h"
 
-#include <algorithm>
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <vector>
 using namespace std;
-
-
 bool cmp(const pair<string, int>& a, const pair<string, int>& b) {
     return a.second > b.second;
 }
@@ -26,18 +19,19 @@ vector<pair<string, int> > getRank() {
         fin.close();
         return defaultlist;
     }
-    std::string name;
+    string name;
     int score;
     while (!fin.eof()) {
         fin >> name >> score;
         ranklist.push_back(make_pair(name, score));
     }
+    fin.close();
+
     if (ranklist.empty()) {
         return defaultlist;
     }
     sort(ranklist.begin(), ranklist.end(), cmp);
 
-    fin.close();
     return ranklist;
 }
 

@@ -50,7 +50,7 @@ The following non-standard C/C++ library has been used in this project:
 ## Quick Start
 
 ### Compilation
-Run `make` under the root directory of the project (i.e. where this file is located) tp compile.
+Run `make` under the root directory of the project (i.e. where this file is located) to compile.
 
 If you ran into issues with `make`, you can try `make clean` and then try again with `make`.
 

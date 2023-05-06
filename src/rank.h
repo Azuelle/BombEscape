@@ -2,15 +2,13 @@
 
 #ifndef RANK_H
 #define RANK_H
-#include <string>
+
+#include <algorithm>
 #include <fstream>
+#include <iostream>
+#include <string>
 #include <vector>
 
-using namespace std;
-
-vector<pair<string, int > > getRank();
-
+std::vector<std::pair<std::string, int>> getRank();
 
 #endif
-
-
