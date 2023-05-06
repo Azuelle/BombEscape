@@ -20,12 +20,20 @@ class Player {
 
     time_point<system_clock> last_moved = system_clock::now();
     duration<double> movement_cd =
-        milliseconds(100);  // Interval between movements
+        milliseconds(300);  // Interval between movements
     bool bomb_placed = false;
 
+    time_point<system_clock> start;
+
    public:
-    Player(int x, int y) : position(Pos{x, y}) {}
-    Player(Pos pos) : position(pos) {}
+    Player(int x, int y) : position(Pos{x, y}) {
+        this->start = system_clock::now();
+    }
+    Player(Pos pos) : position(pos) { this->start = system_clock::now(); }
+
+    duration<double> getCurrentDuration() {
+        return system_clock::now() - this->start;
+    }
 
     char getpIcon() { return pIcon; }
 
@@ -55,6 +63,21 @@ class Player {
     void move(Pos offset, bool update_last_moved = true) {
         this->position += offset;
         if (update_last_moved) last_moved = system_clock::now();
+    }
+
+    long long additionalScore = 0;
+
+    // Calculate score given for surviving
+    long long getSurvivalScore() {
+        return 100 * duration_cast<seconds>(this->getCurrentDuration()).count();
+    }
+    // Calculate score given for breaking obstacles, etc.
+    long long getAdditionalScore() { return this->additionalScore; }
+    void addAdditionalScore(long long addition) { additionalScore += addition; }
+    void clearAdditionalScore() { additionalScore = 0; }
+    // Calculate full score
+    long long getScore() {
+        return this->getSurvivalScore() + this->getAdditionalScore();
     }
 };
 

@@ -3,8 +3,14 @@
 #ifndef IO_UTILS_H
 #define IO_UTILS_H
 
+#include <curses.h>
+
+#include <iostream>
+#include <map>
+#include <sstream>
 #include <string>
 
+#include "config.h"
 #include "init_window.h"
 
 enum class Input : int {
@@ -13,9 +19,9 @@ enum class Input : int {
     down,       // Down
     left,       // Left
     right,      // Right
-    place,      // Place bomb
-    enter,      // enter
-    backspace,  // backspace
+    place,      // Place bomb, defaults to space
+    confirm,    // Defaults to enter
+    backspace,  // Backspace
     none        // No input
 };
 
@@ -24,8 +30,12 @@ enum class Input : int {
  * Returns the input from user as type Input.
  */
 Input getInput(Win w);
-std::string getString(const unsigned int max_len);
-std::string getString(int x, int y, const unsigned int max_len);
+
+// get strings from the users
+// if the input exceeds the limits, ask users to input again.
+// return a string, input a max length.
+std::string getString(Win w, const unsigned int max_len);
+std::string getString(Win w, int x, int y, const unsigned int max_len);
 
 /**
  * Expansion on curses.h's addstr() / addnstr().

@@ -1,69 +1,62 @@
 // config.cpp
 
 #include "config.h"
+
 using namespace std;
 
-map<string, int> config() {
+inline void createDefaultConfigFile() {
+    ofstream fout("config.txt");
+    for (auto i : defaultConfig) fout << i.first << " " << i.second << endl;
+    fout.close();
+}
+
+map<string, int> getConfig() {
     ifstream fin;
+    ofstream err;
     fin.open("config.txt");
-    map<string, int> finalmap;
-    finalmap["up"] = 259;
-    finalmap["down"] = 258;
-    finalmap["left"] = 260;
-    finalmap["right"] = 261;
-    finalmap["place"] = 32;
-    finalmap["enter"] = 10;
-    finalmap["backspace"] = 263;
-    finalmap["none"] = -1;
-    vector<string> listshould;
-    listshould.insert(listshould.end(), {"up", "down", "left", "right", "place",
-                                         "enter", "backplace", "none"});
+    err.open("error.log", ios::app);
 
     if (fin.fail()) {
+        err << getCurrentTimeAndDate()
+            << "Failed to load config file, creating new file" << endl;
         fin.close();
-        ofstream fout;
-        fout.open("config.txt");
-        fout << "up 259" << endl;
-        fout << "down 258" << endl;
-        fout << "left 260" << endl;
-        fout << "right 261" << endl;
-        fout << "place 32" << endl;
-        fout << "enter 10" << endl;
-        fout << "backspace 263" << endl;
-        fout << "none -1" << endl;
-        fout.close();
-        return finalmap;
+        createDefaultConfigFile();
+        return defaultConfig;
     }
-    // check whether config.txt contains all the settings
-    // otherwise return the default map
-    vector<string> keylist;
-    map<string, int> configMap;
+
+    vector<string> key_list;
+    map<string, int> config_map;
     string key_name;
     int key_int;
+
+    // Get config from file
     while (!fin.eof()) {
         fin >> key_name >> key_int;
-        configMap[key_name] = key_int;
+        config_map[key_name] = key_int;
+        key_list.push_back(key_name);
     }
-    for (auto const& imap : configMap) keylist.push_back(imap.first);
-    for (auto const& imap : configMap) {
-        if (find(listshould.begin(), listshould.end(), imap.first) !=
-            listshould.end()) {
-            fin.close();
-            ofstream fout;
-            fout.open("config.txt");
-            fout << "up 259" << endl;
-            fout << "down 258" << endl;
-            fout << "left 260" << endl;
-            fout << "right 261" << endl;
-            fout << "place 32" << endl;
-            fout << "enter 10" << endl;
-            fout << "backspace 263" << endl;
-            fout << "none -1" << endl;
-            fout.close();
-            return finalmap;
-        }
+    fin.close();
 
-        fin.close();
-        return configMap;
+    // Check whether config.txt contains all the settings
+    // Otherwise return the default config
+    bool found = false;
+    for (auto const& req_key : necessaryKeys) {
+        found = false;
+        for (auto const& k : key_list)
+            if (k == req_key) {
+                found = true;
+                break;
+            }
+        if (!found) {
+            err << getCurrentTimeAndDate() << "Failed to find key \"" << req_key
+                << "\", resetting config file" << endl;
+            break;
+        }
     }
+    err.close();
+    if (!found) {
+        createDefaultConfigFile();
+        return defaultConfig;
+    } else
+        return config_map;
 }

@@ -5,8 +5,9 @@
 // This Function mainly changes the option display state.
 // It takes the win, from, to and centerX, centerY, optionlist as input
 // parameter
-inline void switchOptionDisplayState(WINDOW *win, int from, int to, int cX[4],
+inline void switchOptionDisplayState(Win w, int from, int to, int cX[4],
                                      int cY[4], std::string op[4]) {
+    WINDOW *win = w.win;
     wrefresh(win);
     wattron(win, A_BOLD);
     mvwprintw(win, cY[from], cX[from], op[from].c_str());
@@ -21,26 +22,21 @@ inline void switchOptionDisplayState(WINDOW *win, int from, int to, int cX[4],
 
 // This function use switchOptionDisplayState function to switch the option
 // display It takes the win, centerX, centerY, optionlist as input parameter
-int getOptions(WINDOW *win, int cX[4], int cY[4], std::string op[4]) {
+int getOptions(Win w, int cX[4], int cY[4], std::string op[4]) {
     bool isRun = true;
-    int choice, pos = 0;
+    int pos = 0;
     while (isRun) {
-        choice = wgetch(win);
-        switch (choice) {
-            case KEY_UP:
-                switchOptionDisplayState(win, pos, (pos + 3) % 4, cX, cY, op);
-                pos = (pos + 3) % 4;
-                break;
-            case KEY_DOWN:
-                switchOptionDisplayState(win, pos, (pos + 1) % 4, cX, cY, op);
-                pos = (pos + 1) % 4;
-                break;
-            default:
-                if (choice == 10) {
-                    erase();
-                    refresh();
-                    isRun = false;
-                }
+        Input choice = getInput(w);
+        if (choice == Input::up) {
+            switchOptionDisplayState(w, pos, (pos + 3) % 4, cX, cY, op);
+            pos = (pos + 3) % 4;
+        } else if (choice == Input::down) {
+            switchOptionDisplayState(w, pos, (pos + 1) % 4, cX, cY, op);
+            pos = (pos + 1) % 4;
+        } else if (choice == Input::confirm) {
+            erase();
+            refresh();
+            isRun = false;
         }
     }
     return pos;
@@ -117,7 +113,7 @@ int runMenu(Win w) {
     wattroff(win, A_BOLD);
 
     // Highlight chosen options
-    int pos = getOptions(win, optionX, optionY, option);
+    int pos = getOptions(w, optionX, optionY, option);
 
     refresh();
 

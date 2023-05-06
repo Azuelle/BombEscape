@@ -22,8 +22,6 @@ void display(GameState &state, Win w) {
     // start_color();
 
     WINDOW *win = w.win;
-    int yMax = w.yMax;
-    int xMax = w.xMax;
 
     std::string status_bar[4] = {"HP", "Score", "Time Survived (s)",
                                  "Bomb Range"};
@@ -37,8 +35,9 @@ void display(GameState &state, Win w) {
     wattroff(win, A_UNDERLINE);
 
     // get status from gamestate and player
-    int duration = duration_cast<seconds>(state.getCurrentDuration()).count();
-    long long score = state.getScore();
+    int duration =
+        duration_cast<seconds>(state.player->getCurrentDuration()).count();
+    long long score = state.player->getScore();
     int hp = state.player->getHP();
 
     // int hp = 88;
@@ -107,7 +106,7 @@ void display(GameState &state, Win w) {
     int yOffset = w.getYCenterOffset() - 1 - map_string.size() / 2;
     int xOffset = w.getXCenterOffset() - map_string[0].size() / 2;
     // Print
-    for (int i = 0; i < map_string.size(); i++)
+    for (unsigned int i = 0; i < map_string.size(); i++)
         mvwprintw(win, yOffset + i, xOffset, map_string[i].c_str());
 
     wrefresh(win);

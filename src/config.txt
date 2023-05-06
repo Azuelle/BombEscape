@@ -1,8 +1,0 @@
-up 259
-down 258
-left 260
-right 261
-place 32
-enter 10
-backspace 263
-none -1

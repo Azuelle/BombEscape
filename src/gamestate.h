@@ -48,17 +48,6 @@ class GameState {
     duration<double> getCurrentDuration() {
         return system_clock::now() - this->start;
     }
-
-    // Calculate score given for surviving
-    long long getSurvivalScore() {
-        return 100 * duration_cast<seconds>(this->getCurrentDuration()).count();
-    }
-    // Calculate score given for breaking obstacles, etc.
-    long long getAdditionalScore() { return 0; }
-    // Calculate full score
-    long long getScore() {
-        return this->getSurvivalScore() + this->getAdditionalScore();
-    }
 };
 
 #endif

@@ -23,10 +23,10 @@ OBJ = $(SRC:%.cpp=$(OUT_DIR)/%.o)
 DEP = ${OBJ:.o=.d}
 
 
-all: $(OUT_DIR)/$(EXEC)
+all: $(EXEC)
 
 # Make the final executable
-$(OUT_DIR)/$(EXEC): $(OBJ)
+$(EXEC): $(OBJ)
 	mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
 

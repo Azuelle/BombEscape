@@ -2,13 +2,15 @@
 
 #include "io_utils.h"
 
-#include <curses.h>
+static std::map<std::string, int> keymap;
 
-#include <iostream>
-#include <sstream>
-#include <string>
-
+/**
+ * Acquires input from user.
+ * Returns the input from user as type Input.
+ */
 Input getInput(Win w) {
+    if (!keymap.size()) keymap = getConfig();
+
     Input usr_input = Input::none;
     // Set up for non-blocking input
     noecho();
@@ -16,44 +18,36 @@ Input getInput(Win w) {
     nodelay(w.win, TRUE);
 
     int i = wgetch(w.win);
-    if (i != ERR) {
-        switch (i) {
-            case KEY_BACKSPACE: /* user pressed backspace */
-                return Input::backspace;
-                break;
-            case KEY_UP: /* user pressed up arrow key */
-                return Input::up;
-                break;
-            case KEY_DOWN: /* user pressed down arrow key */
-                return Input::down;
-                break;
-            case KEY_LEFT:
-                return Input::left;
-                break;
-            case KEY_RIGHT:
-                return Input::right;
-                break;
-            case 32: /* user pressed space key */
-                return Input::place;
-                break;
-            case 10: /* Enter */
-                return Input::enter;
-                break;
-        }
-    }
+
+    if (i == keymap["backspace"])
+        usr_input = Input::backspace;
+
+    else if (i == keymap["up"])
+        usr_input = Input::up;
+    else if (i == keymap["down"])
+        usr_input = Input::down;
+    else if (i == keymap["left"])
+        usr_input = Input::left;
+    else if (i == keymap["right"])
+        usr_input = Input::right;
+
+    else if (i == keymap["place"])
+        usr_input = Input::place;
+    else if (i == keymap["confirm"])
+        usr_input = Input::confirm;
+
     return usr_input;
 }
 
 // get strings from the users
 // if the input exceeds the limits, ask users to input again.
 // return a string, input a max length.
-
-std::string getString(const unsigned int max_len) {
+std::string getString(Win w, const unsigned int max_len) {
     std::string str = "";
     echo();
     nocbreak();
     while (str.size() <= max_len) {
-        str += getch();
+        str += wgetch(w.win);
         if (str.size() > max_len) {
             addstr("Your input exceeds the limit. Please input again.");
         }
@@ -64,15 +58,13 @@ std::string getString(const unsigned int max_len) {
     return str;
 }
 
-std::string getString(
-    int x, int y,
-    const unsigned int max_len) {  
+std::string getString(Win w, int x, int y, const unsigned int max_len) {
     std::string str = "";
     move(x, y);
     echo();
     nocbreak();
     while (str.size() <= max_len) {
-        str += getch();
+        str += wgetch(w.win);
         if (str.size() > max_len) {
             addstr("Your input exceeds the limit. Please input again.");
         }

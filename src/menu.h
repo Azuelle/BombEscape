@@ -11,9 +11,11 @@
 #include <string>
 
 #include "init_window.h"
+#include "io_utils.h"
 
-int getOptions(WINDOW *win, int cX[4], int cY[4], std::string op[4], int choice,
-               int pos);
+inline void switchOptionDisplayState(Win w, int from, int to, int cX[4],
+                                     int cY[4], std::string op[4]);
+int getOptions(Win w, int cX[4], int cY[4], std::string op[4]);
 int runMenu(Win win);
 
 #endif

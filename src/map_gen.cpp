@@ -11,7 +11,7 @@ using namespace std;
 
 // Add a wall border to the map
 vector<deque<bool>> addBorder(vector<deque<bool>> map) {
-    int width = map[0].size(), height = map.size();
+    int width = map[0].size();
     for (auto& line : map) {
         line.push_front(true);
         line.push_back(true);
@@ -27,9 +27,9 @@ void fill(int x, int y, vector<deque<bool>>& filled) {
     filled[y][x] = true;
 
     if (x > 0) fill(x - 1, y, filled);
-    if (x < filled[0].size() - 1) fill(x + 1, y, filled);
+    if (x < int(filled[0].size()) - 1) fill(x + 1, y, filled);
     if (y > 0) fill(x, y - 1, filled);
-    if (y < filled.size() - 1) fill(x, y + 1, filled);
+    if (y < int(filled.size()) - 1) fill(x, y + 1, filled);
 }
 
 // Verify the validity of a map with fill

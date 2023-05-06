@@ -34,11 +34,11 @@ class Message {
     }
 
    private:
-    // Content of the message
-    std::string content;
     // Type of the message
     // Should always be Capitalized.
     std::string type = "None";
+    // Content of the message
+    std::string content;
 
     duration<double> display_length;
     time_point<system_clock> start;

@@ -41,8 +41,13 @@ void logic(GameState &state, Win w) {
 
         case StateType::death_screen:
             // TODO: Death screen
+
             state.type = StateType::main_menu;  // We'll just return to menu for
                                                 // now, to be changed
+            delete state.player;
+            state.player = nullptr;
+            delete state.playfield;
+            state.playfield = nullptr;
             break;
 
         case StateType::main_menu:
