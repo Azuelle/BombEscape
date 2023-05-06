@@ -6,9 +6,15 @@
 #include <string>
 #include <vector>
 using namespace std;
+
+
 bool cmp(const pair<string, int>& a, const pair<string, int>& b) {
     return a.second > b.second;
 }
+
+// To get rank from ranklist.txt
+// return a vector pair containing the username and score.
+
 vector<pair<string, int> > getRank() {
     std::ifstream fin;
     vector<pair<string, int> > ranklist, defaultlist;
@@ -35,11 +41,3 @@ vector<pair<string, int> > getRank() {
     return ranklist;
 }
 
-/*int main() {
-    vector<pair<string, int> > rank = getRank();
-    vector<pair<string, int> >::iterator itr;
-    for (itr = rank.begin(); itr != rank.end(); itr++) {
-        cout << (*itr).first << " " << (*itr).second << endl;
-    }
-    return 0;
-}*/
