@@ -5,9 +5,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <map>
+#include <vector>
+
 
 #include "rank.h"
 
+// This function displays the ranking of the player
 void showRanking(){
     initscr();
     noecho();
@@ -35,23 +38,25 @@ void showRanking(){
 
     //std::map<std::string, int>all_rank = getRank();
     wrefresh(win);
+    //vector<pair<string, int> > my_rank = getRank();
 
     int yRank = 7;
 
-    for (auto const& [key, val] : myrank) {
+    //for (auto const& [key, val] : myrank) {
+        //std::string output = key + ": " + std::to_string(val);
+        //mvwprintw(win,yRank,centerX,output.c_str());
+        //yRank = yRank+2;
+    //}
+
+    std::vector<std::pair<std::string,int>> myVec = {{"name1", 10}, {"name2", 20}, {"name3", 30}};
+    for (auto const& [key, val] : myVec) {
         std::string output = key + ": " + std::to_string(val);
         mvwprintw(win,yRank,centerX,output.c_str());
-        yRank = yRank+2;
+        yRank = yRank +2 ;
     }
-
     wrefresh(win);
 
     usleep(2147483647);
     endwin();
 
-}
-
-int main(){
-    showRanking();
-    return 0;
 }

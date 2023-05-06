@@ -7,9 +7,12 @@
 #include <string>
 #include <stdlib.h>
 #include <unistd.h>
-#include <rank.h>
+#include <map>
+#include <vector>
+
+
+#include "rank.h"
 
 void showRanking();
 
-int main();
 #endif
