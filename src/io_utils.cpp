@@ -24,7 +24,7 @@ Input getInput(Win w) {
             case KEY_UP: /* user pressed up arrow key */
                 return Input::up;
                 break;
-            case KEY_DOWN: /* user pressed up arrow key */
+            case KEY_DOWN: /* user pressed down arrow key */
                 return Input::down;
                 break;
             case KEY_LEFT:
@@ -36,13 +36,17 @@ Input getInput(Win w) {
             case 32: /* user pressed space key */
                 return Input::place;
                 break;
-            case 10:  // Enter or send
+            case 10: /* Enter */
                 return Input::enter;
                 break;
         }
     }
     return usr_input;
 }
+
+// get strings from the users
+// if the input exceeds the limits, ask users to input again.
+// return a string, input a max length.
 
 std::string getString(const unsigned int max_len) {
     std::string str = "";
@@ -62,7 +66,7 @@ std::string getString(const unsigned int max_len) {
 
 std::string getString(
     int x, int y,
-    const unsigned int max_len) {  // get the string input from users
+    const unsigned int max_len) {  
     std::string str = "";
     move(x, y);
     echo();

@@ -12,6 +12,8 @@
 #include <vector>
 using namespace std;
 
+// Return user's key setting;
+// If exists error, return a default setting. 
 map<string,int> config();
 
 #endif
