@@ -60,7 +60,7 @@ int runMenu(Win w) {
     box(w.win, 0, 0);
 
     // Creating variables for the game option
-    std::string option[4] = {"Start Game", "Ranking", "Settings", "Quit"};
+    std::string option[4] = {"Start Game", "Scoreboard", "Settings", "Quit"};
 
     // Creating variables for the game title
     std::string title[8] = {

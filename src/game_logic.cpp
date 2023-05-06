@@ -2,14 +2,13 @@
 
 #include "game_logic.h"
 
-#include <vector>
-
 bool quitting = false;
 
 bool checkRunning() { return !quitting; }
 
 void logic(GameState &state, Win w) {
     Input usr_input = getInput(w);
+    int choice;
     switch (state.type) {
         case StateType::exit:
             quitting = true;
@@ -40,9 +39,10 @@ void logic(GameState &state, Win w) {
             break;
 
         case StateType::death_screen:
+            addRank(state.player->getScore());
             // TODO: Death screen
 
-            state.type = StateType::main_menu;  // We'll just return to menu for
+            state.type = StateType::main_menu;  // We'll just show the menu for
                                                 // now, to be changed
             delete state.player;
             state.player = nullptr;
@@ -51,13 +51,13 @@ void logic(GameState &state, Win w) {
             break;
 
         case StateType::main_menu:
-            int choice = runMenu(w);
+            choice = runMenu(w);
             switch (choice) {
                 case 0:  // start game
                     state.type = StateType::alive;
                     break;
                 case 1:  // ranking
-
+                    state.type = StateType::scoreboard;
                     break;
                 case 2:  // settings
 
@@ -67,6 +67,14 @@ void logic(GameState &state, Win w) {
                     break;
             }
             break;
+
+        case StateType::scoreboard:
+            showRanking(w);
+            if (usr_input == Input::confirm) state.type = StateType::main_menu;
+            break;
+
+        default:
+            state.type = StateType::main_menu;
     }
 }
 

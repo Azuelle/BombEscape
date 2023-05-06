@@ -12,7 +12,7 @@ class Player;
 
 class Player {
    private:
-    int hp = 3;
+    int hp = 1;
     int max_hp = 3;
     int bomb_power = 2;
     Pos position;
@@ -20,7 +20,7 @@ class Player {
 
     time_point<system_clock> last_moved = system_clock::now();
     duration<double> movement_cd =
-        milliseconds(300);  // Interval between movements
+        milliseconds(100);  // Interval between movements
     bool bomb_placed = false;
 
     time_point<system_clock> start;

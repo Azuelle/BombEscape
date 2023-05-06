@@ -1,62 +1,56 @@
-#include <stdio.h>
-#include <ncurses.h>
-#include <curses.h>
-#include <string>
-#include <stdlib.h>
-#include <unistd.h>
-#include <map>
-#include <vector>
+// ranking.cpp
 
+#include "ranking.h"
 
-#include "rank.h"
+// Displays the ranking of the player
+void showRanking(Win w) {
+    WINDOW* win = w.win;
+    auto ranks = getRank();
+    const int listing_offset_x = w.getXCenterOffset() - 11;
 
-// This function displays the ranking of the player
-void showRanking(){
-    initscr();
-    noecho();
+    const int title_y = w.getYCenterOffset() -
+                        (4 + (ranks.size() ? ranks.size() * 2 - 1 : 2) + 3) / 2;
+
+    int current_listing_offset_y = title_y + 3;
+
+    werase(w.win);
     curs_set(0);
-    //start_color();
-    std::map<std::string, int> myrank;
-    myrank["Jonathan"] = 100;
-    myrank["John"] = 10;
-    myrank["Marvolo"] = 105;
 
-    int yMax, xMax;
-    getmaxyx(stdscr, yMax, xMax);
-
-    WINDOW *win = newwin(yMax-yMax/5, xMax/2, yMax/10, xMax/4);
     box(win, 0, 0);
 
-    std::string rank = "Ranking List";
-    int centerX = (xMax/4) - rank.length()/2;
-    wrefresh(win);
     wattron(win, A_BOLD);
-    mvwprintw(win, 3, centerX, rank.c_str());
+    wattron(win, A_UNDERLINE);
+    wattron(win, A_STANDOUT);
+    mvwprintw(win, title_y, w.getXCenterOffset() - 5, "Scoreboard");
     wattroff(win, A_BOLD);
+    wattroff(win, A_UNDERLINE);
+    wattroff(win, A_STANDOUT);
+
+    if (!ranks.size()) {
+        mvwprintw(win, current_listing_offset_y, w.getXCenterOffset() - 6,
+                  "No Entry Yet");
+        mvwprintw(win, ++current_listing_offset_y, w.getXCenterOffset() - 10,
+                  "Waiting for yours! ;)");
+        current_listing_offset_y += 2;
+    } else
+        for (auto const& [key, val] : ranks) {
+            std::string output =
+                std::string(std::max(12, int(key.size()) + 2), ' ') +
+                std::to_string(val);
+            mvwprintw(win, current_listing_offset_y, listing_offset_x,
+                      output.c_str());
+
+            wattron(win, A_STANDOUT);
+            mvwprintw(win, current_listing_offset_y, listing_offset_x,
+                      key.c_str());
+            wattroff(win, A_STANDOUT);
+
+            current_listing_offset_y += 2;
+        }
+    wattron(win, A_ITALIC);
+    mvwprintw(win, ++current_listing_offset_y, w.getXCenterOffset() - 17,
+              "~ Press the Confirm key to leave ~");
+    wattroff(win, A_ITALIC);
+
     wrefresh(win);
-
-
-    //std::map<std::string, int>all_rank = getRank();
-    wrefresh(win);
-    //vector<pair<string, int> > my_rank = getRank();
-
-    int yRank = 7;
-
-    //for (auto const& [key, val] : myrank) {
-        //std::string output = key + ": " + std::to_string(val);
-        //mvwprintw(win,yRank,centerX,output.c_str());
-        //yRank = yRank+2;
-    //}
-
-    std::vector<std::pair<std::string,int>> myVec = {{"name1", 10}, {"name2", 20}, {"name3", 30}};
-    for (auto const& [key, val] : myVec) {
-        std::string output = key + ": " + std::to_string(val);
-        mvwprintw(win,yRank,centerX,output.c_str());
-        yRank = yRank +2 ;
-    }
-    wrefresh(win);
-
-    usleep(2147483647);
-    endwin();
-
 }

@@ -3,6 +3,8 @@
 #ifndef GAME_LOGIC_H
 #define GAME_LOGIC_H
 
+#include <vector>
+
 #include "gamestate.h"
 #include "init_window.h"
 #include "interface.h"
@@ -10,6 +12,7 @@
 #include "menu.h"
 #include "player.h"
 #include "playfield.h"
+#include "ranking.h"
 
 // Process all game logic
 void logic(GameState &cur_state, Win w);

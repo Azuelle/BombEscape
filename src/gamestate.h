@@ -25,6 +25,8 @@ enum class StateType {
     // Player has died and is being shown the death screen (with
     // scores, etc.)
     death_screen,
+    // Player is in the scoreboard (a.k.a. ranking) screen
+    scoreboard,
 
     // etc., add as needed
 };
