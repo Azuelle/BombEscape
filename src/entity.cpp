@@ -6,7 +6,10 @@
 
 void Bomb::onDeath(Player* player, std::vector<Entity*>& entity_list) {
     this->alreadyDied = true;
-    if (this->inRange(player->getPosition())) player->getDamage();
+    Pos p_pos = player->getPosition();
+    if ((p_pos.x == this->position.x || p_pos.y == this->position.y) &&
+        this->inRange(p_pos))
+        player->getDamage();
 
     // Restores player ability if this is placed by player
     if (this->isPlacedByPlayer()) player->setBombPlaced(false);
