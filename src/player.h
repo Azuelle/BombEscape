@@ -29,7 +29,7 @@ class Player {
 
     char getpIcon() { return pIcon; }
 
-    bool isAlive() { return hp >= 0; }
+    bool isAlive() { return hp > 0; }
     void getDamage() {
         if (isAlive()) hp--;
     }

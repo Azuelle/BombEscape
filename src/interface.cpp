@@ -25,7 +25,8 @@ void display(GameState &state, Win w) {
     int yMax = w.yMax;
     int xMax = w.xMax;
 
-    std::string status_bar[3] = {"HP", "Score", "Time Survived (s)"};
+    std::string status_bar[4] = {"HP", "Score", "Time Survived (s)",
+                                 "Bomb Range"};
     int corY = w.getSizeY() - 2;
 
     werase(win);
@@ -69,6 +70,10 @@ void display(GameState &state, Win w) {
     pos += status_bar[1].size() + 1 + score_len + 3;
     mvwprintw(win, corY, pos, status_bar[2].c_str());
 
+    // Bomb Range
+    pos += status_bar[2].size() + 1 + std::to_string(duration).size() + 3;
+    mvwprintw(win, corY, pos, status_bar[3].c_str());
+
     wattroff(win, A_STANDOUT);
     wattroff(win, A_BOLD);
 
@@ -89,6 +94,11 @@ void display(GameState &state, Win w) {
     // Time Survived (s) 10000
     pos += score_len + 3 + status_bar[2].size() + 1;
     mvwprintw(win, corY, pos, std::to_string(duration).c_str());
+
+    // Bomb Range 2
+    pos += std::to_string(duration).size() + 3 + status_bar[3].size() + 1;
+    mvwprintw(win, corY, pos,
+              std::to_string(state.player->getBombPower()).c_str());
 
     // Print map on screen
     // Get rendered map
