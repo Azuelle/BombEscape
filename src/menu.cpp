@@ -2,6 +2,9 @@
 
 #include "menu.h"
 
+// This Function mainly changes the option display state.
+// It takes the win, from, to and centerX, centerY, optionlist as input
+// parameter
 inline void switchOptionDisplayState(WINDOW *win, int from, int to, int cX[4],
                                      int cY[4], std::string op[4]) {
     wrefresh(win);
@@ -16,6 +19,8 @@ inline void switchOptionDisplayState(WINDOW *win, int from, int to, int cX[4],
     wrefresh(win);
 }
 
+// This function use switchOptionDisplayState function to switch the option
+// display It takes the win, centerX, centerY, optionlist as input parameter
 int getOptions(WINDOW *win, int cX[4], int cY[4], std::string op[4]) {
     bool isRun = true;
     int choice, pos = 0;
@@ -41,6 +46,8 @@ int getOptions(WINDOW *win, int cX[4], int cY[4], std::string op[4]) {
     return pos;
 }
 
+// This function is to initiallize the window, create the ascii art of BOMB
+// ESCAPE and display all the game options.
 int runMenu(Win w) {
     // Initialize the game menu
     curs_set(0);
