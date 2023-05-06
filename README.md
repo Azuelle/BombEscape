@@ -30,7 +30,7 @@ The map for the game is randomly generated to ensure a unique experience.
 On the coding side, we organized the map generation utilites, the map class (`Playfield`) itself and map rendering utilities into different files to limit bloating of a single file.
 
 ### Restarting
-You can retry the game after you have died, which resets the `GameState` object saving your current status in the game, including your character, the map, and entities.
+You can retry the game after you have died. In detail, returning to the main menu resets the `GameState` object which contains your current status in the game, including your character (`Player`), the map (`Playfield`), and entities (stored with `std::vector<Entity*>`, a dynamic list of pointers, in `Playfield`).
 
 ### Controls
 The player can use the keyboard to control Marvolo.
