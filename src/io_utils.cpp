@@ -2,6 +2,19 @@
 
 #include "io_utils.h"
 
+// For logging error and other messages
+void log(std::string filename, std::string message) {
+    std::ofstream of(filename + ".log", std::ios::app);
+    of << "[" << getCurrentTimeAndDate() << "] " << message << std::endl;
+    of.close();
+}
+// Defaults to logging to error.log
+void log(std::string message) {
+    std::ofstream of("error.log", std::ios::app);
+    of << "[" << getCurrentTimeAndDate() << "] " << message << std::endl;
+    of.close();
+}
+
 static std::map<std::string, int> keymap;
 
 /**

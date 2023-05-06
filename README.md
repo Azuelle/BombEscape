@@ -24,24 +24,38 @@ Enter a chaotic world full of pitfalls and bombshells. Try your best to gather r
 
 ## Features & Explanation
 
+### Random map generation
+The map for the game is randomly generated to ensure a unique experience.
+
+On the coding side, we organized the map generation utilites, the map class (`Playfield`) itself and map rendering utilities into different files to limit bloating of a single file.
+
+### Restarting
+You can retry the game after you have died. In detail, returning to the main menu resets the `GameState` object which contains your current status in the game, including your character (`Player`), the map (`Playfield`), and entities (stored with `std::vector<Entity*>`, a dynamic list of pointers, in `Playfield`).
+
 ### Controls
 The player can use the keyboard to control Marvolo.
 
+You can also change the key bindings by editing the `config.txt` file, which will be generated the first time you start the game. The key values are stored as their decimal ASCII codes.
+
 #### Default key bindings
-- `w` / `a` / `s` / `d` or `↑` / `←` / `↓` / `→` to move Marvolo
+- `↑` / `←` / `↓` / `→` to move Marvolo
 - `space` to place a bomb in front of Marvolo
+- `enter` to confirm selection
 
 ## Dependencies
 The following non-standard C/C++ library has been used in this project:
-- `curses` , for acquiring user input without blocking the processing and rendering the UI and graphics
+- `curses.h`/`ncurses.h` , for acquiring user input without blocking the processing and rendering the UI and graphics
+- `unistd.h` , for using Linux utilities
 
 ## Quick Start
 
 ### Compilation
-Do some stuff
+Run `make` under the root directory of the project (i.e. where this file is located) tp compile.
+
+If you ran into issues with `make`, you can try `make clean` and then try again with `make`.
 
 ### Execution
-Do other stuff
+The executable file, generated once you have run `make`, is located at `bin/bombescape`. Note that config files and logs will be placed at where you called the executable file, not necessarily where the executable file is located.
 
 <!-- README REQUIREMENT
 
