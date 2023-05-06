@@ -5,6 +5,7 @@
 
 #include <curses.h>
 
+#include <fstream>
 #include <iostream>
 #include <map>
 #include <sstream>
@@ -12,6 +13,12 @@
 
 #include "config.h"
 #include "init_window.h"
+#include "time_utils.h"
+
+// For logging error and other messages
+void log(std::string filename, std::string message);
+// Defaults to logging to error.log
+void log(std::string message);
 
 enum class Input : int {
     // Directions

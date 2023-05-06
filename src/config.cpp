@@ -12,13 +12,10 @@ inline void createDefaultConfigFile() {
 
 map<string, int> getConfig() {
     ifstream fin;
-    ofstream err;
     fin.open("config.txt");
-    err.open("error.log", ios::app);
 
     if (fin.fail()) {
-        err << getCurrentTimeAndDate()
-            << "Failed to load config file, creating new file" << endl;
+        log("Failed to load config file, creating new file");
         fin.close();
         createDefaultConfigFile();
         return defaultConfig;
@@ -48,12 +45,11 @@ map<string, int> getConfig() {
                 break;
             }
         if (!found) {
-            err << getCurrentTimeAndDate() << "Failed to find key \"" << req_key
-                << "\", resetting config file" << endl;
+            log("Failed to find key \"" + req_key +
+                "\", resetting config file");
             break;
         }
     }
-    err.close();
     if (!found) {
         createDefaultConfigFile();
         return defaultConfig;
