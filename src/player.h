@@ -12,7 +12,7 @@ class Player;
 
 class Player {
    private:
-    int hp = 1;
+    int hp = 3;
     int max_hp = 3;
     int bomb_power = 2;
     Pos position;

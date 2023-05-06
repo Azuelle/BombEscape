@@ -43,5 +43,5 @@ vector<pair<string, int>> getRank() {
 void addRank(long long score) {
     string username = (getlogin() ? getlogin() : "AnonymousWizard");
     ofstream fout("ranklist.txt", ios::app);
-    fout << username << " " << score << endl;
+    fout << endl << username << " " << score << endl;
 }
