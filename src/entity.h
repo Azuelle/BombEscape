@@ -97,8 +97,8 @@ class Bomb : public Entity {
     }
     char getIcon() { return this->icon; }
 
-   private:
-    static constexpr duration<double> lifetime = seconds(3);
+   protected:
+    duration<double> lifetime = seconds(3);
     char icon = 'O';
     int bomb_power = 1;
     bool placed_by_player = false;
