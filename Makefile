@@ -3,6 +3,8 @@ SHELL = /bin/bash
 
 # Output directory
 OUT_DIR = ./build
+# Executeable directory
+BIN_DIR = ./bin
 # Source code directory
 SRC_DIR = ./src
 
@@ -23,10 +25,10 @@ OBJ = $(SRC:%.cpp=$(OUT_DIR)/%.o)
 DEP = ${OBJ:.o=.d}
 
 
-all: $(EXEC)
+all: $(BIN_DIR)/$(EXEC)
 
 # Make the final executable
-$(EXEC): $(OBJ)
+$(BIN_DIR)/$(EXEC): $(OBJ)
 	mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
 
