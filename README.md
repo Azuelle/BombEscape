@@ -3,13 +3,7 @@
 
 ## Team Members
 
-| **Name**     | **UID**      | **GitHub Username**                                           |
-| :----------- | :----------- | :------------------------------------------------------------ |
-| ***REMOVED*** | ***REMOVED*** | [@Azuelle](https://github.com/Azuelle)                        | 
-| ***REMOVED*** | ***REMOVED*** | [@kxwhiowo](https://github.com/kxwhiowo)                      |
-| ***REMOVED*** | ***REMOVED*** | [@qinchonghanzuibang](https://github.com/qinchonghanzuibang)  |
-| ***REMOVED*** | ***REMOVED*** | [@Zhao-Shuman](https://github.com/Zhao-Shuman)                |
-| ***REMOVED*** | ***REMOVED*** | [@Summerflyfly](https://github.com/Summerflyfly)              |
+*Redacted due to privacy concerns*
 
 ## Game Introduction
 **BombEscape** is an uncompromising roguelike game. You will play as Marvolo, a rapacious wizard who overstudied dark magic and is now imprisoned in an unknown dungeon. In order to survive, Marvolo has to familiarize himself quickly with a randomly-generated environment that contains dangers including bombs and traps. 
